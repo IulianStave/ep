@@ -1,0 +1,24 @@
+uuid: d5e9a46c-6a0b-4dd7-a75f-69e0e488177a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pret
+    - node.type.oferta_speciala
+  module:
+    - text
+id: node.oferta_speciala.field_pret
+field_name: field_pret
+entity_type: node
+bundle: oferta_speciala
+label: Pret
+description: 'Pret salvat in format complet (de ex.: 40 € + TVA'
+required: false
+translatable: false
+default_value:
+  -
+    value: '40 € + TVA'
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text

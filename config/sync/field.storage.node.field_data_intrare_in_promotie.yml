@@ -1,0 +1,20 @@
+uuid: 9157fc23-edde-4efd-b778-4ab545728258
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_data_intrare_in_promotie
+field_name: field_data_intrare_in_promotie
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

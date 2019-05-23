@@ -1,0 +1,24 @@
+uuid: 10dd521b-72cd-4592-829b-9c28c69444bc
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ultima_zi_la_oferta
+    - node.type.oferta_speciala
+  module:
+    - datetime
+id: node.oferta_speciala.field_ultima_zi_la_oferta
+field_name: field_ultima_zi_la_oferta
+entity_type: node
+bundle: oferta_speciala
+label: 'Ultima zi la oferta'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: relative
+    default_date: '+30 days'
+default_value_callback: ''
+settings: {  }
+field_type: datetime

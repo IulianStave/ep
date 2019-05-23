@@ -1,0 +1,24 @@
+uuid: 4cec4009-c6b2-4555-b607-14db2bc50385
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_data_intrare_in_promotie
+    - node.type.oferta_speciala
+  module:
+    - datetime
+id: node.oferta_speciala.field_data_intrare_in_promotie
+field_name: field_data_intrare_in_promotie
+entity_type: node
+bundle: oferta_speciala
+label: 'Data intrare in promotie'
+description: 'Data incepand cu care oferta speciala este valabila'
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

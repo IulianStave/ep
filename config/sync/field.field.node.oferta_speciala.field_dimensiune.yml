@@ -1,0 +1,21 @@
+uuid: 81fe9c94-dc29-4323-9733-0a4192927e67
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dimensiune
+    - node.type.oferta_speciala
+  module:
+    - text
+id: node.oferta_speciala.field_dimensiune
+field_name: field_dimensiune
+entity_type: node
+bundle: oferta_speciala
+label: Dimensiune
+description: 'Dimensiuni, text complet, de exemplu "Dimensiuni : 300 x1000 mm"'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

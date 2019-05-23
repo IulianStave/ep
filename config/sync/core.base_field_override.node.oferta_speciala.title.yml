@@ -1,0 +1,18 @@
+uuid: 3ba08537-1e20-41b4-b33e-b743ab3e619f
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.oferta_speciala
+id: node.oferta_speciala.title
+field_name: title
+entity_type: node
+bundle: oferta_speciala
+label: Oferta
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

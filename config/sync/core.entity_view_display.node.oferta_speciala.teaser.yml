@@ -1,0 +1,30 @@
+uuid: 256f9a05-850c-4150-b661-1394ecaa2ac7
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.oferta_speciala.body
+    - node.type.oferta_speciala
+  module:
+    - text
+    - user
+id: node.oferta_speciala.teaser
+targetEntityType: node
+bundle: oferta_speciala
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

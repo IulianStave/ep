@@ -1,0 +1,29 @@
+uuid: 45bfe0c3-01f2-4a99-b3da-956bbab84857
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_esenta
+    - node.type.oferta_speciala
+    - taxonomy.vocabulary.esente_parchet
+id: node.oferta_speciala.field_esenta
+field_name: field_esenta
+entity_type: node
+bundle: oferta_speciala
+label: Esenta
+description: 'Esenta parchet la care se refera oferta speciala'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      esente_parchet: esente_parchet
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

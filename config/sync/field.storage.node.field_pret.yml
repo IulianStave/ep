@@ -1,0 +1,20 @@
+uuid: 1bbcfcca-200d-4a98-87fa-6878834d0738
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_pret
+field_name: field_pret
+entity_type: node
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

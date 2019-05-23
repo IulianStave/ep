@@ -1,0 +1,20 @@
+uuid: 6c7de132-835f-45a0-98f6-1ca7faaf8ba1
+langcode: en
+status: true
+dependencies:
+  module:
+    - datetime
+    - node
+id: node.field_ultima_zi_la_oferta
+field_name: field_ultima_zi_la_oferta
+entity_type: node
+type: datetime
+settings:
+  datetime_type: date
+module: datetime
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

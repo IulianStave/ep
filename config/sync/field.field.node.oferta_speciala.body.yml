@@ -1,0 +1,22 @@
+uuid: 84fa8198-8945-4879-b68b-611100b9f58e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.oferta_speciala
+  module:
+    - text
+id: node.oferta_speciala.body
+field_name: body
+entity_type: node
+bundle: oferta_speciala
+label: Descriere
+description: 'Descrierea ofertei'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary
