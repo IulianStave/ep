@@ -1,0 +1,8 @@
+uuid: 627d42bb-7e73-4dd2-bfea-8609bcc2d454
+langcode: en
+status: true
+dependencies: {  }
+name: Duritati
+vid: duritati
+description: 'Clasifica esentele dupa duritate'
+weight: 0

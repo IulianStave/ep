@@ -1,0 +1,29 @@
+uuid: 39bc1ad3-502b-461d-b433-9b2d7eb88453
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_oxidare
+    - taxonomy.vocabulary.esente_parchet
+    - taxonomy.vocabulary.oxidari
+id: taxonomy_term.esente_parchet.field_oxidare
+field_name: field_oxidare
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: Oxidare
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      oxidari: oxidari
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

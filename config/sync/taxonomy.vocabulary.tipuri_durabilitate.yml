@@ -1,0 +1,8 @@
+uuid: d074d1df-bdca-4a4e-9652-f47dba33b160
+langcode: en
+status: true
+dependencies: {  }
+name: 'Tipuri durabilitate'
+vid: tipuri_durabilitate
+description: 'Clasifica esente parchet dupa durabilitate'
+weight: 0

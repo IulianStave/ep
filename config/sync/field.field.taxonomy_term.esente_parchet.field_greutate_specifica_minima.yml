@@ -1,0 +1,23 @@
+uuid: f586a59a-ef06-48cb-86e9-08fceb61ac39
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_greutate_specifica_minima
+    - taxonomy.vocabulary.esente_parchet
+id: taxonomy_term.esente_parchet.field_greutate_specifica_minima
+field_name: field_greutate_specifica_minima
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: 'Greutate specifica minima'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

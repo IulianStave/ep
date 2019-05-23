@@ -1,0 +1,8 @@
+uuid: 66bbae4e-dd99-4270-ab37-e450857e5a2d
+langcode: en
+status: true
+dependencies: {  }
+name: 'Tipuri contragere'
+vid: tipuri_contragere
+description: 'Clasifica esente parchet dupa contragere'
+weight: 0

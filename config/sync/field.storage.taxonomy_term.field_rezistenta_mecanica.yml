@@ -1,0 +1,19 @@
+uuid: bd711585-ea90-4878-be8d-57095b53f89d
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.field_rezistenta_mecanica
+field_name: field_rezistenta_mecanica
+entity_type: taxonomy_term
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

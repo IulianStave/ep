@@ -1,0 +1,29 @@
+uuid: 1be20e96-7785-4b56-bc90-882a2bbff1c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_culoare
+    - taxonomy.vocabulary.culori_parchet
+    - taxonomy.vocabulary.esente_parchet
+id: taxonomy_term.esente_parchet.field_culoare
+field_name: field_culoare
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: Culoare
+description: 'Nuanta de culoare, aleasa prin autocomplete din lista sau adaugata nou, automat'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      culori_parchet: culori_parchet
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,23 @@
+uuid: fa35fe18-0877-4a2a-9d81-280feb47e115
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_greutate_specifica_maxima
+    - taxonomy.vocabulary.esente_parchet
+id: taxonomy_term.esente_parchet.field_greutate_specifica_maxima
+field_name: field_greutate_specifica_maxima
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: 'Greutate specifica maxima'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

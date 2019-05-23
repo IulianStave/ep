@@ -1,0 +1,29 @@
+uuid: 5134126c-12a2-4bde-adb8-749b7fd6b9a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_duritate
+    - taxonomy.vocabulary.duritati
+    - taxonomy.vocabulary.esente_parchet
+id: taxonomy_term.esente_parchet.field_duritate
+field_name: field_duritate
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: Duritate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      duritati: duritati
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,8 @@
+uuid: 2377fccc-ed9f-4992-9e20-0ef9b581105e
+langcode: en
+status: true
+dependencies: {  }
+name: 'Tipuri rezistenta'
+vid: tipuri_rezistenta
+description: 'Clasifica esente parchet dupa rezistenta mecanica'
+weight: 0

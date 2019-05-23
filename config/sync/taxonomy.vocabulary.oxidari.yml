@@ -1,0 +1,8 @@
+uuid: 0065eb8b-006b-4650-8a07-ee1f9d366f0f
+langcode: en
+status: true
+dependencies: {  }
+name: Oxidari
+vid: oxidari
+description: 'Clasifica esente parchet dupa gradul de oxidare'
+weight: 0

@@ -1,0 +1,29 @@
+uuid: 35d20dda-896b-490f-9e3d-ea76e27cf37e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_contragere
+    - taxonomy.vocabulary.esente_parchet
+    - taxonomy.vocabulary.tipuri_contragere
+id: taxonomy_term.esente_parchet.field_contragere
+field_name: field_contragere
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: Contragere
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tipuri_contragere: tipuri_contragere
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

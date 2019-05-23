@@ -3,10 +3,19 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.esente_parchet.field_contragere
+    - field.field.taxonomy_term.esente_parchet.field_culoare
+    - field.field.taxonomy_term.esente_parchet.field_durabilitate
+    - field.field.taxonomy_term.esente_parchet.field_duritate
     - field.field.taxonomy_term.esente_parchet.field_fibra
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_maxima
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_minima
     - field.field.taxonomy_term.esente_parchet.field_nume_latina
+    - field.field.taxonomy_term.esente_parchet.field_oxidare
     - field.field.taxonomy_term.esente_parchet.field_poza_esenta
     - field.field.taxonomy_term.esente_parchet.field_provenienta
+    - field.field.taxonomy_term.esente_parchet.field_rezistenta_mecanica
+    - field.field.taxonomy_term.esente_parchet.field_textura
     - image.style.thumbnail
     - taxonomy.vocabulary.esente_parchet
   module:
@@ -26,6 +35,42 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_contragere:
+    weight: 42
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_culoare:
+    weight: 35
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_durabilitate:
+    weight: 41
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_duritate:
+    weight: 39
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
   field_fibra:
     weight: 32
     settings:
@@ -35,6 +80,20 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
+  field_greutate_specifica_maxima:
+    weight: 37
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_greutate_specifica_minima:
+    weight: 36
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
   field_nume_latina:
     weight: 33
     settings:
@@ -42,6 +101,15 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
+  field_oxidare:
+    weight: 40
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
     region: content
   field_poza_esenta:
     weight: 34
@@ -53,6 +121,24 @@ content:
     region: content
   field_provenienta:
     weight: 31
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_rezistenta_mecanica:
+    weight: 43
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_textura:
+    weight: 38
     settings:
       match_operator: CONTAINS
       size: 60

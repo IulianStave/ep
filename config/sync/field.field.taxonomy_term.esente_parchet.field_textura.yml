@@ -1,0 +1,29 @@
+uuid: fd6bfd44-fc17-4cee-8259-5a8b72f64be8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_textura
+    - taxonomy.vocabulary.esente_parchet
+    - taxonomy.vocabulary.texturi
+id: taxonomy_term.esente_parchet.field_textura
+field_name: field_textura
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: Textura
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      texturi: texturi
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

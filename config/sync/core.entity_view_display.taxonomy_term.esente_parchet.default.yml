@@ -3,10 +3,19 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.esente_parchet.field_contragere
+    - field.field.taxonomy_term.esente_parchet.field_culoare
+    - field.field.taxonomy_term.esente_parchet.field_durabilitate
+    - field.field.taxonomy_term.esente_parchet.field_duritate
     - field.field.taxonomy_term.esente_parchet.field_fibra
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_maxima
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_minima
     - field.field.taxonomy_term.esente_parchet.field_nume_latina
+    - field.field.taxonomy_term.esente_parchet.field_oxidare
     - field.field.taxonomy_term.esente_parchet.field_poza_esenta
     - field.field.taxonomy_term.esente_parchet.field_provenienta
+    - field.field.taxonomy_term.esente_parchet.field_rezistenta_mecanica
+    - field.field.taxonomy_term.esente_parchet.field_textura
     - taxonomy.vocabulary.esente_parchet
   module:
     - image
@@ -23,6 +32,38 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_contragere:
+    weight: 12
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_culoare:
+    weight: 5
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_durabilitate:
+    weight: 11
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_duritate:
+    weight: 9
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_fibra:
     weight: 2
     label: above
@@ -31,6 +72,24 @@ content:
     third_party_settings: {  }
     type: entity_reference_label
     region: content
+  field_greutate_specifica_maxima:
+    weight: 7
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_greutate_specifica_minima:
+    weight: 6
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
   field_nume_latina:
     weight: 3
     label: above
@@ -38,6 +97,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
+  field_oxidare:
+    weight: 10
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   field_poza_esenta:
     weight: 4
@@ -50,6 +117,22 @@ content:
     region: content
   field_provenienta:
     weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_rezistenta_mecanica:
+    weight: 13
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_textura:
+    weight: 8
     label: above
     settings:
       link: true

@@ -1,0 +1,8 @@
+uuid: b9d104ee-e1c8-4aac-902d-0d2dbf9fd0bc
+langcode: en
+status: true
+dependencies: {  }
+name: Texturi
+vid: texturi
+description: 'Clasifica texturile dupa finete'
+weight: 0

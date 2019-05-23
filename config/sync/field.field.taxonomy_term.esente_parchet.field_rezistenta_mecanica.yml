@@ -1,0 +1,29 @@
+uuid: 97f69e4a-4e19-45a1-be39-ffd5b211b53c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_rezistenta_mecanica
+    - taxonomy.vocabulary.esente_parchet
+    - taxonomy.vocabulary.tipuri_rezistenta
+id: taxonomy_term.esente_parchet.field_rezistenta_mecanica
+field_name: field_rezistenta_mecanica
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: 'Rezistenta mecanica'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tipuri_rezistenta: tipuri_rezistenta
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

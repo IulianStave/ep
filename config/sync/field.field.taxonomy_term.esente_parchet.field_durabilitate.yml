@@ -1,0 +1,29 @@
+uuid: 9199d537-14c8-4b64-88c3-f47a659a1b91
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_durabilitate
+    - taxonomy.vocabulary.esente_parchet
+    - taxonomy.vocabulary.tipuri_durabilitate
+id: taxonomy_term.esente_parchet.field_durabilitate
+field_name: field_durabilitate
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: Durabilitate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      tipuri_durabilitate: tipuri_durabilitate
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
