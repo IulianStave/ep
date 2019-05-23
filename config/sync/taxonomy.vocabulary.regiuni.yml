@@ -1,0 +1,8 @@
+uuid: 41dc5b60-c8b5-41c5-8102-e632b97256b2
+langcode: en
+status: true
+dependencies: {  }
+name: Regiuni
+vid: regiuni
+description: 'Regiuni de provenienta'
+weight: 0
