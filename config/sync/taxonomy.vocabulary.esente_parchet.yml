@@ -1,0 +1,8 @@
+uuid: e739a74e-ea7a-4370-8cba-cfc14b7ce604
+langcode: en
+status: true
+dependencies: {  }
+name: 'Esente parchet'
+vid: esente_parchet
+description: 'Categorii de parchet dupa esenta'
+weight: 0

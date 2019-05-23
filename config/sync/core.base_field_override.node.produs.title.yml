@@ -1,0 +1,18 @@
+uuid: 125746c4-79f0-43d6-b41a-1e7023bace83
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.produs
+id: node.produs.title
+field_name: title
+entity_type: node
+bundle: produs
+label: 'Nume produs'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

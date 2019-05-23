@@ -1,0 +1,22 @@
+uuid: 0857613b-670e-4c9a-95e9-c321c8a71058
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.produs
+id: node.produs.promote
+field_name: promote
+entity_type: node
+bundle: produs
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

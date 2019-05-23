@@ -1,0 +1,29 @@
+uuid: d41de7e4-2698-4fd0-844e-5b7a383c72aa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_provenienta
+    - taxonomy.vocabulary.esente_parchet
+    - taxonomy.vocabulary.regiuni
+id: taxonomy_term.esente_parchet.field_provenienta
+field_name: field_provenienta
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: Provenienta
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      regiuni: regiuni
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

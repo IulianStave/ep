@@ -1,0 +1,59 @@
+uuid: 9efd355d-2021-488e-9f4f-f2e85bdd598a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.esente_parchet.field_fibra
+    - field.field.taxonomy_term.esente_parchet.field_nume_latina
+    - field.field.taxonomy_term.esente_parchet.field_poza_esenta
+    - field.field.taxonomy_term.esente_parchet.field_provenienta
+    - taxonomy.vocabulary.esente_parchet
+  module:
+    - image
+    - text
+id: taxonomy_term.esente_parchet.default
+targetEntityType: taxonomy_term
+bundle: esente_parchet
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_fibra:
+    weight: 2
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_nume_latina:
+    weight: 3
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_poza_esenta:
+    weight: 4
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_provenienta:
+    weight: 1
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden: {  }

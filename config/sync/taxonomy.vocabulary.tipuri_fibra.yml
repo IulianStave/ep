@@ -1,0 +1,8 @@
+uuid: b8b61368-1d2d-43fa-9aea-54469be28812
+langcode: en
+status: true
+dependencies: {  }
+name: 'Tipuri fibra'
+vid: tipuri_fibra
+description: 'Clasifica esentele in functie de structura fibrei (ex. regulata, dreapta, neregulata,etc.)'
+weight: 0

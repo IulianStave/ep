@@ -1,0 +1,17 @@
+uuid: 5d5e03b4-f241-43cc-95f5-ba5b575090db
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Produs
+type: produs
+description: 'Stocheaza produsele din oferta EP'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false
