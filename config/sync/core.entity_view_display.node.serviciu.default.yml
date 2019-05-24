@@ -1,0 +1,39 @@
+uuid: b8b10880-b56e-4280-adb3-e8a3146c3ab2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.serviciu.body
+    - field.field.node.serviciu.field_image
+    - node.type.serviciu
+  module:
+    - image
+    - text
+    - user
+id: node.serviciu.default
+targetEntityType: node
+bundle: serviciu
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_image:
+    weight: 102
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

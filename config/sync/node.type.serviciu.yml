@@ -1,0 +1,17 @@
+uuid: f27bfc21-8618-402e-bb77-2f32b2b44319
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Serviciu
+type: serviciu
+description: 'Stocheaza serviciile oferite de EP'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

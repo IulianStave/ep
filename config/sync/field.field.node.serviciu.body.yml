@@ -1,0 +1,22 @@
+uuid: 173fa109-1920-4255-a60e-f91e2dd7062d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.serviciu
+  module:
+    - text
+id: node.serviciu.body
+field_name: body
+entity_type: node
+bundle: serviciu
+label: Descriere
+description: 'Reguli si alte detalii relevante'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

@@ -1,0 +1,30 @@
+uuid: c7a7f858-58ab-4133-a066-9916012a7326
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.serviciu.body
+    - node.type.serviciu
+  module:
+    - text
+    - user
+id: node.serviciu.teaser
+targetEntityType: node
+bundle: serviciu
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }
