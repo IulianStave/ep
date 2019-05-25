@@ -1,0 +1,29 @@
+uuid: e788be60-d0fc-4744-8500-dc0b3e6b7601
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_categorie_material
+    - node.type.material_montaj
+    - taxonomy.vocabulary.categorii_materiale_de_montaj
+id: node.material_montaj.field_categorie_material
+field_name: field_categorie_material
+entity_type: node
+bundle: material_montaj
+label: 'Categorie material'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categorii_materiale_de_montaj: categorii_materiale_de_montaj
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

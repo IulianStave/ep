@@ -1,0 +1,30 @@
+uuid: 20825918-8199-406f-a17b-e4bbaeb94c2c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.material_montaj.body
+    - node.type.material_montaj
+  module:
+    - text
+    - user
+id: node.material_montaj.teaser
+targetEntityType: node
+bundle: material_montaj
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

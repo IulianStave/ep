@@ -1,0 +1,17 @@
+uuid: 61559d97-f836-4904-9860-c0859b897a45
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Material montaj'
+type: material_montaj
+description: 'Stocheaza materialele de montaj'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false

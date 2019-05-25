@@ -1,0 +1,18 @@
+uuid: 41f21167-78bd-41e4-b506-aae7e78727c7
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.material_montaj
+id: node.material_montaj.title
+field_name: title
+entity_type: node
+bundle: material_montaj
+label: Material
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

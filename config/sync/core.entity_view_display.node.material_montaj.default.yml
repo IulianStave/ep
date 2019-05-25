@@ -1,0 +1,48 @@
+uuid: a777642d-7407-445c-9062-d8dece5335f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.material_montaj.body
+    - field.field.node.material_montaj.field_categorie_material
+    - field.field.node.material_montaj.field_image
+    - node.type.material_montaj
+  module:
+    - image
+    - text
+    - user
+id: node.material_montaj.default
+targetEntityType: node
+bundle: material_montaj
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_categorie_material:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_image:
+    weight: 102
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

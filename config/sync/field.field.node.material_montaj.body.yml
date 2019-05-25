@@ -1,0 +1,22 @@
+uuid: 230e46a3-aa42-4d50-87a6-d0f554db0133
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.material_montaj
+  module:
+    - text
+id: node.material_montaj.body
+field_name: body
+entity_type: node
+bundle: material_montaj
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

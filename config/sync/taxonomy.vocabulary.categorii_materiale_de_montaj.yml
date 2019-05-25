@@ -1,0 +1,8 @@
+uuid: d85d4262-e024-4c78-b9c6-cc83d1572c10
+langcode: en
+status: true
+dependencies: {  }
+name: 'Categorii materiale de montaj'
+vid: categorii_materiale_de_montaj
+description: 'Clasifica materialele de montaj'
+weight: 0
