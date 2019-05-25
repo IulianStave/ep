@@ -1,0 +1,17 @@
+uuid: dc767bf5-dd9b-41e0-8df4-f3e3c7dc32f7
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Fotografie galerie'
+type: fotografie_galerie
+description: 'Stocheaza fotografiile cu lucrari care vor fi expuse in galeria foto, in ordinea crescatoare a campului Ordine, mapate pe Produs, Serviciu, Esenta'
+help: 'Un titlu sugestiv pentru lucrarea fotografiata'
+new_revision: false
+preview_mode: 1
+display_submitted: false

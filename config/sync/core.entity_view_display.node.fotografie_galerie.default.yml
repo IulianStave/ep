@@ -1,0 +1,76 @@
+uuid: d6f72577-34ee-4f63-b7b4-77b7c327526c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.fotografie_galerie.body
+    - field.field.node.fotografie_galerie.field_esenta_parchet
+    - field.field.node.fotografie_galerie.field_image
+    - field.field.node.fotografie_galerie.field_ordine_afisare
+    - field.field.node.fotografie_galerie.field_produs
+    - field.field.node.fotografie_galerie.field_serviciu
+    - node.type.fotografie_galerie
+  module:
+    - image
+    - text
+    - user
+id: node.fotografie_galerie.default
+targetEntityType: node
+bundle: fotografie_galerie
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_esenta_parchet:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_image:
+    weight: 102
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_ordine_afisare:
+    weight: 103
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_produs:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_serviciu:
+    weight: 105
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

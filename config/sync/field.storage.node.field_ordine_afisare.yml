@@ -1,0 +1,20 @@
+uuid: 54e8f439-a6ee-41f8-9109-cd995cd8c0c2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_ordine_afisare
+field_name: field_ordine_afisare
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

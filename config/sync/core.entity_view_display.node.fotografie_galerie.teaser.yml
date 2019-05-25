@@ -1,0 +1,30 @@
+uuid: 0a52b41b-2bc0-4e92-81a4-19054b9c2794
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.fotografie_galerie.body
+    - node.type.fotografie_galerie
+  module:
+    - text
+    - user
+id: node.fotografie_galerie.teaser
+targetEntityType: node
+bundle: fotografie_galerie
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

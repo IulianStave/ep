@@ -1,0 +1,18 @@
+uuid: 50b48a54-7a35-4f2c-b638-92b0fbb63066
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.fotografie_galerie
+id: node.fotografie_galerie.title
+field_name: title
+entity_type: node
+bundle: fotografie_galerie
+label: 'Titlu lucrare'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

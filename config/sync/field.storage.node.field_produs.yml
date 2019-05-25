@@ -1,0 +1,19 @@
+uuid: 7cb521f5-33f8-4e13-bcc4-343e8e899bd7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_produs
+field_name: field_produs
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

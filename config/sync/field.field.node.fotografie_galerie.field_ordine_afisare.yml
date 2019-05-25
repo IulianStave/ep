@@ -1,0 +1,25 @@
+uuid: 4d80994f-4110-4df2-b3a0-53de81e944f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ordine_afisare
+    - node.type.fotografie_galerie
+id: node.fotografie_galerie.field_ordine_afisare
+field_name: field_ordine_afisare
+entity_type: node
+bundle: fotografie_galerie
+label: 'Ordine afisare'
+description: 'Imaginile vor fi afisate in ordinea crescatoare a valorii campului Ordine afisare (cele mai mici primele)'
+required: false
+translatable: false
+default_value:
+  -
+    value: 1000
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

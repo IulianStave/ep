@@ -1,0 +1,29 @@
+uuid: 0faa2c76-22cb-456c-9feb-7f81da0cf3cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_esenta_parchet
+    - node.type.fotografie_galerie
+    - taxonomy.vocabulary.esente_parchet
+id: node.fotografie_galerie.field_esenta_parchet
+field_name: field_esenta_parchet
+entity_type: node
+bundle: fotografie_galerie
+label: 'Esenta parchet'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      esente_parchet: esente_parchet
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

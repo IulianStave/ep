@@ -1,0 +1,22 @@
+uuid: d37b69ae-8960-4596-9459-2bc424a049cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.fotografie_galerie
+  module:
+    - text
+id: node.fotografie_galerie.body
+field_name: body
+entity_type: node
+bundle: fotografie_galerie
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

@@ -1,0 +1,29 @@
+uuid: b9b9ad09-9321-4d09-bc46-b2935f122c15
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_produs
+    - node.type.fotografie_galerie
+    - node.type.produs
+id: node.fotografie_galerie.field_produs
+field_name: field_produs
+entity_type: node
+bundle: fotografie_galerie
+label: Produs
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      produs: produs
+    sort:
+      field: field_ordine_afisare
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

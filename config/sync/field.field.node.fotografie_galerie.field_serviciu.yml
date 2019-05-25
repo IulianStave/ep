@@ -1,0 +1,29 @@
+uuid: b244f3a7-0e81-4728-ab42-efe60a0fae6f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_serviciu
+    - node.type.fotografie_galerie
+    - node.type.serviciu
+id: node.fotografie_galerie.field_serviciu
+field_name: field_serviciu
+entity_type: node
+bundle: fotografie_galerie
+label: Serviciu
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      serviciu: serviciu
+    sort:
+      field: title
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

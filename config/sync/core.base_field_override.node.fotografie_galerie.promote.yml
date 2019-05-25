@@ -1,0 +1,22 @@
+uuid: d9fddc9b-bb08-4056-a866-45b5aaade14b
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.fotografie_galerie
+id: node.fotografie_galerie.promote
+field_name: promote
+entity_type: node
+bundle: fotografie_galerie
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
