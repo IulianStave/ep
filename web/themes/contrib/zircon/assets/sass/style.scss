@@ -1,0 +1,37 @@
+/*------------------------------------------------------------------
+CSS
+-------------------------------------------------------------------*/
+@import url(../includes/bootstrap/css/bootstrap.min.css);
+@import url(../includes/bootstrap/css/bootstrap-theme.css);
+// @import url(../includes/nucleo/outline/css/nucleo-outline.css);
+// @import url(../includes/nucleo/mini/css/nucleo-mini.css);
+// @import url(../includes/nucleo/glyph/css/nucleo-glyph.css);
+
+@import url(../includes/font-awesome/css/font-awesome.css);
+
+// Fonts
+@import url(../includes/fonts/oswald_regular/stylesheet.css);
+
+@import "compass/css3";
+
+// Core variables and mixins
+@import "config/variables";
+@import "config/mixins";
+
+// Skins
+@import "base/skincolor";
+@import "base/skinbackground";
+@import "base/skinmenu";
+
+// Base
+@import "base/base";
+@import "base/elements";
+@import "base/header";
+@import "base/footer";
+
+// Partials
+@import "partials/view";
+@import "partials/block";
+@import "partials/page";
+@import "partials/responsive";
+@import "partials/print";

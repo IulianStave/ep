@@ -1,0 +1,39 @@
+global-styling:
+  version: 8.0.0
+  css:
+    base:
+      assets/includes/slick/slick.css: {}
+      assets/includes/slick/slick-theme.css: {}
+      assets/includes/monokai/monokai.min.css: {}
+      assets/includes/flexslider/flexslider.css: {}
+      assets/css/slideshow.css: {}
+      assets/css/style.css: {}
+      assets/css/style-rtl.css: {}
+  js:
+    assets/includes/respond/respond.min.js: {}
+    assets/includes/respond/html5shiv.min.js: {}
+    assets/includes/js/jquery.smooth-scroll.js: {}
+    assets/includes/jssor/js/jssor.core.js: {}
+    assets/includes/jssor/js/jssor.utils.js: {}
+    assets/includes/jssor/js/jssor.slider.js: {}
+    assets/includes/slick/slick.js: {}
+    assets/includes/bootstrap/js/bootstrap.js: {}
+    assets/includes/flexslider/jquery.flexslider.js: {}
+    assets/includes/flexslider/jquery.flexslider-min.js: {}
+    assets/js/slideshow.js: {}
+    assets/js/carousel.js: {}
+    assets/js/zircon.js: {}
+    assets/js/fix_script.js: {}    
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+
+skins-menu:
+  version: 1.x
+
+  js:
+    assets/includes/skins-menu/skins_menu.js: {}
+    assets/js/jquery.cookie.js: {}

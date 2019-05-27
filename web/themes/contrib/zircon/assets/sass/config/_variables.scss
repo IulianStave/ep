@@ -1,0 +1,31 @@
+// =============================================================================
+// TYPOGRAPHY
+// =============================================================================
+$font-body:             'oswaldregular';
+$font-primary:          '';
+$font-secondary:        '';
+
+// Font Size
+$fs-body:               14px;
+$fs-14:                 1em;
+
+// Colors
+$dark_grey: #555;
+$red: #c01700;
+$white: #fff;
+$border_grey: 1px solid #dadada;
+$light_grey: #999;
+$light_grey_2: #aaa;
+$light_grey_3: #ddd;
+
+// Devices
+$desktop:               1200px;
+$tablet-lg:             1199px;
+$tablet:                992px;
+$tablet-md:             991px;
+$tablet-sm:             768px;
+$mobile-lg:             767px;
+$mobile:                640px;
+$mobile-md:             480px;
+$mobile-sm:             360px;
+$mobile-xs:             320px;

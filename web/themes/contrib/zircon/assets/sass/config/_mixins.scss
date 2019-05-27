@@ -1,0 +1,164 @@
+@mixin clearfix {
+    &:before, &:after {
+        display: table;
+        content: " ";
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin sprites {
+    background-color: transparent;
+    background-image: url(../images/sprites.png);
+    background-repeat: no-repeat;
+}
+
+// @mixin nucleo {
+//     display: inline-block;
+//     font-family: "Nucleo Outline";
+//     font-style: normal;
+//     font-weight: normal;
+//     line-height: 1;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+// }
+
+// @mixin nucleo_mini {
+//     display: inline-block;
+//     font-family: "Nucleo Mini";
+//     font-style: normal;
+//     font-weight: normal;
+//     line-height: 1;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+// }
+
+// @mixin nucleo_glyph {
+//     display: inline-block;
+//     font-family: "Nucleo Glyph";
+//     font-style: normal;
+//     font-weight: normal;
+//     line-height: 1;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+// }
+
+@mixin fontawesome {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin border-radius($number...) {
+    -webkit-border-radius: $number;
+    border-radius: $number;
+}
+
+@mixin box-shadow($val...) {
+    -webkit-box-shadow: $val;
+    -moz-box-shadow: $val;
+    box-shadow: $val;
+}
+
+@mixin text-shadow($val...) {
+    -webkit-text-shadow: $val;
+    text-shadow: $val;
+}
+
+@mixin transition($val...) {
+    -webkit-transition: $val;
+    -moz-transition: $val;
+    -o-transition: $val;
+    transition: $val;
+}
+
+/* Translate */
+@mixin translate($val...) {
+    -webkit-transform: translate($val);
+    -moz-transform: translate($val);
+    -ms-transform: translate($val);
+    -o-transform: translate($val);
+    transform: translate($val);
+}
+
+@mixin translate3d($val...) {
+    -webkit-transform: translate3d($val);
+    -moz-transform: translate3d($val);
+    transform: translate3d($val);
+}
+
+@mixin scale($val...) {
+    -webkit-transform: scale($val);
+    -moz-transform: scale($val);
+    -o-transform: scale($val);
+    transform: scale($val);
+}
+
+@mixin scaleX($val...) {
+    -webkit-transform: scaleX($val);
+    -moz-transform: scaleX($val);
+    -o-transform: scaleX($val);
+    transform: scaleX($val);
+}
+
+@mixin scaleY($val...) {
+    -webkit-transform: scaleY($val);
+    -moz-transform: scaleY($val);
+    -o-transform: scaleY($val);
+    transform: scaleY($val);
+}
+
+@mixin rotate($val...) {
+    -webkit-transform: rotate($val);
+    -ms-transform: rotate($val);
+    transform: rotate($val);
+}
+
+@mixin transform-origin($val...) {
+    -webkit-transform-origin: inherit;
+    -moz-transform-origin: inherit;
+    -ms-transform-origin: inherit;
+    -o-transform-origin: inherit;
+    transform-origin: inherit;
+}
+
+@mixin animation($val...) {
+    -webkit-animation: $val;
+    -moz-animation: $val;
+    -o-animation: $val;
+    animation: $val;
+}
+
+@mixin scale($scale-size, $milisecond) {
+    -moz-transform: scale($scale-size, $scale-size);
+    -moz-transition-duration: $milisecond;
+    -webkit-transform: scale($scale-size, $scale-size);
+    -webkit-transition-duration: $milisecond;
+    -ms-transform: scale($scale-size, $milisecond);
+    -ms-transition-duration: $milisecond;
+}
+
+@mixin placeholder($val...){
+    &::-webkit-input-placeholder {
+        color: $val;
+    }
+    &:-moz-placeholder {
+        color: $val;
+        opacity: 1;
+    }
+    &::-moz-placeholder {
+        color: $val;
+        opacity: 1;
+    }
+    &:-ms-input-placeholder {
+        color: $val;
+    }
+    &:placeholder {
+        color: $val;
+    }
+}
