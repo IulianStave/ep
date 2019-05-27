@@ -1,0 +1,25 @@
+uuid: 4fc441c8-bd07-4190-ac84-9984390a92aa
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:3302c7aa-2af2-455c-8dcd-571a773a770c'
+  module:
+    - block_content
+  theme:
+    - ep
+id: contactinfo
+theme: ep
+region: panel_second_1
+weight: -7
+provider: null
+plugin: 'block_content:3302c7aa-2af2-455c-8dcd-571a773a770c'
+settings:
+  id: 'block_content:3302c7aa-2af2-455c-8dcd-571a773a770c'
+  label: 'Contact info'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

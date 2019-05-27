@@ -19,7 +19,7 @@
                 }
             }).blur(function() {
                 if ($(this).val() === "") {
-                    $(this).val(Drupal.t("Keywords"));
+                    $(this).val(Drupal.t("Cauta..."));
                 }
             });
 
