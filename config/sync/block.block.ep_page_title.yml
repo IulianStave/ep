@@ -1,0 +1,20 @@
+uuid: 29f4f7fc-6ffc-4363-b035-8f7ffc5d5ef2
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ep
+_core:
+  default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
+id: ep_page_title
+theme: ep
+region: content
+weight: -50
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  provider: core
+  label_display: '0'
+visibility: {  }
