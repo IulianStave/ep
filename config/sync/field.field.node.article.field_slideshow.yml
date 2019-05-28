@@ -1,29 +1,29 @@
-uuid: 8d98a5ee-2d3e-42ac-bff1-93cb7c3b0ee2
+uuid: afc60f46-1608-4154-ab8f-425e5d708d11
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_imagine_produs
-    - node.type.produs
+    - field.storage.node.field_slideshow
+    - node.type.article
   module:
     - image
-id: node.produs.field_imagine_produs
-field_name: field_imagine_produs
+id: node.article.field_slideshow
+field_name: field_slideshow
 entity_type: node
-bundle: produs
-label: 'Imagine produs'
-description: ''
+bundle: article
+label: Slideshow
+description: 'Imagine folosita in caruselul de imagini din pagina de start, va fi ajustata la dimensiunea 1170 x 390 pixeli'
 required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
 settings:
-  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_directory: field/image
   file_extensions: 'png gif jpg jpeg'
-  max_filesize: '2 MB'
+  max_filesize: ''
   max_resolution: ''
   min_resolution: ''
-  alt_field: true
+  alt_field: false
   alt_field_required: true
   title_field: false
   title_field_required: false

@@ -12,8 +12,8 @@ _core:
   default_config_hash: 8zRjTNbfNAJ94lQpZDu6MkyD87GYJ2zpH9VQPVmRbcM
 id: ep_footer
 theme: ep
-region: header
-weight: -6
+region: panel_second_4
+weight: -7
 provider: null
 plugin: 'system_menu_block:footer'
 settings:

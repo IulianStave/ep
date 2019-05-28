@@ -1,17 +1,17 @@
-uuid: 57c50926-35eb-44d3-910e-cb10c4a0a9b6
+uuid: c5420b22-7e60-4aa2-b797-134187e90fa8
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_poza_esenta
+    - field.storage.taxonomy_term.field_imagine
     - taxonomy.vocabulary.esente_parchet
   module:
     - image
-id: taxonomy_term.esente_parchet.field_poza_esenta
-field_name: field_poza_esenta
+id: taxonomy_term.esente_parchet.field_imagine
+field_name: field_imagine
 entity_type: taxonomy_term
 bundle: esente_parchet
-label: 'Imagine reprezentativa'
+label: Imagine
 description: ''
 required: false
 translatable: false
@@ -20,7 +20,7 @@ default_value_callback: ''
 settings:
   file_directory: '[date:custom:Y]-[date:custom:m]'
   file_extensions: 'png gif jpg jpeg'
-  max_filesize: '2 MB'
+  max_filesize: ''
   max_resolution: ''
   min_resolution: ''
   alt_field: true

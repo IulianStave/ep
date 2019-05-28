@@ -1,14 +1,14 @@
-uuid: b28a6de5-fb59-4d85-b8e4-489b7901c59f
+uuid: a25e006d-e310-4d21-94b8-4615ad9c6164
 langcode: en
 status: true
 dependencies:
   module:
     - file
     - image
-    - taxonomy
-id: taxonomy_term.field_poza_esenta
-field_name: field_poza_esenta
-entity_type: taxonomy_term
+    - node
+id: node.field_slideshow
+field_name: field_slideshow
+entity_type: node
 type: image
 settings:
   uri_scheme: public

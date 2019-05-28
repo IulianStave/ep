@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.node.produs.body
     - field.field.node.produs.field_esente
-    - field.field.node.produs.field_imagine_produs
+    - field.field.node.produs.field_image
     - image.style.thumbnail
     - node.type.produs
   module:
@@ -41,8 +41,8 @@ content:
     third_party_settings: {  }
     type: entity_reference_autocomplete
     region: content
-  field_imagine_produs:
-    weight: 122
+  field_image:
+    weight: 124
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail

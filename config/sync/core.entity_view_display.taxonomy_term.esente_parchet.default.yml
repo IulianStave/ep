@@ -10,9 +10,9 @@ dependencies:
     - field.field.taxonomy_term.esente_parchet.field_fibra
     - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_maxima
     - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_minima
+    - field.field.taxonomy_term.esente_parchet.field_imagine
     - field.field.taxonomy_term.esente_parchet.field_nume_latina
     - field.field.taxonomy_term.esente_parchet.field_oxidare
-    - field.field.taxonomy_term.esente_parchet.field_poza_esenta
     - field.field.taxonomy_term.esente_parchet.field_provenienta
     - field.field.taxonomy_term.esente_parchet.field_rezistenta_mecanica
     - field.field.taxonomy_term.esente_parchet.field_textura
@@ -90,6 +90,15 @@ content:
     third_party_settings: {  }
     type: number_integer
     region: content
+  field_imagine:
+    weight: 14
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
   field_nume_latina:
     weight: 3
     label: above
@@ -105,15 +114,6 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  field_poza_esenta:
-    weight: 4
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
     region: content
   field_provenienta:
     weight: 1

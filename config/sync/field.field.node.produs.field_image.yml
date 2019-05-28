@@ -1,0 +1,38 @@
+uuid: 051706f8-e65a-4671-b562-39bd8bfcec41
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_image
+    - node.type.produs
+  module:
+    - image
+id: node.produs.field_image
+field_name: field_image
+entity_type: node
+bundle: produs
+label: Imagine
+description: 'Imagine reprezentativa pentru produs, redata in pagina de detaliu a produsului si in listari de produse'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: field/image
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: '4 MB'
+  max_resolution: 1028x768
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

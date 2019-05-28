@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.fotografie_galerie.field_ordine_afisare
     - field.field.node.fotografie_galerie.field_produs
     - field.field.node.fotografie_galerie.field_serviciu
+    - field.field.node.fotografie_galerie.field_slideshow
     - node.type.fotografie_galerie
   module:
     - image
@@ -58,6 +59,15 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_slideshow:
+    weight: 6
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
     region: content
   links:
     weight: 0
