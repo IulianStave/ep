@@ -10,6 +10,7 @@ module:
   config: 0
   contact: 0
   contextual: 0
+  crop: 0
   datetime: 0
   dblog: 0
   devel: 0
@@ -18,10 +19,16 @@ module:
   field: 0
   field_ui: 0
   file: 0
+  file_mdm: 0
+  file_mdm_exif: 0
+  file_mdm_font: 0
   filter: 0
   help: 0
   history: 0
   image: 0
+  image_effects: 0
+  image_widget_crop: 0
+  imagemagick: 0
   link: 0
   menu_ui: 0
   node: 0
