@@ -1,0 +1,30 @@
+uuid: 39253a48-0d9f-4e30-b5cd-8e5ee0a1d3fc
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.oferte_speciale
+  module:
+    - system
+    - views
+  theme:
+    - ep
+id: views_block__oferte_speciale_block_1
+theme: ep
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'views_block:oferte_speciale-block_1'
+settings:
+  id: 'views_block:oferte_speciale-block_1'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
