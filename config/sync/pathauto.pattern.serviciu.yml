@@ -1,0 +1,22 @@
+uuid: 56340b1f-13fc-429e-a541-9920420c78bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: serviciu
+label: Serviciu
+type: 'canonical_entities:node'
+pattern: 'servicii/[node:title]'
+selection_criteria:
+  35c12cdd-79d7-456a-a389-2e7ef68a1e82:
+    id: node_type
+    bundles:
+      serviciu: serviciu
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 35c12cdd-79d7-456a-a389-2e7ef68a1e82
+selection_logic: and
+weight: -5
+relationships: {  }
