@@ -1,14 +1,15 @@
 <svg width="122" height="40" xmlns="http://www.w3.org/2000/svg">
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
  <g>
   <title>background</title>
-  <rect fill="#fff" id="canvas_background" height="42" width="124" y="-1" x="-1"/>
+  <rect x="-1" y="-1" width="124" height="42" id="canvas_background" fill="#fff"/>
  </g>
  <g>
   <title>Layer 1</title>
-  <text xml:space="preserve" text-anchor="start" font-family="Arial, Verdana" font-size="20" id="svg_2" y="17.5" x="6.5" stroke-width="0" stroke="#000" fill="#ce1919">Europarchet</text>
-  <text xml:space="preserve" text-anchor="start" font-family="Arial, Verdana" font-size="20" id="svg_3" y="8.5" x="-301" stroke-width="0" stroke="#000" fill="#020202">Design</text>
-  <text xml:space="preserve" text-anchor="start" font-family="Arial, Verdana" font-size="20" id="svg_4" y="11.5" x="-220" stroke-width="0" stroke="#000" fill="#f70909"/>
-  <text xml:space="preserve" text-anchor="start" font-family="Arial, Verdana" font-size="20" id="svg_6" y="35.5" x="55" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#000000">Design</text>
+  <text font-weight="bold" fill="#ce1919" stroke="#000" stroke-width="0" x="2.5" y="18.5" id="svg_2" font-size="20" font-family="Arial, Verdana" text-anchor="start" xml:space="preserve">Europarchet</text>
+  <text fill="#020202" stroke="#000" stroke-width="0" x="-301" y="8.5" id="svg_3" font-size="20" font-family="Arial, Verdana" text-anchor="start" xml:space="preserve">Design</text>
+  <text fill="#f70909" stroke="#000" stroke-width="0" x="-220" y="11.5" id="svg_4" font-size="20" font-family="Arial, Verdana" text-anchor="start" xml:space="preserve"/>
+  <text font-weight="bold" font-style="normal" fill="#000000" stroke="#000" stroke-width="0" stroke-opacity="null" x="53" y="36.5" id="svg_6" font-size="18" font-family="Arial, Verdana" text-anchor="start" xml:space="preserve">Design</text>
  </g>
 </svg>
