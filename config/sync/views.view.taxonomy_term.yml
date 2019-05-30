@@ -303,6 +303,37 @@ display:
         options: {  }
       path: taxonomy/term/%
       display_extenders: {  }
+      style:
+        type: default
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          uses_fields: false
+      defaults:
+        style: false
+        row: false
+        header: false
+      row:
+        type: 'entity:node'
+        options:
+          relationship: none
+          view_mode: teaser
+      header:
+        entity_taxonomy_term_1:
+          id: entity_taxonomy_term_1
+          table: views
+          field: entity_taxonomy_term
+          relationship: none
+          group_type: group
+          admin_label: ''
+          empty: false
+          tokenize: true
+          target: '{{ raw_arguments.tid }}'
+          view_mode: default
+          bypass_access: false
+          plugin_id: entity
+      enabled: false
     cache_metadata:
       contexts:
         - 'languages:language_interface'

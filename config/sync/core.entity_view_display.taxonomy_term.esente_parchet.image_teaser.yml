@@ -1,0 +1,50 @@
+uuid: 19897e09-21d0-4f1b-82c9-c02944feedc6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.image_teaser
+    - field.field.taxonomy_term.esente_parchet.field_contragere
+    - field.field.taxonomy_term.esente_parchet.field_culoare
+    - field.field.taxonomy_term.esente_parchet.field_durabilitate
+    - field.field.taxonomy_term.esente_parchet.field_duritate
+    - field.field.taxonomy_term.esente_parchet.field_fibra
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_maxima
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_minima
+    - field.field.taxonomy_term.esente_parchet.field_imagine
+    - field.field.taxonomy_term.esente_parchet.field_nume_latina
+    - field.field.taxonomy_term.esente_parchet.field_oxidare
+    - field.field.taxonomy_term.esente_parchet.field_provenienta
+    - field.field.taxonomy_term.esente_parchet.field_rezistenta_mecanica
+    - field.field.taxonomy_term.esente_parchet.field_textura
+    - taxonomy.vocabulary.esente_parchet
+  module:
+    - image
+id: taxonomy_term.esente_parchet.image_teaser
+targetEntityType: taxonomy_term
+bundle: esente_parchet
+mode: image_teaser
+content:
+  field_imagine:
+    weight: 0
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  description: true
+  field_contragere: true
+  field_culoare: true
+  field_durabilitate: true
+  field_duritate: true
+  field_fibra: true
+  field_greutate_specifica_maxima: true
+  field_greutate_specifica_minima: true
+  field_nume_latina: true
+  field_oxidare: true
+  field_provenienta: true
+  field_rezistenta_mecanica: true
+  field_textura: true

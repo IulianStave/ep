@@ -264,6 +264,7 @@ display:
         style: false
         row: false
         fields: false
+        css_class: false
       row:
         type: fields
         options:
@@ -402,6 +403,7 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: term_name
+      css_class: our-products-list
     cache_metadata:
       max-age: -1
       contexts:

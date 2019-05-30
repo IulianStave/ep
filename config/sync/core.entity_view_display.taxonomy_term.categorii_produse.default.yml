@@ -24,16 +24,17 @@ content:
       trim_length: 600
     third_party_settings: {  }
   field_esente:
+    type: entity_reference_entity_view
     weight: 2
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
     region: content
+    label: above
+    settings:
+      view_mode: image_teaser
+      link: false
+    third_party_settings: {  }
   field_imagine:
     weight: 1
-    label: hidden
+    label: inline
     settings:
       image_style: medium
       image_link: ''

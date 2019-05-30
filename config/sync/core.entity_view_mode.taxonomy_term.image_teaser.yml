@@ -1,0 +1,10 @@
+uuid: a7aaa52f-23a9-4492-a465-d347058e2214
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.image_teaser
+label: 'Image teaser'
+targetEntityType: taxonomy_term
+cache: true

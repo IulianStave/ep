@@ -1,0 +1,8 @@
+uuid: 8da75f93-6120-44af-ab38-69e25f8521a1
+langcode: en
+status: true
+dependencies: {  }
+name: 'Categorii fotografii'
+vid: categorii_fotografii
+description: 'Clasifica fotografiile din galeria cu imagini lucrari'
+weight: 0
