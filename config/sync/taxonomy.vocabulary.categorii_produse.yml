@@ -1,0 +1,8 @@
+uuid: 320c5e37-6124-4f40-a1de-c091700232f2
+langcode: en
+status: true
+dependencies: {  }
+name: 'Categorii produse'
+vid: categorii_produse
+description: 'Clasifica produsele EP'
+weight: 0

@@ -1,0 +1,38 @@
+uuid: 42b5dded-5cc3-4bdf-999c-c9ad233a041c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_imagine
+    - taxonomy.vocabulary.categorii_produse
+  module:
+    - image
+id: taxonomy_term.categorii_produse.field_imagine
+field_name: field_imagine
+entity_type: taxonomy_term
+bundle: categorii_produse
+label: Imagine
+description: 'Imaginea reprezentativa pentru (categoria de) produs'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: field/image
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: 4MB
+  max_resolution: 1024x768
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

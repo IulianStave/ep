@@ -1,19 +1,18 @@
-uuid: 46cfe36b-84c3-4f0d-b17e-cc50262429b8
+uuid: bb6b86d5-f733-49c1-b71c-5a9abbb030ae
 langcode: en
 status: true
 dependencies:
   module:
-    - node
     - taxonomy
-id: node.field_produs
-field_name: field_produs
-entity_type: node
+id: taxonomy_term.field_esente
+field_name: field_esente
+entity_type: taxonomy_term
 type: entity_reference
 settings:
   target_type: taxonomy_term
 module: core
 locked: false
-cardinality: 1
+cardinality: -1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

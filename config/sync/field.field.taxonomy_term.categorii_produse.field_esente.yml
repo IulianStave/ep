@@ -1,17 +1,17 @@
-uuid: c5d28ab5-01d5-4fbb-9174-17d9fdf5c3a4
+uuid: a5de4ee9-24ec-4cc8-b3c8-6772867510fd
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_produs
-    - node.type.fotografie_galerie
+    - field.storage.taxonomy_term.field_esente
     - taxonomy.vocabulary.categorii_produse
-id: node.fotografie_galerie.field_produs
-field_name: field_produs
-entity_type: node
-bundle: fotografie_galerie
-label: Produs
-description: ''
+    - taxonomy.vocabulary.esente_parchet
+id: taxonomy_term.categorii_produse.field_esente
+field_name: field_esente
+entity_type: taxonomy_term
+bundle: categorii_produse
+label: Esente
+description: 'Stocheaza esentele specifice categoriei de produs'
 required: false
 translatable: false
 default_value: {  }
@@ -20,7 +20,7 @@ settings:
   handler: 'default:taxonomy_term'
   handler_settings:
     target_bundles:
-      categorii_produse: categorii_produse
+      esente_parchet: esente_parchet
     sort:
       field: name
       direction: asc

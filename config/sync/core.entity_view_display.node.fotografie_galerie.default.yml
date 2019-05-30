@@ -45,7 +45,7 @@ content:
     type: image
     region: content
   field_produs:
-    weight: 3
+    weight: 7
     label: above
     settings:
       link: true

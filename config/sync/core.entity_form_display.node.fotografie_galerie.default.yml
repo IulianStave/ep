@@ -61,13 +61,10 @@ content:
     type: number
     region: content
   field_produs:
-    weight: 124
-    settings:
-      match_operator: CONTAINS
-      size: 60
-      placeholder: ''
+    weight: 128
+    settings: {  }
     third_party_settings: {  }
-    type: entity_reference_autocomplete
+    type: options_buttons
     region: content
   field_serviciu:
     weight: 125
