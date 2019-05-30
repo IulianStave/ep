@@ -1,18 +1,18 @@
-uuid: 051706f8-e65a-4671-b562-39bd8bfcec41
+uuid: 7eb62aef-29b7-4436-b162-fa2b4f8c80e2
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_image
-    - node.type.produs
+    - field.storage.node.field_slideshow
+    - node.type.serviciu
   module:
     - image
-id: node.produs.field_image
-field_name: field_image
+id: node.serviciu.field_slideshow
+field_name: field_slideshow
 entity_type: node
-bundle: produs
-label: Imagine
-description: 'Imagine reprezentativa pentru produs, redata in pagina de detaliu a produsului si in listari de produse'
+bundle: serviciu
+label: Slideshow
+description: 'Imagine care permite afisarea serviciului in caruselul de pe homepage'
 required: false
 translatable: true
 default_value: {  }
@@ -21,9 +21,9 @@ settings:
   file_directory: field/image
   file_extensions: 'png gif jpg jpeg'
   max_filesize: '4 MB'
-  max_resolution: 1028x768
+  max_resolution: 1024x768
   min_resolution: ''
-  alt_field: true
+  alt_field: false
   alt_field_required: true
   title_field: false
   title_field_required: false

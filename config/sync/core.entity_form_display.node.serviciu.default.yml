@@ -4,7 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.node.serviciu.body
+    - field.field.node.serviciu.field_categorie
     - field.field.node.serviciu.field_image
+    - field.field.node.serviciu.field_slideshow
     - image.style.thumbnail
     - node.type.serviciu
   module:
@@ -31,8 +33,24 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_categorie:
+    weight: 124
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textfield
+    region: content
   field_image:
     weight: 122
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_slideshow:
+    weight: 123
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail

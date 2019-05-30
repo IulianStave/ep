@@ -1,9 +1,9 @@
-uuid: c7a7f858-58ab-4133-a066-9916012a7326
+uuid: cf6d06ae-1430-48d0-872a-c027c0949fe4
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.gallery_view
     - field.field.node.serviciu.body
     - field.field.node.serviciu.field_categorie
     - field.field.node.serviciu.field_image
@@ -12,27 +12,20 @@ dependencies:
   module:
     - text
     - user
-id: node.serviciu.teaser
+id: node.serviciu.gallery_view
 targetEntityType: node
 bundle: serviciu
-mode: teaser
+mode: gallery_view
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 0
-    settings:
-      trim_length: 200
-    third_party_settings: {  }
-    region: content
   field_categorie:
-    type: text_default
-    weight: 1
-    region: content
-    label: above
+    weight: 0
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    type: text_default
+    region: content
 hidden:
+  body: true
   field_image: true
   field_slideshow: true
   links: true
