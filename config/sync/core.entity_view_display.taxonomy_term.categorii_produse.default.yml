@@ -17,10 +17,11 @@ mode: default
 content:
   description:
     label: hidden
-    type: text_default
+    type: text_trimmed
     weight: 0
     region: content
-    settings: {  }
+    settings:
+      trim_length: 600
     third_party_settings: {  }
   field_esente:
     weight: 2
@@ -35,7 +36,7 @@ content:
     label: hidden
     settings:
       image_style: medium
-      image_link: content
+      image_link: ''
     third_party_settings: {  }
     type: image
     region: content

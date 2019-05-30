@@ -255,7 +255,7 @@ display:
           grouping: {  }
           columns: 2
           automatic_width: true
-          alignment: vertical
+          alignment: horizontal
           col_class_default: true
           col_class_custom: ''
           row_class_default: true
@@ -422,14 +422,13 @@ display:
         type: grid
         options:
           grouping: {  }
-          uses_fields: false
-          columns: 4
+          columns: 2
           automatic_width: true
           alignment: horizontal
-          col_class_custom: ''
           col_class_default: true
-          row_class_custom: ''
+          col_class_custom: ''
           row_class_default: true
+          row_class_custom: ''
       defaults:
         style: false
         row: false
