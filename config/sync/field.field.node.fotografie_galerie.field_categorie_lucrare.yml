@@ -1,0 +1,29 @@
+uuid: bf8281b3-376e-43d0-bdb2-02a5275d8a26
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_categorie_lucrare
+    - node.type.fotografie_galerie
+    - taxonomy.vocabulary.categorii_fotografii
+id: node.fotografie_galerie.field_categorie_lucrare
+field_name: field_categorie_lucrare
+entity_type: node
+bundle: fotografie_galerie
+label: 'Categorie lucrare'
+description: 'Salveaza categoria lucrare, criteriul folosit in gruparea fotografiilor in galerie'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categorii_fotografii: categorii_fotografii
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

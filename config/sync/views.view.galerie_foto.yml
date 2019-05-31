@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.node.field_categorie_lucrare
     - field.storage.node.field_image
-    - field.storage.node.field_serviciu
     - image.style.medium
     - node.type.fotografie_galerie
     - system.menu.main
@@ -75,7 +75,7 @@ display:
         options:
           grouping:
             -
-              field: field_serviciu
+              field: field_categorie_lucrare
               rendered: true
               rendered_strip: false
           columns: 3
@@ -227,10 +227,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: field
-        field_serviciu:
-          id: field_serviciu
-          table: node__field_serviciu
-          field: field_serviciu
+        field_categorie_lucrare:
+          id: field_categorie_lucrare
+          table: node__field_categorie_lucrare
+          field: field_categorie_lucrare
           relationship: none
           group_type: group
           admin_label: ''
@@ -276,9 +276,9 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: entity_reference_entity_view
+          type: entity_reference_label
           settings:
-            view_mode: gallery_view
+            link: true
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -355,8 +355,8 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_categorie_lucrare'
         - 'config:field.storage.node.field_image'
-        - 'config:field.storage.node.field_serviciu'
   page_1:
     display_plugin: page
     id: page_1
@@ -383,5 +383,5 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
+        - 'config:field.storage.node.field_categorie_lucrare'
         - 'config:field.storage.node.field_image'
-        - 'config:field.storage.node.field_serviciu'

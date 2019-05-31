@@ -1,17 +1,17 @@
-uuid: 656ac2bc-fa39-4482-9ff0-b5fbf3c3d5c8
+uuid: 64b13c0d-a6f0-4e12-a586-8d8a53f3d0fb
 langcode: en
 status: true
 dependencies:
   module:
     - node
-    - text
-id: node.field_categorie
-field_name: field_categorie
+    - taxonomy
+id: node.field_categorie_lucrare
+field_name: field_categorie_lucrare
 entity_type: node
-type: text
+type: entity_reference
 settings:
-  max_length: 255
-module: text
+  target_type: taxonomy_term
+module: core
 locked: false
 cardinality: 1
 translatable: true

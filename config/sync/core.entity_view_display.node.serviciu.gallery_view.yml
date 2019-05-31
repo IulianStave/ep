@@ -5,25 +5,16 @@ dependencies:
   config:
     - core.entity_view_mode.node.gallery_view
     - field.field.node.serviciu.body
-    - field.field.node.serviciu.field_categorie
     - field.field.node.serviciu.field_image
     - field.field.node.serviciu.field_slideshow
     - node.type.serviciu
   module:
-    - text
     - user
 id: node.serviciu.gallery_view
 targetEntityType: node
 bundle: serviciu
 mode: gallery_view
-content:
-  field_categorie:
-    weight: 0
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
-    region: content
+content: {  }
 hidden:
   body: true
   field_image: true

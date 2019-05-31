@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.serviciu.body
-    - field.field.node.serviciu.field_categorie
     - field.field.node.serviciu.field_image
     - field.field.node.serviciu.field_slideshow
     - node.type.serviciu
@@ -23,13 +22,6 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
-    region: content
-  field_categorie:
-    weight: 104
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: text_default
     region: content
   field_image:
     weight: 102
