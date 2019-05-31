@@ -5,4 +5,4 @@ dependencies: {  }
 name: Texturi
 vid: texturi
 description: 'Clasifica texturile dupa finete'
-weight: 0
+weight: -1

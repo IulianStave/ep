@@ -1,0 +1,19 @@
+uuid: 9144c9be-f924-4f31-8ebd-3a15e449fb01
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: block_style_
+label: 'Block style crop 300x200'
+effects:
+  0cb37717-5f6d-4065-8cfb-1df15396f22c:
+    uuid: 0cb37717-5f6d-4065-8cfb-1df15396f22c
+    id: image_effects_scale_and_smart_crop
+    weight: 3
+    data:
+      width: '300'
+      height: '200'
+      upscale: false
+      simulate: false
+      algorithm: entropy_slice

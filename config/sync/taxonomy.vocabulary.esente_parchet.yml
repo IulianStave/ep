@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Esente parchet'
 vid: esente_parchet
 description: 'Categorii de parchet dupa esenta'
-weight: 0
+weight: -9

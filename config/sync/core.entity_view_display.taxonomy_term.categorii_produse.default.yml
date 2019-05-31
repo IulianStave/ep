@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.field.taxonomy_term.categorii_produse.field_esente
     - field.field.taxonomy_term.categorii_produse.field_imagine
-    - image.style.medium
+    - image.style.block_style_
     - taxonomy.vocabulary.categorii_produse
   module:
     - image
@@ -36,8 +36,8 @@ content:
     weight: 1
     label: inline
     settings:
-      image_style: medium
-      image_link: ''
+      image_style: block_style_
+      image_link: content
     third_party_settings: {  }
     type: image
     region: content

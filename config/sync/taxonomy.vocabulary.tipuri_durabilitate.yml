@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Tipuri durabilitate'
 vid: tipuri_durabilitate
 description: 'Clasifica esente parchet dupa durabilitate'
-weight: 0
+weight: 1

@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Categorii produse'
 vid: categorii_produse
 description: 'Clasifica produsele EP'
-weight: 0
+weight: -10

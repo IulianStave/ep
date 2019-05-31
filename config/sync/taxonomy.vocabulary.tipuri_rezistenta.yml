@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Tipuri rezistenta'
 vid: tipuri_rezistenta
 description: 'Clasifica esente parchet dupa rezistenta mecanica'
-weight: 0
+weight: 3
