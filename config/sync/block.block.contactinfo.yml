@@ -16,7 +16,7 @@ provider: null
 plugin: 'block_content:3302c7aa-2af2-455c-8dcd-571a773a770c'
 settings:
   id: 'block_content:3302c7aa-2af2-455c-8dcd-571a773a770c'
-  label: 'Contact info'
+  label: 'Date contact'
   provider: block_content
   label_display: visible
   status: true
