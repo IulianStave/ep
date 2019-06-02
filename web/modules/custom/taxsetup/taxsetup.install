@@ -1,0 +1,55 @@
+<?php
+use Drupal\taxonomy\Entity\Term;
+/**
+ * Programatically add terms to esente parchet taxonomy 
+ */
+
+function taxsetup_update_8001() {
+  // Create the taxonomy terms.
+  $terms = [
+	  'Stejar',
+	  'Cires',
+	  'Frasin',
+	  'Merbau',
+	  'Tek'
+  ];
+  foreach ($terms as $term_value){
+    $new_term = Term::create([
+  		'name' => $term_value,
+    	'vid' => 'esente_parchet',
+    	//'parent' => $parent,
+  	]);
+   	// Save the taxonomy term.
+  	$new_term->save();
+  }
+    
+ 
+  // Return the taxonomy term id.
+ // return $new_term->id();
+}
+
+function taxsetup_install(){
+	// Create the taxonomy terms.
+  $terms = [
+	  'Stejar',
+	  'Cires',
+	  'Frasin',
+	  'Merbau',
+	  'Tek'
+  ];
+  foreach ($terms as $term_value){
+    $new_term = Term::create([
+  		'name' => $term_value,
+    	'vid' => 'esente_parchet',
+    	//'parent' => $parent,
+  	]);
+   	// Save the taxonomy term.
+  	$new_term->save();
+  }
+    
+ 
+  // Return the taxonomy term id.
+ // return $new_term->id();
+
+}
+
