@@ -12,7 +12,7 @@ field_name: field_slideshow
 entity_type: node
 bundle: serviciu
 label: Slideshow
-description: 'Imagine care permite afisarea serviciului in caruselul de pe homepage'
+description: "Imagine folosita pentru afisarea serviciului in caruselul de imagini din pagina de start, va fi ajustata la dimensiunea 1170 x 390 pixeli\r\n"
 required: false
 translatable: true
 default_value: {  }
@@ -21,9 +21,9 @@ settings:
   file_directory: field/image
   file_extensions: 'png gif jpg jpeg'
   max_filesize: '4 MB'
-  max_resolution: 1024x768
+  max_resolution: ''
   min_resolution: ''
-  alt_field: false
+  alt_field: true
   alt_field_required: true
   title_field: false
   title_field_required: false

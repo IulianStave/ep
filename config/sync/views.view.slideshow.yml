@@ -6,7 +6,7 @@ dependencies:
     - field.storage.node.field_slideshow
     - image.style.slideshow
     - node.type.article
-    - node.type.fotografie_galerie
+    - node.type.serviciu
   module:
     - image
     - node
@@ -237,7 +237,7 @@ display:
           operator: in
           value:
             article: article
-            fotografie_galerie: fotografie_galerie
+            serviciu: serviciu
           group: 1
           exposed: false
           expose:

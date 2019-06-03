@@ -29,7 +29,7 @@ content:
     region: content
     label: above
     settings:
-      view_mode: image_teaser
+      view_mode: full
       link: false
     third_party_settings: {  }
   field_imagine:

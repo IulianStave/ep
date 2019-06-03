@@ -59,6 +59,14 @@ content:
     third_party_settings: {  }
     type: options_select
     region: content
+  field_slideshow:
+    type: image_image
+    weight: 10
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   promote:
     type: boolean_checkbox
     settings:
@@ -91,6 +99,5 @@ content:
 hidden:
   body: true
   created: true
-  field_slideshow: true
   path: true
   uid: true

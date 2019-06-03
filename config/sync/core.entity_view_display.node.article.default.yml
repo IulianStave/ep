@@ -36,19 +36,8 @@ content:
       image_link: ''
     third_party_settings: {  }
     label: hidden
-  field_tags:
-    type: entity_reference_label
-    weight: 2
-    region: content
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-  links:
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
 hidden:
   comment: true
   field_slideshow: true
+  field_tags: true
+  links: true

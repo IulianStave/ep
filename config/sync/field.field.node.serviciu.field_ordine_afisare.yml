@@ -1,0 +1,25 @@
+uuid: 0ce6f73f-2367-4f9c-9c4d-f90b0d2c5d54
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ordine_afisare
+    - node.type.serviciu
+id: node.serviciu.field_ordine_afisare
+field_name: field_ordine_afisare
+entity_type: node
+bundle: serviciu
+label: 'Ordine afisare'
+description: 'Introduceti un numar de ordine pentru a configura listarea serviciilor in pagina Servicii (in ordine crescatoare, cel mai mic primul)'
+required: false
+translatable: true
+default_value:
+  -
+    value: 100
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

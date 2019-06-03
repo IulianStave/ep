@@ -5,7 +5,9 @@ dependencies:
   config:
     - field.field.node.serviciu.body
     - field.field.node.serviciu.field_image
+    - field.field.node.serviciu.field_ordine_afisare
     - field.field.node.serviciu.field_slideshow
+    - image.style.medium
     - node.type.serviciu
   module:
     - image
@@ -19,31 +21,20 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 0
     settings: {  }
     third_party_settings: {  }
     region: content
   field_image:
-    weight: 102
-    label: above
+    weight: 1
+    label: hidden
     settings:
-      image_style: ''
+      image_style: medium
       image_link: ''
     third_party_settings: {  }
     type: image
     region: content
-  field_slideshow:
-    weight: 103
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
-  links:
-    weight: 100
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_ordine_afisare: true
+  field_slideshow: true
+  links: true

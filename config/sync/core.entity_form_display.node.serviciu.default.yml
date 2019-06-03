@@ -5,6 +5,7 @@ dependencies:
   config:
     - field.field.node.serviciu.body
     - field.field.node.serviciu.field_image
+    - field.field.node.serviciu.field_ordine_afisare
     - field.field.node.serviciu.field_slideshow
     - image.style.thumbnail
     - node.type.serviciu
@@ -39,6 +40,13 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
+  field_ordine_afisare:
+    weight: 124
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
     region: content
   field_slideshow:
     weight: 123
