@@ -1,8 +1,9 @@
-uuid: 9efd355d-2021-488e-9f4f-f2e85bdd598a
+uuid: b09a06f0-25bd-4871-8b03-4bcb759d890a
 langcode: en
-status: true
+status: false
 dependencies:
   config:
+    - core.entity_view_mode.taxonomy_term.full
     - field.field.taxonomy_term.esente_parchet.field_contragere
     - field.field.taxonomy_term.esente_parchet.field_culoare
     - field.field.taxonomy_term.esente_parchet.field_durabilitate
@@ -20,10 +21,10 @@ dependencies:
   module:
     - image
     - text
-id: taxonomy_term.esente_parchet.default
+id: taxonomy_term.esente_parchet.full
 targetEntityType: taxonomy_term
 bundle: esente_parchet
-mode: default
+mode: full
 content:
   description:
     label: hidden
@@ -34,47 +35,47 @@ content:
     third_party_settings: {  }
   field_contragere:
     weight: 12
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_culoare:
     weight: 5
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_durabilitate:
     weight: 11
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_duritate:
     weight: 9
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_fibra:
     weight: 3
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_greutate_specifica_maxima:
     weight: 7
-    label: inline
+    label: above
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -83,7 +84,7 @@ content:
     region: content
   field_greutate_specifica_minima:
     weight: 6
-    label: inline
+    label: above
     settings:
       thousand_separator: ''
       prefix_suffix: true
@@ -101,7 +102,7 @@ content:
     region: content
   field_nume_latina:
     weight: 4
-    label: inline
+    label: above
     settings:
       link_to_entity: false
     third_party_settings: {  }
@@ -109,33 +110,33 @@ content:
     region: content
   field_oxidare:
     weight: 10
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_provenienta:
     weight: 2
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_rezistenta_mecanica:
     weight: 13
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_textura:
     weight: 8
-    label: inline
+    label: above
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content

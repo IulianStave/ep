@@ -17,6 +17,7 @@ dependencies:
     - field.field.taxonomy_term.esente_parchet.field_provenienta
     - field.field.taxonomy_term.esente_parchet.field_rezistenta_mecanica
     - field.field.taxonomy_term.esente_parchet.field_textura
+    - image.style.medium
     - taxonomy.vocabulary.esente_parchet
   module:
     - image
@@ -27,10 +28,10 @@ mode: image_teaser
 content:
   field_imagine:
     weight: 0
-    label: above
+    label: hidden
     settings:
-      image_style: ''
-      image_link: ''
+      image_style: medium
+      image_link: content
     third_party_settings: {  }
     type: image
     region: content

@@ -27,14 +27,14 @@ content:
     type: entity_reference_entity_view
     weight: 2
     region: content
-    label: above
+    label: hidden
     settings:
-      view_mode: full
+      view_mode: image_teaser
       link: false
     third_party_settings: {  }
   field_imagine:
     weight: 1
-    label: inline
+    label: hidden
     settings:
       image_style: block_style_
       image_link: content
