@@ -10,6 +10,7 @@ dependencies:
     - field.field.node.oferta_speciala.field_image
     - field.field.node.oferta_speciala.field_pret
     - field.field.node.oferta_speciala.field_ultima_zi_la_oferta
+    - image.style.medium
     - node.type.oferta_speciala
   module:
     - datetime
@@ -24,12 +25,12 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     region: content
   field_data_intrare_in_promotie:
-    weight: 106
+    weight: 5
     label: above
     settings:
       format_type: medium
@@ -38,38 +39,38 @@ content:
     type: datetime_default
     region: content
   field_dimensiune:
-    weight: 104
-    label: above
+    weight: 3
+    label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_esenta:
-    weight: 102
-    label: above
+    weight: 4
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_image:
-    weight: 103
-    label: above
+    weight: 0
+    label: hidden
     settings:
-      image_style: ''
+      image_style: medium
       image_link: ''
     third_party_settings: {  }
     type: image
     region: content
   field_pret:
-    weight: 105
-    label: above
+    weight: 2
+    label: inline
     settings: {  }
     third_party_settings: {  }
     type: text_default
     region: content
   field_ultima_zi_la_oferta:
-    weight: 107
+    weight: 6
     label: above
     settings:
       format_type: medium
@@ -77,9 +78,5 @@ content:
     third_party_settings: {  }
     type: datetime_default
     region: content
-  links:
-    weight: 100
-    settings: {  }
-    third_party_settings: {  }
-    region: content
-hidden: {  }
+hidden:
+  links: true

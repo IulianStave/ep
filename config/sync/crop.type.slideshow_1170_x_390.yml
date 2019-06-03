@@ -5,8 +5,8 @@ dependencies: {  }
 label: 'Slideshow 1170 x 390'
 id: slideshow_1170_x_390
 description: ''
-aspect_ratio: ''
-soft_limit_width: 1170
-soft_limit_height: 390
+aspect_ratio: '3:1'
+soft_limit_width: null
+soft_limit_height: null
 hard_limit_width: null
 hard_limit_height: null
