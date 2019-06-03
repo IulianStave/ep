@@ -7,10 +7,12 @@ dependencies:
     - field.field.node.serviciu.field_image
     - field.field.node.serviciu.field_ordine_afisare
     - field.field.node.serviciu.field_slideshow
+    - image.style.slideshow
     - image.style.thumbnail
     - node.type.serviciu
   module:
     - image
+    - image_widget_crop
     - path
     - text
 id: node.serviciu.default
@@ -51,10 +53,18 @@ content:
   field_slideshow:
     weight: 123
     settings:
+      show_crop_area: true
+      show_default_crop: true
+      warn_multiple_usages: true
+      preview_image_style: slideshow
+      crop_preview_image_style: slideshow_crop
+      crop_list:
+        - slideshow_1170_x_390
+      crop_types_required:
+        - slideshow_1170_x_390
       progress_indicator: throbber
-      preview_image_style: thumbnail
     third_party_settings: {  }
-    type: image_image
+    type: image_widget_crop
     region: content
   path:
     type: path

@@ -1,0 +1,25 @@
+uuid: 85080640-f90b-4489-9d3b-ab43ce9ee53d
+langcode: en
+status: true
+dependencies:
+  config:
+    - crop.type.slideshow_1170_x_390
+  module:
+    - crop
+name: slideshow_crop
+label: 'Slideshow Crop'
+effects:
+  4e384411-8e33-48d8-baa3-fb38bd0f331e:
+    uuid: 4e384411-8e33-48d8-baa3-fb38bd0f331e
+    id: crop_crop
+    weight: -9
+    data:
+      crop_type: slideshow_1170_x_390
+  821a1ab5-be80-46af-9e9c-56bb76569bd9:
+    uuid: 821a1ab5-be80-46af-9e9c-56bb76569bd9
+    id: image_scale
+    weight: -10
+    data:
+      width: 1170
+      height: null
+      upscale: true
