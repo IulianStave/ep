@@ -1,0 +1,15 @@
+uuid: d141242f-8595-470e-ad6a-a6df857e9367
+langcode: en
+status: true
+dependencies: {  }
+name: scaled_and_crop_220x200
+label: 'Scaled and crop 220x200'
+effects:
+  ed765fe7-8585-4ad8-ad64-a81a3c6f3459:
+    uuid: ed765fe7-8585-4ad8-ad64-a81a3c6f3459
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 220
+      height: 220
+      anchor: center-center
