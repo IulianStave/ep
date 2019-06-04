@@ -60,3 +60,10 @@ function imagemagick_update_8202() {
 function imagemagick_update_8203() {
   // Empty function.
 }
+
+/**
+ * Clear caches to discover service changes.
+ */
+function imagemagick_update_8204() {
+  // Empty function.
+}

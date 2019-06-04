@@ -38,6 +38,15 @@ class ScaleAndCrop extends ImagemagickImageToolkitOperationBase {
    * {@inheritdoc}
    */
   protected function validateArguments(array $arguments) {
+    // Fail if no dimensions available for current image.
+    if (is_null($this->getToolkit()->getWidth()) || is_null($this->getToolkit()->getHeight())) {
+      // @todo \InvalidArgumentException is incorrect, but other exceptions
+      // would not be managed by toolkits that implement ImageToolkitBase.
+      // Change to \RuntimeException when
+      // https://www.drupal.org/project/drupal/issues/2583041 is committed.
+      throw new \InvalidArgumentException("No image dimensions available for the image '{$this->getPluginDefinition()['operation']}' operation");
+    }
+
     $actual_width = $this->getToolkit()->getWidth();
     $actual_height = $this->getToolkit()->getHeight();
 

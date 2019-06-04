@@ -9,3 +9,8 @@ services:
     class: Drupal\imagemagick\ImagemagickMimeTypeMapper
     arguments: ['@file.mime_type.guesser.extension']
     deprecated: The "%service_id%" service is deprecated in ImageMagick 8.x-2.4, will be removed in 8.x-3.0. You should use the FileEye\MimeMap\Type and FileEye\MimeMap\Extension API instead. See https://www.drupal.org/project/imagemagick/issues/3026733.
+  imagemagick.event_subscriber:
+    class: Drupal\imagemagick\EventSubscriber\ImagemagickEventSubscriber
+    arguments: ['@logger.channel.image', '@config.factory', '@file_system']
+    tags:
+      - { name: 'event_subscriber' }

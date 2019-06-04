@@ -21,6 +21,10 @@
  * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
  *   The ImageMagick/GraphicsMagick execution arguments object.
  *
+ * @deprecated in 8.x-2.5, will be removed in 8.x-3.0. Use an event subscriber
+ *   to react on a ImagemagickExecutionEvent::ENSURE_SOURCE_LOCAL_PATH event.
+ *
+ * @see https://www.drupal.org/project/imagemagick/issues/3043136
  * @see \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit::parseFile()
  * @see \Drupal\imagemagick\ImagemagickExecArguments::getSource()
  * @see \Drupal\imagemagick\ImagemagickExecArguments::setSourceLocalPath()
@@ -39,6 +43,10 @@ function hook_imagemagick_pre_parse_file_alter(\Drupal\imagemagick\ImagemagickEx
  * @param \Drupal\imagemagick\ImagemagickExecArguments $arguments
  *   The ImageMagick/GraphicsMagick execution arguments object.
  *
+ * @deprecated in 8.x-2.5, will be removed in 8.x-3.0. Use an event subscriber
+ *   to react on a ImagemagickExecutionEvent::POST_SAVE event.
+ *
+ * @see https://www.drupal.org/project/imagemagick/issues/3043136
  * @see \Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit::save()
  * @see \Drupal\imagemagick\ImagemagickExecArguments::getDestination()
  * @see \Drupal\imagemagick\ImagemagickExecArguments::getDestinationLocalPath()
@@ -76,6 +84,11 @@ function hook_imagemagick_post_save_alter(\Drupal\imagemagick\ImagemagickExecArg
  * @param string $command
  *   The ImageMagick/GraphicsMagick command being called.
  *
+ * @deprecated in 8.x-2.5, will be removed in 8.x-3.0. Use an event subscriber
+ *   to react on a ImagemagickExecutionEvent::PRE_IDENTIFY_EXECUTE or a
+ *   ImagemagickExecutionEvent::PRE_CONVERT_EXECUTE event.
+ *
+ * @see https://www.drupal.org/project/imagemagick/issues/3043136
  * @see http://www.imagemagick.org/script/command-line-processing.php#output
  * @see http://www.imagemagick.org/Usage/files/#save
  *

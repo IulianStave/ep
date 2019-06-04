@@ -63,6 +63,12 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    * The module handler service.
    *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   *
+   * @deprecated in 8.x-2.5, will be removed in 8.x-3.0. No replacement
+   *   suggested, Imagemagick hooks have been dropped in favour of event
+   *   subscribers.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/3043136
    */
   protected $moduleHandler;
 
@@ -117,9 +123,14 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
    * @return \Drupal\Core\Extension\ModuleHandlerInterface
    *   The module handler service.
    *
-   * @todo in 8.x-3.0, add this method to the interface.
+   * @deprecated in 8.x-2.5, will be removed in 8.x-3.0. No replacement
+   *   suggested, Imagemagick hooks have been dropped in favour of event
+   *   subscribers.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/3043136
    */
   public function getModuleHandler() {
+    @trigger_error(__METHOD__ . ' is deprecated in 8.x-2.5, will be removed in 8.x-3.0. No replacement suggested, Imagemagick hooks have been dropped in favour of event subscribers. See https://www.drupal.org/project/imagemagick/issues/3043136.', E_USER_DEPRECATED);
     return $this->moduleHandler;
   }
 
@@ -500,11 +511,12 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
     // in the same request.
     static $config_locale;
 
+    $current_locale = setlocale(LC_CTYPE, 0);
+
     if (!isset($config_locale)) {
-      $config_locale = $this->configFactory->get('imagemagick.settings')->get('locale');
-      if (empty($config_locale)) {
-        $config_locale = FALSE;
-      }
+      $config_locales = explode(' ', $this->configFactory->get('imagemagick.settings')->get('locale'));
+      $temp_locale = !empty($config_locales) ? setlocale(LC_CTYPE, $config_locales) : FALSE;
+      $config_locale = $temp_locale ?: $current_locale;
     }
 
     if ($this->isWindows) {
@@ -512,22 +524,16 @@ class ImagemagickExecManager implements ImagemagickExecManagerInterface {
       $arg = str_replace('%', $percentage_sign_replace_pattern, $arg);
     }
 
-    // If no locale specified in config, return with standard.
-    if ($config_locale === FALSE) {
-      $arg_escaped = escapeshellarg($arg);
+    if ($current_locale !== $config_locale) {
+      // Temporarily swap the current locale with the configured one.
+      setlocale(LC_CTYPE, $config_locale);
     }
-    else {
-      // Get the current locale.
-      $current_locale = setlocale(LC_CTYPE, 0);
-      if ($current_locale != $config_locale) {
-        // Temporarily swap the current locale with the configured one.
-        setlocale(LC_CTYPE, $config_locale);
-        $arg_escaped = escapeshellarg($arg);
-        setlocale(LC_CTYPE, $current_locale);
-      }
-      else {
-        $arg_escaped = escapeshellarg($arg);
-      }
+
+    $arg_escaped = escapeshellarg($arg);
+
+    if ($current_locale !== $config_locale) {
+      // Restore the current locale.
+      setlocale(LC_CTYPE, $current_locale);
     }
 
     // Get our % characters back.

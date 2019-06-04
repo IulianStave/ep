@@ -15,11 +15,13 @@ use Drupal\Core\ImageToolkit\ImageToolkitOperationManagerInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\file_mdm\FileMetadataManagerInterface;
+use Drupal\imagemagick\Event\ImagemagickExecutionEvent;
 use Drupal\imagemagick\ImagemagickExecArguments;
 use Drupal\imagemagick\ImagemagickExecManagerInterface;
 use Drupal\imagemagick\ImagemagickFormatMapperInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Provides ImageMagick integration toolkit for image manipulation.
@@ -42,9 +44,27 @@ class ImagemagickToolkit extends ImageToolkitBase {
   const EXIF_ORIENTATION_NOT_FETCHED = -99;
 
   /**
+   * The id of the file_mdm plugin managing image metadata.
+   */
+  const FILE_METADATA_PLUGIN_ID = 'imagemagick_identify';
+
+  /**
+   * The event dispatcher.
+   *
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected $eventDispatcher;
+
+  /**
    * The module handler service.
    *
    * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   *
+   * @deprecated in 8.x-2.5, will be removed in 8.x-3.0. No replacement
+   *   suggested, Imagemagick hooks have been dropped in favour of event
+   *   subscribers.
+   *
+   * @see https://www.drupal.org/project/imagemagick/issues/3043136
    */
   protected $moduleHandler;
 
@@ -141,14 +161,17 @@ class ImagemagickToolkit extends ImageToolkitBase {
    *   The file metadata manager service.
    * @param \Drupal\imagemagick\ImagemagickExecManagerInterface $exec_manager
    *   The ImageMagick execution manager service.
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $dispatcher
+   *   The event dispatcher.
    */
-  public function __construct(array $configuration, $plugin_id, array $plugin_definition, ImageToolkitOperationManagerInterface $operation_manager, LoggerInterface $logger, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ImagemagickFormatMapperInterface $format_mapper, FileMetadataManagerInterface $file_metadata_manager, ImagemagickExecManagerInterface $exec_manager) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, ImageToolkitOperationManagerInterface $operation_manager, LoggerInterface $logger, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, ImagemagickFormatMapperInterface $format_mapper, FileMetadataManagerInterface $file_metadata_manager, ImagemagickExecManagerInterface $exec_manager, EventDispatcherInterface $dispatcher = NULL) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $operation_manager, $logger, $config_factory);
     $this->moduleHandler = $module_handler;
     $this->formatMapper = $format_mapper;
     $this->fileMetadataManager = $file_metadata_manager;
     $this->execManager = $exec_manager;
     $this->arguments = new ImagemagickExecArguments($this->execManager);
+    $this->eventDispatcher = $dispatcher ?: \Drupal::service('event_dispatcher');
   }
 
   /**
@@ -165,7 +188,8 @@ class ImagemagickToolkit extends ImageToolkitBase {
       $container->get('module_handler'),
       $container->get('imagemagick.format_mapper'),
       $container->get('file_metadata_manager'),
-      $container->get('imagemagick.exec_manager')
+      $container->get('imagemagick.exec_manager'),
+      $container->get('event_dispatcher')
     );
   }
 
@@ -635,7 +659,8 @@ class ImagemagickToolkit extends ImageToolkitBase {
     // available, but the temp file path is not resolved, or even the temp file
     // could be missing if it was copied locally from a remote file system.
     if (!$this->arguments()->getSourceLocalPath() && $this->getSource()) {
-      $this->moduleHandler->alter('imagemagick_pre_parse_file', $this->arguments);
+      $this->moduleHandler->alterDeprecated('Deprecated in 8.x-2.5, will be removed in 8.x-3.0. Use an event subscriber to react on a ImagemagickExecutionEvent::ENSURE_SOURCE_LOCAL_PATH event. See https://www.drupal.org/project/imagemagick/issues/3043136.', 'imagemagick_pre_parse_file', $this->arguments);
+      $this->eventDispatcher->dispatch(ImagemagickExecutionEvent::ENSURE_SOURCE_LOCAL_PATH, new ImagemagickExecutionEvent($this->arguments));
     }
     return $this->arguments()->getSourceLocalPath();
   }
@@ -1180,7 +1205,8 @@ class ImagemagickToolkit extends ImageToolkitBase {
     $this->arguments()->setDestination($destination);
     if ($ret = $this->convert()) {
       // Allow modules to alter the destination file.
-      $this->moduleHandler->alter('imagemagick_post_save', $this->arguments);
+      $this->moduleHandler->alterDeprecated('Deprecated in 8.x-2.5, will be removed in 8.x-3.0. Use an event subscriber to react on a ImagemagickExecutionEvent::POST_SAVE event. See https://www.drupal.org/project/imagemagick/issues/3043136.', 'imagemagick_post_save', $this->arguments);
+      $this->eventDispatcher->dispatch(ImagemagickExecutionEvent::POST_SAVE, new ImagemagickExecutionEvent($this->arguments));
       // Reset local path to allow saving to other file.
       $this->arguments()->setDestinationLocalPath('');
     }
@@ -1210,7 +1236,7 @@ class ImagemagickToolkit extends ImageToolkitBase {
     // plugin will fetch it from the file via the ::identify() method if data
     // is not already available.
     $file_md = $this->fileMetadataManager->uri($this->getSource());
-    $data = $file_md->getMetadata('imagemagick_identify');
+    $data = $file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID);
 
     // No data, return.
     if (!$data) {
@@ -1218,25 +1244,25 @@ class ImagemagickToolkit extends ImageToolkitBase {
     }
 
     // Sets the local file path to the one retrieved by identify if available.
-    if ($source_local_path = $file_md->getMetadata('imagemagick_identify', 'source_local_path')) {
+    if ($source_local_path = $file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'source_local_path')) {
       $this->arguments()->setSourceLocalPath($source_local_path);
     }
 
     // Process parsed data from the first frame.
-    $format = $file_md->getMetadata('imagemagick_identify', 'format');
+    $format = $file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'format');
     if ($this->formatMapper->isFormatEnabled($format)) {
       $this
-        ->setWidth((int) $file_md->getMetadata('imagemagick_identify', 'width'))
-        ->setHeight((int) $file_md->getMetadata('imagemagick_identify', 'height'))
-        ->setExifOrientation($file_md->getMetadata('imagemagick_identify', 'exif_orientation'))
-        ->setFrames($file_md->getMetadata('imagemagick_identify', 'frames_count'));
+        ->setWidth((int) $file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'width'))
+        ->setHeight((int) $file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'height'))
+        ->setExifOrientation($file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'exif_orientation'))
+        ->setFrames($file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'frames_count'));
       $this->arguments()
         ->setSourceFormat($format);
       // Only Imagemagick allows to get colorspace and profiles information
       // via 'identify'.
       if ($this->getExecManager()->getPackage() === 'imagemagick') {
-        $this->setColorspace($file_md->getMetadata('imagemagick_identify', 'colorspace'));
-        $this->setProfiles($file_md->getMetadata('imagemagick_identify', 'profiles'));
+        $this->setColorspace($file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'colorspace'));
+        $this->setProfiles($file_md->getMetadata(static::FILE_METADATA_PLUGIN_ID, 'profiles'));
       }
       return TRUE;
     }
@@ -1301,7 +1327,8 @@ class ImagemagickToolkit extends ImageToolkitBase {
 
     // Allow modules to alter the command line parameters.
     $command = 'convert';
-    $this->moduleHandler->alter('imagemagick_arguments', $this->arguments, $command);
+    $this->moduleHandler->alterDeprecated('Deprecated in 8.x-2.5, will be removed in 8.x-3.0. Use an event subscriber to react on a ImagemagickExecutionEvent::PRE_IDENTIFY_EXECUTE or a ImagemagickExecutionEvent::PRE_CONVERT_EXECUTE event. See https://www.drupal.org/project/imagemagick/issues/3043136.', 'imagemagick_arguments', $this->arguments, $command);
+    $this->eventDispatcher->dispatch(ImagemagickExecutionEvent::PRE_CONVERT_EXECUTE, new ImagemagickExecutionEvent($this->arguments));
 
     // Delete any cached file metadata for the destination image file, before
     // creating a new one, and release the URI from the manager so that

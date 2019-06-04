@@ -1,15 +1,13 @@
-
--- SUMMARY --
+# Summary
 
 Provides ImageMagick integration.
 
-For a full description of the module, visit the project page:
-  https://drupal.org/project/imagemagick
-To submit bug reports and feature suggestions, or to track changes:
-  https://drupal.org/project/issues/imagemagick
+For a full description of the module, visit the project page: https://drupal.org/project/imagemagick.
+To submit bug reports and feature suggestions, or to track changes: https://drupal.org/project/issues/imagemagick.
 
+# Requirements
 
--- REQUIREMENTS --
+* The module **must** be installed using Composer, see https://www.drupal.org/node/2718229
 
 * PHP 5.6 or higher
 
@@ -19,37 +17,32 @@ To submit bug reports and feature suggestions, or to track changes:
   (http://www.graphicsmagick.org) need to be installed on your server and the
   convert binary needs to be accessible and executable from PHP.
 
-* The PHP configuration must allow invocation of proc_open() (which is
-  security-wise identical to exec()).
+* The PHP configuration must allow invocation of _proc_open()_, which is
+  security-wise identical to _exec()_.
 
 * File Metadata Manager module 8.x-1.1 or higher
-
-* Composer based installation process is needed to install the module
-  dependencies, see https://www.drupal.org/node/2718229
 
 Consult your server administrator or hosting provider if you are unsure about
 these requirements.
 
-
--- INSTALLATION --
+# Installation
 
 * Install the required module packages with Composer. From the Drupal
   installation root directory, type
-
-    $ composer require drupal/imagemagick:^2.1
-
+  ```
+      $ composer require drupal/imagemagick:^2.1
+  ```
   This will download both the ImageMagick module and any dependent module
   (namely, the File Metadata Manager module).
 
-* Enable the module. Navigate to Manage > Extend. Check the box next to the
+* Enable the module. Navigate to _Manage > Extend_. Check the box next to the
   ImageMagick module and then click the 'Install' button at the bottom. If
   File Metadata Manager is not already installed, the system will prompt you
   to confirm installing it too. Just confirm and proceed.
 
+# Configuration
 
--- CONFIGURATION --
-
-* Go to Administration » Configuration » Media » Image toolkit and change the
+* Go to _Administration » Configuration » Media » Image toolkit_ and change the
   image toolkit to ImageMagick.
 
 * Select the graphics package (ImageMagick or GraphicsMagick) you want to use
@@ -70,8 +63,7 @@ these requirements.
   locale defined, the non-ASCII characters will be dropped by the escape
   function, leading to errors.
 
-
--- ENABLE/DISABLE SUPPORTED IMAGE FORMATS --
+# Enable/disable supported image formats
 
 ImageMagick and GraphicsMagick support a wide range of image formats. The image
 toolkits need to declare the image file extensions they support. This module
@@ -80,7 +72,7 @@ an 'internal' ImageMagick format code to its MIME type. The file extensions
 associated to the MIME type are then used to built the full list of supported
 extensions.
 
-* Go to Administration » Configuration » Media » Image toolkit and expand the
+* Go to _Administration » Configuration » Media » Image toolkit_ and expand the
   'Format list' section in the 'Image formats' box of the ImageMagick toolkit
   configuration. This list shows the 'internal' image formats supported by the
   *installed* ImageMagick package. Note that this list depends on the libraries
@@ -89,35 +81,35 @@ extensions.
 * Enter the list of image formats you want to support in the 'Enable/Disable
   Image Formats' box. Each format need to be typed following a YAML syntax,
   like e.g.:
-
+```
     JPEG:
       mime_type: image/jpeg
       enabled: true
       weight: 0
       exclude_extensions: jpe, jpg
-
+```
   The 'internal' format should be entered with no spaces in front, and with a
   trailing colon. For each format there are more variables that can be
   associated. Each variable should be entered with two leading spaces, followed
   by a colon, followed by a space, followed by the variable's value.
   The variables are:
-  'mime_type': (MUST) the MIME type of the image format. This will be used to
+
+  * _mime_type_: (MUST) the MIME type of the image format. This will be used to
   resolve the supported file extensions, i.e. ImageMagick 'JPEG' format is
   mapped to MIME type 'image/jpeg' which in turn will be mapped to 'jpeg jpg
   jpe' image file extensions.
-  'enabled': (OPTIONAL) if the format is enabled in the toolkit. Defaults to
+  * _enabled_: (OPTIONAL) if the format is enabled in the toolkit. Defaults to
   true.
-  'weight': (OPTIONAL), defaults to 0. This is used in edge cases where an
+  * _weight_: (OPTIONAL), defaults to 0. This is used in edge cases where an
   image file extension is mapped to more than one ImageMagick format. It is
   needed in file format conversions, e.g. in conversion from 'png' to 'gif',
   to decide if 'GIF' or 'GIF87' internal Imagemagick format be used.
-  'exclude_extensions': (OPTIONAL) it can be used to limit the file extensions
+  * _exclude_extensions_: (OPTIONAL) it can be used to limit the file extensions
   to be supported by the toolkit if the mapping MIME type <-> file extension
   returns more extensions than needed and we do not want to alter the MIME type
   mapping.
 
-
--- IMAGEMAGICK AND DRUPAL'S IMAGE API REVEALED --
+# ImageMagick and Drupal's image API revealed
 
 ImageMagick is a command line based image manipulation tool. It is executed
 through calls to the operating system shell, rather than using PHP functions.
@@ -127,9 +119,11 @@ All the image manipulation performed by the operations provided by the Image
 API (scale, resize, desaturate, etc.), in fact, have to be accumulated and
 deferred to a single call of the 'convert' executable.
 The way ImageMagick toolkit interacts with Drupal Image API is the following:
+
 a) When an Image object is created, the toolkit calls ImageMagick's 'identify'
    command to retrieve information about the image itself (e.g. format, width,
    height, orientation).
+
 b) When operations are applied to the Image object (typically as part of
    creating an image style derivative), the toolkit *both* adds arguments to
    the command line to be executed *and* keeps track of the changes occurring
@@ -137,20 +131,20 @@ b) When operations are applied to the Image object (typically as part of
    retrieved sub (a), and the expected changes introduced by a specific
    operation, because we do not have an object in memory that can be tested
    against current values as we have in the GD toolkit.
+
 c) When the Image object is 'saved' (typically at the end of the image style
    derivative creation process), then the toolkit actually executes
    ImageMagick's 'convert' command with the entire set of arguments that have
    been added by effects/operations so far.
 
-
--- DEBUGGING IMAGEMAGICK COMMANDS --
+# Debugging ImageMagick commands
 
 The toolkit provides some of options to facilitate debugging the execution of
 ImageMagick commands.
 
-- Display debugging information
+## Display debugging information
 
-  Go to Administration » Configuration » Media » Image toolkit and select the
+  Go to _Administration » Configuration » Media » Image toolkit_ and select the
   'Display debugging information' tickbox in the 'Execution options' box. This
   will result in logging all the parameters passed in input to the 'identify'
   and 'convert' binaries, and all output/errors produced by the execution. The
@@ -161,16 +155,16 @@ ImageMagick commands.
 
   As an example, the following is logged when an image derivative is generated
   by the 'Thumbnail' image style:
-
+```
    ImageMagick command: identify -format 'format:%m|width:%w|height:%h|exif_orientation:%[EXIF:Orientation]' 'core/modules/image/sample.png'
    ImageMagick output:  format:PNG|width:800|height:600|exif_orientation:
    ImageMagick command: convert 'core/modules/image/sample.png' -resize 100x75! -quality 75 '/[...]/sites/default/files/styles/thumbnail/public/core/modules/image/sample.png'
    ImageMagick command: identify -format 'format:%m|width:%w|height:%h|exif_orientation:%[EXIF:Orientation]' '/[...]/sites/default/files/styles/thumbnail/public/core/modules/image/sample.png'
    ImageMagick output:  format:PNG|width:100|height:75|exif_orientation:
+```
+## Prepend -debug argument
 
-- Prepend -debug argument
-
-  Go to Administration » Configuration » Media » Image toolkit and enter, for
+  Go to _Administration » Configuration » Media » Image toolkit_ and enter, for
   example, '-debug All' in the 'Prepend arguments' text box. Also, enable
   'Display debugging information' as described above. This will instruct
   ImageMagick 'identify' and 'convert' binaries to produce a verbose log of
@@ -178,13 +172,13 @@ ImageMagick commands.
   Also, a '-log' argument can be entered to specify how to format the log
   itself.
   For more details, see ImageMagick documentation online:
-    https://www.imagemagick.org/script/command-line-options.php#debug
-    https://www.imagemagick.org/script/command-line-options.php#log
+  * https://www.imagemagick.org/script/command-line-options.php#debug
+  * https://www.imagemagick.org/script/command-line-options.php#log
 
-  This requires some trials before getting the required level of detail. A good
-  combination is "-debug All -log '%u: %d - %e'". Following on the example
+  It requires some trials before getting the required level of detail. A good
+  combination is _"-debug All -log '%u: %d - %e'"_. Following on the example
   above, this will log something like (extract):
-
+```
    ImageMagick command: convert 'core/modules/image/sample.png' -debug All -log '%u: %d - %e' -resize 100x75! -quality 75 '/[...]/sites/default/files/styles/thumbnail/public/core/modules/image/sample.png'
    ImageMagick error:
       [...]
@@ -210,9 +204,9 @@ ImageMagick commands.
       0.110u: Coder -       number_opaque          > 256
       0.110u: Coder -       number_semitransparent = 0
       [...]
+```
 
-
--- CONTACT --
+# Contact
 
 Current maintainers:
 * Daniel F. Kudwien 'sun' - https://www.drupal.org/u/sun

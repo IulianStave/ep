@@ -2,12 +2,10 @@
 
 namespace Drupal\Tests\imagemagick\Functional;
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Image\ImageInterface;
-use Drupal\Tests\TestFileCreationTrait;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\file_mdm\FileMetadataInterface;
 use Drupal\imagemagick\ImagemagickExecArguments;
+use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
 
 /**
  * Tests that core image manipulations work properly through Imagemagick.
@@ -16,21 +14,7 @@ use Drupal\imagemagick\ImagemagickExecArguments;
  */
 class ToolkitImagemagickTest extends BrowserTestBase {
 
-  use TestFileCreationTrait;
-
-  /**
-   * The image factory service.
-   *
-   * @var \Drupal\Core\Image\ImageFactory
-   */
-  protected $imageFactory;
-
-  /**
-   * A directory for image test file results.
-   *
-   * @var string
-   */
-  protected $testDirectory;
+  use ToolkitSetupTrait;
 
   // Colors that are used in testing.
   // @codingStandardsIgnoreStart
@@ -53,16 +37,11 @@ class ToolkitImagemagickTest extends BrowserTestBase {
   /**
    * Modules to enable.
    *
+   * Enable 'file_test' to be able to work with dummy_remote:// stream wrapper.
+   *
    * @var array
    */
-  protected static $modules = [
-    'system',
-    'simpletest',
-    'file_test',
-    'imagemagick',
-    'file_mdm',
-    'file_mdm_exif',
-  ];
+  public static $modules = ['system', 'imagemagick', 'file_mdm', 'file_test'];
 
   /**
    * {@inheritdoc}
@@ -81,64 +60,9 @@ class ToolkitImagemagickTest extends BrowserTestBase {
 
     // Prepare a directory for test file results.
     $this->testDirectory = 'public://imagetest';
-  }
-
-  /**
-   * Helper to setup the image toolkit.
-   *
-   * @param string $binaries
-   *   The graphics package binaries to use for testing.
-   * @param bool $check_path
-   *   Whether the path to binaries should be tested.
-   */
-  protected function setUpToolkit($binaries, $check_path = TRUE) {
-    // Change the toolkit.
-    \Drupal::configFactory()->getEditable('system.image')
-      ->set('toolkit', 'imagemagick')
-      ->save();
-
-    // Execute tests with selected binaries.
-    \Drupal::configFactory()->getEditable('imagemagick.settings')
-      ->set('debug', TRUE)
-      ->set('binaries', $binaries)
-      ->set('quality', 100)
-      ->save();
-
-    if ($check_path) {
-      // The test can only be executed if binaries are available on the shell
-      // path.
-      $status = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick')->getExecManager()->checkPath('');
-      if (!empty($status['errors'])) {
-        // Bots running automated test on d.o. do not have binaries installed,
-        // so the test will be skipped; it can be run locally where binaries
-        // are installed.
-        $this->markTestSkipped("Tests for '{$binaries}' cannot run because the binaries are not available on the shell path.");
-      }
-    }
-
-    // Set the toolkit on the image factory.
-    $this->imageFactory->setToolkitId('imagemagick');
-
-    // Test that the image factory is set to use the Imagemagick toolkit.
-    $this->assertEqual($this->imageFactory->getToolkitId(), 'imagemagick', 'The image factory is set to use the \'imagemagick\' image toolkit.');
-
     // Prepare directory.
     file_unmanaged_delete_recursive($this->testDirectory);
     file_prepare_directory($this->testDirectory, FILE_CREATE_DIRECTORY);
-  }
-
-  /**
-   * Provides data for testManipulations.
-   *
-   * @return array[]
-   *   A simple array of simple arrays, each having the following elements:
-   *   - binaries to use for testing.
-   */
-  public function providerManipulationTest() {
-    return [
-      ['imagemagick'],
-      ['graphicsmagick'],
-    ];
   }
 
   /**
@@ -148,13 +72,18 @@ class ToolkitImagemagickTest extends BrowserTestBase {
    * properly, build a list of expected color values for each of the corners and
    * the expected height and widths for the final images.
    *
-   * @param string $binaries
-   *   The graphics package binaries to use for testing.
+   * @param string $toolkit_id
+   *   The id of the toolkit to set up.
+   * @param string $toolkit_config
+   *   The config object of the toolkit to set up.
+   * @param array $toolkit_settings
+   *   The settings of the toolkit to set up.
    *
-   * @dataProvider providerManipulationTest
+   * @dataProvider providerToolkitConfiguration
    */
-  public function testManipulations($binaries) {
-    $this->setUpToolkit($binaries);
+  public function testManipulations($toolkit_id, $toolkit_config, array $toolkit_settings) {
+    $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
+    $this->prepareImageFileHandling();
 
     // Typically the corner colors will be unchanged. These colors are in the
     // order of top-left, top-right, bottom-right, bottom-left.
@@ -325,9 +254,6 @@ class ToolkitImagemagickTest extends BrowserTestBase {
       ],
     ];
 
-    // Prepare a copy of test files.
-    $this->getTestFiles('image');
-
     foreach ($files as $file) {
       $image_uri = 'public://' . $file;
       foreach ($operations as $op => $values) {
@@ -339,7 +265,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         }
 
         // Check that no multi-frame information is set.
-        $this->assertIdentical(1, $image->getToolkit()->getFrames());
+        $this->assertSame(1, $image->getToolkit()->getFrames());
 
         // Perform our operation.
         $image->apply($values['function'], $values['arguments']);
@@ -381,7 +307,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
 
         // Check MIME type if needed.
         if (isset($values['mimetype'])) {
-          $this->assertEqual($values['mimetype'], $toolkit->getMimeType(), "Image '$file' after '$op' action has proper MIME type ({$values['mimetype']}).");
+          $this->assertEquals($values['mimetype'], $toolkit->getMimeType(), "Image '$file' after '$op' action has proper MIME type ({$values['mimetype']}).");
         }
 
         // To keep from flooding the test with assert values, make a general
@@ -456,9 +382,9 @@ class ToolkitImagemagickTest extends BrowserTestBase {
       $image->createNew(50, 20, image_type_to_extension($type, FALSE), '#ffff00');
       $file = 'from_null' . image_type_to_extension($type);
       $file_path = $this->testDirectory . '/' . $file;
-      $this->assertEqual(50, $image->getWidth(), "Image file '$file' has the correct width.");
-      $this->assertEqual(20, $image->getHeight(), "Image file '$file' has the correct height.");
-      $this->assertEqual(image_type_to_mime_type($type), $image->getMimeType(), "Image file '$file' has the correct MIME type.");
+      $this->assertEquals(50, $image->getWidth(), "Image file '$file' has the correct width.");
+      $this->assertEquals(20, $image->getHeight(), "Image file '$file' has the correct height.");
+      $this->assertEquals(image_type_to_mime_type($type), $image->getMimeType(), "Image file '$file' has the correct MIME type.");
       $this->assertTrue($image->save($file_path), "Image '$file' created anew from a null image was saved.");
 
       // Reload saved image.
@@ -467,27 +393,16 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         $this->fail("Could not load image '$file'.");
         continue;
       }
-      $this->assertEqual(50, $image_reloaded->getWidth(), "Image file '$file' has the correct width.");
-      $this->assertEqual(20, $image_reloaded->getHeight(), "Image file '$file' has the correct height.");
-      $this->assertEqual(image_type_to_mime_type($type), $image_reloaded->getMimeType(), "Image file '$file' has the correct MIME type.");
+      $this->assertEquals(50, $image_reloaded->getWidth(), "Image file '$file' has the correct width.");
+      $this->assertEquals(20, $image_reloaded->getHeight(), "Image file '$file' has the correct height.");
+      $this->assertEquals(image_type_to_mime_type($type), $image_reloaded->getMimeType(), "Image file '$file' has the correct MIME type.");
       if ($image_reloaded->getToolkit()->getType() == IMAGETYPE_GIF) {
-        $this->assertEqual('#ffff00', $image_reloaded->getToolkit()->getTransparentColor(), "Image file '$file' has the correct transparent color channel set.");
+        $this->assertEquals('#ffff00', $image_reloaded->getToolkit()->getTransparentColor(), "Image file '$file' has the correct transparent color channel set.");
       }
       else {
-        $this->assertEqual(NULL, $image_reloaded->getToolkit()->getTransparentColor(), "Image file '$file' has no color channel set.");
+        $this->assertEquals(NULL, $image_reloaded->getToolkit()->getTransparentColor(), "Image file '$file' has no color channel set.");
       }
     }
-
-    // Test failures of CreateNew.
-    $image = $this->imageFactory->get();
-    $image->createNew(-50, 20);
-    $this->assertFalse($image->isValid(), 'CreateNew with negative width fails.');
-    $image->createNew(50, 20, 'foo');
-    $this->assertFalse($image->isValid(), 'CreateNew with invalid extension fails.');
-    $image->createNew(50, 20, 'gif', '#foo');
-    $this->assertFalse($image->isValid(), 'CreateNew with invalid color hex string fails.');
-    $image->createNew(50, 20, 'gif', '#ff0000');
-    $this->assertTrue($image->isValid(), 'CreateNew with valid arguments validates the Image.');
 
     // Test saving image files with filenames having non-ascii characters.
     $file_names = [
@@ -506,7 +421,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
     ];
     foreach ($file_names as $file) {
       // @todo on Windows, GraphicsMagick fails.
-      if (substr(PHP_OS, 0, 3) === 'WIN' && $binaries === 'graphicsmagick') {
+      if (substr(PHP_OS, 0, 3) === 'WIN' && $toolkit_settings['binaries'] === 'graphicsmagick') {
         continue;
       }
       // On Windows, skip filenames with non-allowed characters.
@@ -524,14 +439,14 @@ class ToolkitImagemagickTest extends BrowserTestBase {
     // Test handling a file stored through a remote stream wrapper.
     $image = $this->imageFactory->get('dummy-remote://image-test.png');
     // Source file should be equal to the copied local temp source file.
-    $this->assertEqual(filesize('dummy-remote://image-test.png'), filesize($image->getToolkit()->arguments()->getSourceLocalPath()));
+    $this->assertEquals(filesize('dummy-remote://image-test.png'), filesize($image->getToolkit()->arguments()->getSourceLocalPath()));
     $image->desaturate();
     $this->assertTrue($image->save('dummy-remote://remote-image-test.png'));
     // Destination file should exists, and destination local temp file should
     // have been reset.
     $this->assertTrue(file_exists($image->getToolkit()->arguments()->getDestination()));
-    $this->assertEqual('dummy-remote://remote-image-test.png', $image->getToolkit()->arguments()->getDestination());
-    $this->assertIdentical('', $image->getToolkit()->arguments()->getDestinationLocalPath());
+    $this->assertEquals('dummy-remote://remote-image-test.png', $image->getToolkit()->arguments()->getDestination());
+    $this->assertSame('', $image->getToolkit()->arguments()->getDestinationLocalPath());
 
     // Test retrieval of EXIF information.
     file_unmanaged_copy(drupal_get_path('module', 'imagemagick') . '/misc/test-exif.jpeg', 'public://', FILE_EXISTS_REPLACE);
@@ -572,7 +487,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         ->set('use_identify', TRUE)
         ->save();
       $image = $this->imageFactory->get($image_file['path']);
-      $this->assertIdentical($image_file['orientation'], $image->getToolkit()->getExifOrientation());
+      $this->assertSame($image_file['orientation'], $image->getToolkit()->getExifOrientation());
     }
 
     // Test multi-frame GIF image.
@@ -595,55 +510,57 @@ class ToolkitImagemagickTest extends BrowserTestBase {
       ->save();
     foreach ($image_files as $image_file) {
       $image = $this->imageFactory->get($image_file['source']);
-      $this->assertIdentical($image_file['width'], $image->getWidth());
-      $this->assertIdentical($image_file['height'], $image->getHeight());
-      $this->assertIdentical($image_file['frames'], $image->getToolkit()->getFrames());
+      $this->assertSame($image_file['width'], $image->getWidth());
+      $this->assertSame($image_file['height'], $image->getHeight());
+      $this->assertSame($image_file['frames'], $image->getToolkit()->getFrames());
 
       // Scaling should preserve frames.
       $image->scale(30);
       $this->assertTrue($image->save($image_file['destination']));
       $image = $this->imageFactory->get($image_file['destination']);
-      $this->assertIdentical($image_file['scaled_width'], $image->getWidth());
-      $this->assertIdentical($image_file['scaled_height'], $image->getHeight());
-      $this->assertIdentical($image_file['frames'], $image->getToolkit()->getFrames());
+      $this->assertSame($image_file['scaled_width'], $image->getWidth());
+      $this->assertSame($image_file['scaled_height'], $image->getHeight());
+      $this->assertSame($image_file['frames'], $image->getToolkit()->getFrames());
 
       // Rotating should preserve frames.
       $image->rotate(24);
       $this->assertTrue($image->save($image_file['destination']));
       $image = $this->imageFactory->get($image_file['destination']);
-      $this->assertIdentical($image_file['rotated_width'], $image->getWidth());
-      $this->assertIdentical($image_file['rotated_height'], $image->getHeight());
-      $this->assertIdentical($image_file['frames'], $image->getToolkit()->getFrames());
+      $this->assertSame($image_file['rotated_width'], $image->getWidth());
+      $this->assertSame($image_file['rotated_height'], $image->getHeight());
+      $this->assertSame($image_file['frames'], $image->getToolkit()->getFrames());
 
       // Converting to PNG should drop frames.
       $image->convert('png');
       $this->assertTrue($image->save($image_file['destination']));
       $image = $this->imageFactory->get($image_file['destination']);
-      $this->assertIdentical(1, $image->getToolkit()->getFrames());
-      $this->assertIdentical($image_file['rotated_width'], $image->getWidth());
-      $this->assertIdentical($image_file['rotated_height'], $image->getHeight());
-      $this->assertIdentical(1, $image->getToolkit()->getFrames());
+      $this->assertSame(1, $image->getToolkit()->getFrames());
+      $this->assertSame($image_file['rotated_width'], $image->getWidth());
+      $this->assertSame($image_file['rotated_height'], $image->getHeight());
+      $this->assertSame(1, $image->getToolkit()->getFrames());
     }
   }
 
   /**
    * Legacy methods tests.
    *
-   * @param string $binaries
-   *   The graphics package binaries to use for testing.
+   * @param string $toolkit_id
+   *   The id of the toolkit to set up.
+   * @param string $toolkit_config
+   *   The config object of the toolkit to set up.
+   * @param array $toolkit_settings
+   *   The settings of the toolkit to set up.
    *
-   * @dataProvider providerManipulationTest
-   *
-   * @todo remove in 8.x-3.0.
+   * @dataProvider providerToolkitConfiguration
    *
    * @group legacy
    */
-  public function testManipulationsLegacy($binaries) {
-    $this->setUpToolkit($binaries);
+  public function testManipulationsLegacy($toolkit_id, $toolkit_config, array $toolkit_settings) {
+    $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
 
     // Check package.
     $toolkit = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick');
-    $this->assertSame($binaries, $toolkit->getPackage());
+    $this->assertSame($toolkit_settings['binaries'], $toolkit->getPackage());
     $this->assertNotNull($toolkit->getPackageLabel());
     $this->assertSame([], $toolkit->checkPath('')['errors']);
 
@@ -830,7 +747,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         }
 
         // Check that no multi-frame information is set.
-        $this->assertIdentical(1, $image->getToolkit()->getFrames());
+        $this->assertSame(1, $image->getToolkit()->getFrames());
 
         // Legacy source tests.
         $this->assertSame($image_uri, $image->getToolkit()->getSource());
@@ -911,7 +828,7 @@ class ToolkitImagemagickTest extends BrowserTestBase {
         ->set('use_identify', FALSE)
         ->save();
       $image = $this->imageFactory->get($image_file['path']);
-      $this->assertIdentical($image_file['orientation'], $image->getToolkit()->getExifOrientation());
+      $this->assertSame($image_file['orientation'], $image->getToolkit()->getExifOrientation());
     }
   }
 
@@ -963,12 +880,14 @@ class ToolkitImagemagickTest extends BrowserTestBase {
   /**
    * Test legacy arguments handling.
    *
-   * @todo remove in 8.x-3.0.
-   *
    * @group legacy
    */
   public function testArgumentsLegacy() {
-    $this->setUpToolkit('imagemagick');
+    $this->setUpToolkit('imagemagick', 'imagemagick.settings', [
+      'binaries' => 'imagemagick',
+      'quality' => 100,
+      'debug' => TRUE,
+    ]);
 
     // Prepare a copy of test files.
     $this->getTestFiles('image');
@@ -1041,203 +960,9 @@ class ToolkitImagemagickTest extends BrowserTestBase {
   }
 
   /**
-   * Test arguments handling.
-   */
-  public function testArguments() {
-    $this->setUpToolkit('imagemagick');
-
-    // Prepare a copy of test files.
-    $this->getTestFiles('image');
-
-    $image_uri = "public://image-test.png";
-    $image = $this->imageFactory->get($image_uri);
-    if (!$image->isValid()) {
-      $this->fail("Could not load image $image_uri.");
-    }
-
-    // Setup a list of arguments.
-    $image->getToolkit()->arguments()
-      ->add("-resize 100x75!")
-      // Internal argument.
-      ->add("INTERNAL", ImagemagickExecArguments::INTERNAL)
-      ->add("-quality 75")
-      // Prepend argument.
-      ->add("-hoxi 76", ImagemagickExecArguments::POST_SOURCE, 0)
-      // Pre source argument.
-      ->add("-density 25", ImagemagickExecArguments::PRE_SOURCE)
-      // Another internal argument.
-      ->add("GATEAU", ImagemagickExecArguments::INTERNAL)
-      // Another pre source argument.
-      ->add("-auchocolat 90", ImagemagickExecArguments::PRE_SOURCE)
-      // Add two arguments with additional info.
-      ->add(
-        "-addz 150",
-        ImagemagickExecArguments::POST_SOURCE,
-        ImagemagickExecArguments::APPEND,
-        [
-          'foo' => 'bar',
-          'qux' => 'der',
-        ]
-      )
-      ->add(
-        "-addz 200",
-        ImagemagickExecArguments::POST_SOURCE,
-        ImagemagickExecArguments::APPEND,
-        [
-          'wey' => 'lod',
-          'foo' => 'bar',
-        ]
-      );
-
-    // Test find arguments skipping identifiers.
-    $this->assertSame([2], array_keys($image->getToolkit()->arguments()->find('/^INTERNAL/')));
-    $this->assertSame([5], array_keys($image->getToolkit()->arguments()->find('/^GATEAU/')));
-    $this->assertSame([6], array_keys($image->getToolkit()->arguments()->find('/^\-auchocolat/')));
-    $this->assertSame([7, 8], array_keys($image->getToolkit()->arguments()->find('/^\-addz/')));
-    $this->assertSame([7, 8], array_keys($image->getToolkit()->arguments()->find('/.*/', NULL, ['foo' => 'bar'])));
-    $this->assertSame([], $image->getToolkit()->arguments()->find('/.*/', NULL, ['arw' => 'moo']));
-
-    // Check resulting command line strings.
-    $this->assertSame('-density 25 -auchocolat 90', $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::PRE_SOURCE));
-    $this->assertSame("-hoxi 76 -resize 100x75! -quality 75 -addz 150 -addz 200", $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
-
-    // Add arguments with a specific index.
-    $image->getToolkit()->arguments()
-      ->add("-ix aa", ImagemagickExecArguments::POST_SOURCE, 4)
-      ->add("-ix bb", ImagemagickExecArguments::POST_SOURCE, 4);
-    $this->assertSame([4, 5], array_keys($image->getToolkit()->arguments()->find('/^\-ix/')));
-    $this->assertSame("-hoxi 76 -resize 100x75! -quality 75 -ix bb -ix aa -addz 150 -addz 200", $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
-
-    // Create a new image and inspect the arguments.
-    $image->createNew(100, 200);
-    $this->assertSame([0], array_keys($image->getToolkit()->arguments()->find('/^./', NULL, ['image_toolkit_operation' => 'create_new'])));
-    $this->assertSame([0], array_keys($image->getToolkit()->arguments()->find('/^./', NULL, ['image_toolkit_operation_plugin_id' => 'imagemagick_create_new'])));
-    $this->assertSame("-size 100x200 xc:transparent", $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
-  }
-
-  /**
-   * Test module arguments alter hook.
-   */
-  public function testArgumentsAlterHook() {
-    $this->setUpToolkit('imagemagick');
-
-    $fmdm = $this->container->get('file_metadata_manager');
-
-    // Change the Advanced Colorspace setting, must be included in the command
-    // line.
-    \Drupal::configFactory()->getEditable('imagemagick.settings')
-      ->set('advanced.colorspace', 'GRAY')
-      ->save();
-
-    // Prepare a copy of test files.
-    $this->getTestFiles('image');
-    $image_uri = "public://image-test.png";
-    $image = $this->imageFactory->get($image_uri);
-    if (!$image->isValid()) {
-      $this->fail("Could not load image $image_uri.");
-    }
-
-    // Check the source colorspace.
-    $this->assertSame('SRGB', $image->getToolkit()->getColorspace());
-
-    // Setup a list of arguments.
-    $image->getToolkit()->arguments()
-      ->add("-resize 100x75!")
-      ->add("-quality 75");
-
-    // Save the derived image.
-    $image->save($image_uri . '.derived');
-
-    // Check expected command line.
-    if (substr(PHP_OS, 0, 3) === 'WIN') {
-      $expected = "-resize 100x75! -quality 75 -colorspace \"GRAY\"";
-    }
-    else {
-      $expected = "-resize 100x75! -quality 75 -colorspace 'GRAY'";
-    }
-    $this->assertSame($expected, $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
-
-    // Check that the colorspace has been actually changed in the file.
-    Cache::InvalidateTags([
-      'config:imagemagick.file_metadata_plugin.imagemagick_identify',
-    ]);
-    $fmdm->release($image_uri . '.derived');
-    $image_md = $fmdm->uri($image_uri . '.derived');
-    $image = $this->imageFactory->get($image_uri . '.derived');
-    $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $image_md->isMetadataLoaded('imagemagick_identify'));
-    $this->assertSame('GRAY', $image->getToolkit()->getColorspace());
-
-    // Change the Prepend settings, must be included in the command line.
-    // Once before the source image.
-    \Drupal::configFactory()->getEditable('imagemagick.settings')
-      ->set('prepend', '-debug All')
-      ->set('prepend_pre_source', TRUE)
-      ->save();
-    $image = $this->imageFactory->get($image_uri);
-    $image->getToolkit()->arguments()
-      ->add("-resize 100x75!")
-      ->add("-quality 75");
-    $image->save($image_uri . '.derived');
-    if (substr(PHP_OS, 0, 3) === 'WIN') {
-      $expected = "-resize 100x75! -quality 75 -colorspace \"GRAY\"";
-    }
-    else {
-      $expected = "-resize 100x75! -quality 75 -colorspace 'GRAY'";
-    }
-    $this->assertSame('-debug All', $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::PRE_SOURCE));
-    $this->assertSame($expected, $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
-    // Then after the source image.
-    \Drupal::configFactory()->getEditable('imagemagick.settings')
-      ->set('prepend_pre_source', FALSE)
-      ->save();
-    $image = $this->imageFactory->get($image_uri);
-    $image->getToolkit()->arguments()
-      ->add("-resize 100x75!")
-      ->add("-quality 75");
-    $image->save($image_uri . '.derived');
-    if (substr(PHP_OS, 0, 3) === 'WIN') {
-      $expected = "-debug All -resize 100x75! -quality 75 -colorspace \"GRAY\"";
-    }
-    else {
-      $expected = "-debug All -resize 100x75! -quality 75 -colorspace 'GRAY'";
-    }
-    $this->assertSame('', $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::PRE_SOURCE));
-    $this->assertSame($expected, $image->getToolkit()->arguments()->toString(ImagemagickExecArguments::POST_SOURCE));
-  }
-
-  /**
-   * Test missing command on ExecManager.
-   */
-  public function testExecManagerCommandNotFound() {
-    $exec_manager = \Drupal::service('imagemagick.exec_manager');
-    $output = '';
-    $error = '';
-    $expected = substr(PHP_OS, 0, 3) !== 'WIN' ? 127 : 1;
-    $ret = $exec_manager->runOsShell('pinkpanther', '-inspector Clouseau', 'blake', $output, $error);
-    $this->assertEquals($expected, $ret, $error);
-  }
-
-  /**
-   * Test timeout on ExecManager.
-   */
-  public function testExecManagerTimeout() {
-    $exec_manager = \Drupal::service('imagemagick.exec_manager');
-    $output = '';
-    $error = '';
-    $expected = substr(PHP_OS, 0, 3) !== 'WIN' ? 143 : 1;
-    // Set a short timeout (1 sec.) and run a process that is expected to last
-    // longer (10 secs.). Should return a 'terminate' exit code.
-    $exec_manager->setTimeout(1);
-    $ret = $exec_manager->runOsShell('sleep', '10', 'sleep', $output, $error);
-    $this->assertEquals($expected, $ret, $error);
-  }
-
-  /**
    * Test deprecation of ImagemagickMimeTypeMapper.
    *
    * @group legacy
-   *
-   * @todo remove in 8.x-3.0.
    *
    * @expectedDeprecation The Drupal\imagemagick\ImagemagickMimeTypeMapper class is deprecated in ImageMagick 8.x-2.4, will be removed in 8.x-3.0. You should use the FileEye\MimeMap\Type and FileEye\MimeMap\Extension API instead. See https://www.drupal.org/project/imagemagick/issues/3026733.
    * @expectedDeprecation Drupal\imagemagick\ImagemagickMimeTypeMapper::getExtensionsForMimeType is deprecated in ImageMagick 8.x-2.4, will be removed in 8.x-3.0. Use FileEye\MimeMap\Type::getExtensions() instead. See https://www.drupal.org/project/imagemagick/issues/3026733.

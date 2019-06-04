@@ -3,9 +3,10 @@
 namespace Drupal\Tests\imagemagick\Functional;
 
 use Drupal\Core\Cache\Cache;
-use Drupal\Tests\TestFileCreationTrait;
 use Drupal\file_mdm\FileMetadataInterface;
+use Drupal\imagemagick\Plugin\ImageToolkit\ImagemagickToolkit;
 use Drupal\Tests\BrowserTestBase;
+use Drupal\Tests\imagemagick\Kernel\ToolkitSetupTrait;
 
 /**
  * Tests that Imagemagick integrates properly with File Metadata Manager.
@@ -14,34 +15,16 @@ use Drupal\Tests\BrowserTestBase;
  */
 class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
 
-  use TestFileCreationTrait;
-
-  /**
-   * The image factory service.
-   *
-   * @var \Drupal\Core\Image\ImageFactory
-   */
-  protected $imageFactory;
-
-  /**
-   * A directory for image test file results.
-   *
-   * @var string
-   */
-  protected $testDirectory;
+  use ToolkitSetupTrait;
 
   /**
    * Modules to enable.
    *
+   * Enable 'file_test' to be able to work with dummy_remote:// stream wrapper.
+   *
    * @var array
    */
-  protected static $modules = [
-    'system',
-    'simpletest',
-    'file_test',
-    'imagemagick',
-    'file_mdm',
-  ];
+  public static $modules = ['system', 'imagemagick', 'file_mdm', 'file_test'];
 
   /**
    * {@inheritdoc}
@@ -52,49 +35,32 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
     // Set the image factory.
     $this->imageFactory = $this->container->get('image.factory');
 
+    // Set the file system.
+    $this->fileSystem = $this->container->get('file_system');
+
     // Prepare a directory for test file results.
     $this->testDirectory = 'public://imagetest';
-
-    // Change the toolkit.
-    \Drupal::configFactory()->getEditable('system.image')
-      ->set('toolkit', 'imagemagick')
-      ->save();
-    \Drupal::configFactory()->getEditable('imagemagick.settings')
-      ->set('debug', FALSE)
-      ->set('binaries', 'imagemagick')
-      ->set('quality', 100)
-      ->save();
 
     // Set the toolkit on the image factory.
     $this->imageFactory->setToolkitId('imagemagick');
   }
 
   /**
-   * Provides data for testFileMetadata.
-   *
-   * @return array[]
-   *   A simple array of simple arrays, each having the following elements:
-   *   - binaries to use for testing.
-   *   - parsing method to use for testing.
-   */
-  public function providerFileMetadataTest() {
-    return [
-      ['imagemagick', 'imagemagick_identify'],
-      ['graphicsmagick', 'imagemagick_identify'],
-    ];
-  }
-
-  /**
    * Test image toolkit integration with file metadata manager.
    *
-   * @param string $binaries
-   *   The graphics package binaries to use for testing.
-   * @param string $parsing_method
-   *   The parsing method to use for testing.
+   * @param string $toolkit_id
+   *   The id of the toolkit to set up.
+   * @param string $toolkit_config
+   *   The config object of the toolkit to set up.
+   * @param array $toolkit_settings
+   *   The settings of the toolkit to set up.
    *
-   * @dataProvider providerFileMetadataTest
+   * @dataProvider providerToolkitConfiguration
    */
-  public function testFileMetadata($binaries, $parsing_method) {
+  public function testFileMetadata($toolkit_id, $toolkit_config, array $toolkit_settings) {
+    $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
+    $this->prepareImageFileHandling();
+
     $config = \Drupal::configFactory()->getEditable('imagemagick.settings');
     $config_mdm = \Drupal::configFactory()->getEditable('file_mdm.settings');
 
@@ -103,21 +69,6 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
       ->set('metadata_cache.enabled', TRUE)
       ->set('metadata_cache.disallowed_paths', [])
       ->save();
-
-    // Execute tests with selected binaries.
-    // The test can only be executed if binaries are available on the shell
-    // path.
-    $config
-      ->set('binaries', $binaries)
-      ->set('use_identify', $parsing_method === 'imagemagick_identify')
-      ->save();
-    $status = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick')->getExecManager()->checkPath('');
-    if (!empty($status['errors'])) {
-      // Bots running automated test on d.o. do not have binaries installed,
-      // so the test will be skipped; it can be run locally where binaries are
-      // installed.
-      $this->markTestSkipped("Tests for '{$binaries}' cannot run because the binaries are not available on the shell path.");
-    }
 
     // A list of files that will be tested.
     $files = [
@@ -202,7 +153,6 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
     $fmdm = $this->container->get('file_metadata_manager');
 
     // Prepare a copy of test files.
-    $this->getTestFiles('image');
     file_unmanaged_copy(drupal_get_path('module', 'imagemagick') . '/misc/test-multi-frame.gif', 'public://', FILE_EXISTS_REPLACE);
     file_unmanaged_copy(drupal_get_path('module', 'imagemagick') . '/misc/test-exif.jpeg', 'public://', FILE_EXISTS_REPLACE);
     file_unmanaged_copy(drupal_get_path('module', 'imagemagick') . '/misc/test-exif-icc.jpeg', 'public://', FILE_EXISTS_REPLACE);
@@ -212,28 +162,28 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
     foreach ($files as $source_uri => $source_image_data) {
       $this->assertFalse($fmdm->has($source_uri));
       $source_image_md = $fmdm->uri($source_uri);
-      $this->assertTrue($fmdm->has($source_uri));
+      $this->assertTrue($fmdm->has($source_uri), $source_uri);
       $first = TRUE;
       file_unmanaged_delete_recursive($this->testDirectory);
       file_prepare_directory($this->testDirectory, FILE_CREATE_DIRECTORY);
       foreach ($operations as $op => $values) {
         // Load up a fresh image.
         if ($first) {
-          $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         }
         $source_image = $this->imageFactory->get($source_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -248,28 +198,28 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         // Reload saved image and check data.
         $saved_image_md = $fmdm->uri($saved_uri);
         $saved_image = $this->imageFactory->get($saved_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         // Get metadata from file.
-        $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID);
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-          $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+          $this->assertEquals($values['height'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'height'));
+          $this->assertEquals($values['width'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'width'));
         }
         $fmdm->release($saved_uri);
 
@@ -290,24 +240,24 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         $this->assertFalse($fmdm->has($source_uri));
         $source_image_md = $fmdm->uri($source_uri);
         $this->assertTrue($fmdm->has($source_uri));
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         $source_image = $this->imageFactory->get($source_uri);
         if ($first) {
           // First time load, metadata loaded from file.
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         }
         else {
           // Further loads, metadata loaded from cache.
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         }
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -322,28 +272,28 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         // Reload saved image and check data.
         $saved_image_md = $fmdm->uri($saved_uri);
         $saved_image = $this->imageFactory->get($saved_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service. Should be cached.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         // Get metadata from cache.
-        $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID);
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-          $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+          $this->assertEquals($values['height'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'height'));
+          $this->assertEquals($values['width'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'width'));
         }
         $fmdm->release($saved_uri);
 
@@ -376,17 +326,17 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         // Load up the source image. Parsing should be fully cached now.
         $fmdm->release($source_uri);
         $source_image_md = $fmdm->uri($source_uri);
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         $source_image = $this->imageFactory->get($source_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -401,28 +351,28 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         // Reload saved image and check data.
         $saved_image_md = $fmdm->uri($saved_uri);
         $saved_image = $this->imageFactory->get($saved_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service. Should be cached.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         // Get metadata from cache.
-        $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID);
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-          $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+          $this->assertEquals($values['height'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'height'));
+          $this->assertEquals($values['width'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'width'));
         }
         $fmdm->release($saved_uri);
       }
@@ -431,19 +381,17 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
     }
 
     // Files in temporary:// must not be cached.
-    if ($parsing_method === 'imagemagick_identify') {
-      file_unmanaged_copy(drupal_get_path('module', 'imagemagick') . '/misc/test-multi-frame.gif', 'temporary://', FILE_EXISTS_REPLACE);
-      $source_uri = 'temporary://test-multi-frame.gif';
-      $fmdm->release($source_uri);
-      $source_image_md = $fmdm->uri($source_uri);
-      $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded('imagemagick_identify'));
-      $source_image = $this->imageFactory->get($source_uri);
-      $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded('imagemagick_identify'));
-      $fmdm->release($source_uri);
-      $source_image_md = $fmdm->uri($source_uri);
-      $source_image = $this->imageFactory->get($source_uri);
-      $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded('imagemagick_identify'));
-    }
+    file_unmanaged_copy(drupal_get_path('module', 'imagemagick') . '/misc/test-multi-frame.gif', 'temporary://', FILE_EXISTS_REPLACE);
+    $source_uri = 'temporary://test-multi-frame.gif';
+    $fmdm->release($source_uri);
+    $source_image_md = $fmdm->uri($source_uri);
+    $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+    $source_image = $this->imageFactory->get($source_uri);
+    $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+    $fmdm->release($source_uri);
+    $source_image_md = $fmdm->uri($source_uri);
+    $source_image = $this->imageFactory->get($source_uri);
+    $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
 
     // Invalidate cache, and open source images again. Now, all files should be
     // parsed again.
@@ -466,21 +414,21 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
       foreach ($operations as $op => $values) {
         // Load up a fresh image.
         if ($first) {
-          $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         }
         $source_image = $this->imageFactory->get($source_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -495,28 +443,28 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         // Reload saved image and check data.
         $saved_image_md = $fmdm->uri($saved_uri);
         $saved_image = $this->imageFactory->get($saved_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
-        if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        if ($toolkit_settings['binaries'] === 'imagemagick') {
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
           $this->assertEquals($source_image_data['profiles'], $source_image->getToolkit()->getProfiles());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         // Get metadata from file.
-        $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID);
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID));
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-          $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+          $this->assertEquals($values['height'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'height'));
+          $this->assertEquals($values['width'], $saved_image_md->getMetadata(ImagemagickToolkit::FILE_METADATA_PLUGIN_ID, 'width'));
         }
         $fmdm->release($saved_uri);
 
@@ -534,8 +482,6 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
    *   A simple array of simple arrays, each having the following elements:
    *   - binaries to use for testing.
    *   - parsing method to use for testing.
-   *
-   * @todo remove in 8.x-3.0.
    */
   public function providerFileMetadataTestLegacy() {
     return [
@@ -551,8 +497,6 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
    *   The graphics package binaries to use for testing.
    * @param string $parsing_method
    *   The parsing method to use for testing.
-   *
-   * @todo remove in 8.x-3.0.
    *
    * @dataProvider providerFileMetadataTestLegacy
    *
@@ -663,20 +607,20 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
       foreach ($operations as $op => $values) {
         // Load up a fresh image.
         if ($first) {
-          $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
         }
         $source_image = $this->imageFactory->get($source_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -708,40 +652,40 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $saved_image->getToolkit()->getFrames() === 1 &&
           !($values['function'] === 'convert' && $source_image_data['frames'] > 1)
         ) {
-          $this->assertIdentical(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
         // Get metadata from file.
         $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
         switch ($parsing_method) {
           case 'imagemagick_identify':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
             }
             break;
 
           case 'getimagesize':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
             }
             break;
 
@@ -765,23 +709,23 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         $this->assertFalse($fmdm->has($source_uri));
         $source_image_md = $fmdm->uri($source_uri);
         $this->assertTrue($fmdm->has($source_uri));
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
         $source_image = $this->imageFactory->get($source_uri);
         if ($first) {
           // First time load, metadata loaded from file.
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
         }
         else {
           // Further loads, metadata loaded from cache.
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded($parsing_method));
         }
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -809,40 +753,40 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $saved_image->getToolkit()->getFrames() === 1 &&
           !($values['function'] === 'convert' && $source_image_data['frames'] > 1)
         ) {
-          $this->assertIdentical(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service. Should be cached.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
         // Get metadata from cache.
         $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded($parsing_method));
         switch ($parsing_method) {
           case 'imagemagick_identify':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
             }
             break;
 
           case 'getimagesize':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
             }
             break;
 
@@ -878,16 +822,16 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
         // Load up the source image. Parsing should be fully cached now.
         $fmdm->release($source_uri);
         $source_image_md = $fmdm->uri($source_uri);
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
         $source_image = $this->imageFactory->get($source_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $source_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -915,40 +859,40 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $saved_image->getToolkit()->getFrames() === 1 &&
           !($values['function'] === 'convert' && $source_image_data['frames'] > 1)
         ) {
-          $this->assertIdentical(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service. Should be cached.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
         // Get metadata from cache.
         $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_CACHE, $saved_image_md->isMetadataLoaded($parsing_method));
         switch ($parsing_method) {
           case 'imagemagick_identify':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
             }
             break;
 
           case 'getimagesize':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
             }
             break;
 
@@ -965,13 +909,13 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
       $source_uri = 'temporary://test-multi-frame.gif';
       $fmdm->release($source_uri);
       $source_image_md = $fmdm->uri($source_uri);
-      $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded('imagemagick_identify'));
+      $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded('imagemagick_identify'));
       $source_image = $this->imageFactory->get($source_uri);
-      $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded('imagemagick_identify'));
+      $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded('imagemagick_identify'));
       $fmdm->release($source_uri);
       $source_image_md = $fmdm->uri($source_uri);
       $source_image = $this->imageFactory->get($source_uri);
-      $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded('imagemagick_identify'));
+      $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded('imagemagick_identify'));
     }
 
     // Invalidate cache, and open source images again. Now, all files should be
@@ -995,20 +939,20 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
       foreach ($operations as $op => $values) {
         // Load up a fresh image.
         if ($first) {
-          $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::NOT_LOADED, $source_image_md->isMetadataLoaded($parsing_method));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
         }
         $source_image = $this->imageFactory->get($source_uri);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
-        $this->assertIdentical($source_image_data['mimetype'], $source_image->getMimeType());
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $source_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame($source_image_data['mimetype'], $source_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertIdentical($source_image_data['height'], $source_image->getHeight());
-          $this->assertIdentical($source_image_data['width'], $source_image->getWidth());
+          $this->assertSame($source_image_data['height'], $source_image->getHeight());
+          $this->assertSame($source_image_data['width'], $source_image->getWidth());
         }
 
         // Perform our operation.
@@ -1036,40 +980,40 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
           $saved_image->getToolkit()->getFrames() === 1 &&
           !($values['function'] === 'convert' && $source_image_data['frames'] > 1)
         ) {
-          $this->assertIdentical(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_BY_CODE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
         else {
-          $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+          $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
         }
-        $this->assertIdentical($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
+        $this->assertSame($values['function'] === 'convert' ? $values['mimetype'] : $source_image_data['mimetype'], $saved_image->getMimeType());
         if ($binaries === 'imagemagick' && $parsing_method === 'imagemagick_identify') {
-          $this->assertIdentical($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
+          $this->assertSame($source_image_data['colorspace'], $source_image->getToolkit()->getColorspace());
         }
         if (!isset($source_image_data['skip_dimensions_check'])) {
-          $this->assertEqual($values['height'], $saved_image->getHeight());
-          $this->assertEqual($values['width'], $saved_image->getWidth());
+          $this->assertEquals($values['height'], $saved_image->getHeight());
+          $this->assertEquals($values['width'], $saved_image->getWidth());
         }
         $fmdm->release($saved_uri);
 
         // Get metadata via the file_mdm service.
         $saved_image_md = $fmdm->uri($saved_uri);
         // Should not be available at this stage.
-        $this->assertIdentical(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::NOT_LOADED, $saved_image_md->isMetadataLoaded($parsing_method));
         // Get metadata from file.
         $saved_image_md->getMetadata($parsing_method);
-        $this->assertIdentical(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
+        $this->assertSame(FileMetadataInterface::LOADED_FROM_FILE, $saved_image_md->isMetadataLoaded($parsing_method));
         switch ($parsing_method) {
           case 'imagemagick_identify':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 'height'));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 'width'));
             }
             break;
 
           case 'getimagesize':
             if (!isset($source_image_data['skip_dimensions_check'])) {
-              $this->assertEqual($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
-              $this->assertEqual($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
+              $this->assertEquals($values['height'], $saved_image_md->getMetadata($parsing_method, 1));
+              $this->assertEquals($values['width'], $saved_image_md->getMetadata($parsing_method, 0));
             }
             break;
 
@@ -1085,15 +1029,19 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
 
   /**
    * Tests getSourceLocalPath() for re-creating local path.
+   *
+   * @param string $toolkit_id
+   *   The id of the toolkit to set up.
+   * @param string $toolkit_config
+   *   The config object of the toolkit to set up.
+   * @param array $toolkit_settings
+   *   The settings of the toolkit to set up.
+   *
+   * @dataProvider providerToolkitConfiguration
    */
-  public function testSourceLocalPath() {
-    $status = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick')->getExecManager()->checkPath('');
-    if (!empty($status['errors'])) {
-      // Bots running automated test on d.o. do not have binaries installed,
-      // so the test will be skipped; it can be run locally where binaries are
-      // installed.
-      $this->markTestSkipped("Tests for 'imagemagick' cannot run because the binaries are not available on the shell path.");
-    }
+  public function testSourceLocalPath($toolkit_id, $toolkit_config, array $toolkit_settings) {
+    $this->setUpToolkit($toolkit_id, $toolkit_config, $toolkit_settings);
+    $this->prepareImageFileHandling();
 
     $config = \Drupal::configFactory()->getEditable('imagemagick.settings');
     $config_mdm = \Drupal::configFactory()->getEditable('file_mdm.settings');
@@ -1104,9 +1052,6 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
     // The file that will be tested.
     $source_uri = 'public://image-test.png';
 
-    // Prepare a copy of test files.
-    $this->getTestFiles('image');
-
     // Enable metadata caching.
     $config_mdm->set('metadata_cache.enabled', TRUE)->save();
 
@@ -1115,8 +1060,8 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
 
     // Load up the image.
     $image = $this->imageFactory->get($source_uri);
-    $this->assertEqual($source_uri, $image->getToolkit()->getSource());
-    $this->assertEqual(drupal_realpath($source_uri), $image->getToolkit()->arguments()->getSourceLocalPath());
+    $this->assertEquals($source_uri, $image->getToolkit()->getSource());
+    $this->assertEquals($this->fileSystem->realpath($source_uri), $image->getToolkit()->arguments()->getSourceLocalPath());
 
     // Free up the URI from the file metadata manager to force reload from
     // cache. Simulates that next imageFactory->get is from another request.
@@ -1124,8 +1069,8 @@ class ToolkitImagemagickFileMetadataTest extends BrowserTestBase {
 
     // Re-load the image, ensureLocalSourcePath should return the local path.
     $image1 = $this->imageFactory->get($source_uri);
-    $this->assertEqual($source_uri, $image1->getToolkit()->getSource());
-    $this->assertEqual(drupal_realpath($source_uri), $image1->getToolkit()->ensureSourceLocalPath());
+    $this->assertEquals($source_uri, $image1->getToolkit()->getSource());
+    $this->assertEquals($this->fileSystem->realpath($source_uri), $image1->getToolkit()->ensureSourceLocalPath());
   }
 
 }
