@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.serviciu.field_image
     - field.field.node.serviciu.field_ordine_afisare
     - field.field.node.serviciu.field_slideshow
+    - image.style.medium
     - node.type.serviciu
   module:
     - image
@@ -30,9 +31,9 @@ content:
     type: image
     weight: 1
     region: content
-    label: above
+    label: hidden
     settings:
-      image_style: ''
+      image_style: medium
       image_link: ''
     third_party_settings: {  }
 hidden:
