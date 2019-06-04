@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '/servicii/*'
+    pages: "/servicii/*\r\n/servicii"
     negate: true
     context_mapping: {  }

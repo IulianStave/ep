@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_categorie_lucrare
     - field.storage.node.field_image
-    - image.style.medium
+    - image.style.thumbnail
     - node.type.fotografie_galerie
     - system.menu.main
   module:
@@ -144,7 +144,7 @@ display:
           click_sort_column: target_id
           type: colorbox
           settings:
-            colorbox_node_style: medium
+            colorbox_node_style: thumbnail
             colorbox_node_style_first: ''
             colorbox_image_style: ''
             colorbox_gallery: page
