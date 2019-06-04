@@ -301,6 +301,9 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      use_more: true
+      use_more_always: false
+      use_more_text: more
     cache_metadata:
       max-age: -1
       contexts:
@@ -327,6 +330,12 @@ display:
           offset: 0
       defaults:
         pager: false
+        use_more: false
+        use_more_always: false
+        use_more_text: false
+      use_more: true
+      use_more_always: false
+      use_more_text: 'Mai multe oferte ...'
     cache_metadata:
       max-age: -1
       contexts:
