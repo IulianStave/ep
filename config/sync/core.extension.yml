@@ -30,7 +30,6 @@ module:
   image: 0
   image_effects: 0
   image_widget_crop: 0
-  imagemagick: 0
   link: 0
   menu_ui: 0
   node: 0
