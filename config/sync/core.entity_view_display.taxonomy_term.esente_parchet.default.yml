@@ -8,8 +8,7 @@ dependencies:
     - field.field.taxonomy_term.esente_parchet.field_durabilitate
     - field.field.taxonomy_term.esente_parchet.field_duritate
     - field.field.taxonomy_term.esente_parchet.field_fibra
-    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_maxima
-    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_minima
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica
     - field.field.taxonomy_term.esente_parchet.field_imagine
     - field.field.taxonomy_term.esente_parchet.field_nume_latina
     - field.field.taxonomy_term.esente_parchet.field_oxidare
@@ -33,7 +32,7 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_contragere:
-    weight: 12
+    weight: 11
     label: inline
     settings:
       link: false
@@ -49,7 +48,7 @@ content:
     type: entity_reference_label
     region: content
   field_durabilitate:
-    weight: 11
+    weight: 10
     label: inline
     settings:
       link: false
@@ -57,7 +56,7 @@ content:
     type: entity_reference_label
     region: content
   field_duritate:
-    weight: 9
+    weight: 8
     label: inline
     settings:
       link: false
@@ -65,30 +64,20 @@ content:
     type: entity_reference_label
     region: content
   field_fibra:
-    weight: 3
+    weight: 4
     label: inline
     settings:
       link: false
     third_party_settings: {  }
     type: entity_reference_label
     region: content
-  field_greutate_specifica_maxima:
-    weight: 7
-    label: inline
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_greutate_specifica_minima:
+  field_greutate_specifica:
     weight: 6
     label: inline
     settings:
-      thousand_separator: ''
-      prefix_suffix: true
+      link_to_entity: false
     third_party_settings: {  }
-    type: number_integer
+    type: string
     region: content
   field_imagine:
     weight: 0
@@ -100,7 +89,7 @@ content:
     type: image
     region: content
   field_nume_latina:
-    weight: 4
+    weight: 2
     label: inline
     settings:
       link_to_entity: false
@@ -108,7 +97,7 @@ content:
     type: string
     region: content
   field_oxidare:
-    weight: 10
+    weight: 9
     label: inline
     settings:
       link: false
@@ -116,7 +105,7 @@ content:
     type: entity_reference_label
     region: content
   field_provenienta:
-    weight: 2
+    weight: 3
     label: inline
     settings:
       link: false
@@ -124,7 +113,7 @@ content:
     type: entity_reference_label
     region: content
   field_rezistenta_mecanica:
-    weight: 13
+    weight: 12
     label: inline
     settings:
       link: false
@@ -132,7 +121,7 @@ content:
     type: entity_reference_label
     region: content
   field_textura:
-    weight: 8
+    weight: 7
     label: inline
     settings:
       link: false

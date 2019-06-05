@@ -1,0 +1,21 @@
+uuid: bdcac834-122e-472e-9a45-128e967f2cca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_greutate_specifica
+    - taxonomy.vocabulary.esente_parchet
+id: taxonomy_term.esente_parchet.field_greutate_specifica
+field_name: field_greutate_specifica
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: 'Greutate specifica'
+description: 'Introduceti greutatea specifica a esentei'
+required: false
+translatable: false
+default_value:
+  -
+    value: ' 600 kg/mc'
+default_value_callback: ''
+settings: {  }
+field_type: string

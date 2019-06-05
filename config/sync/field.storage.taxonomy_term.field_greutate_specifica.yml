@@ -1,16 +1,17 @@
-uuid: 8a27539a-008b-4498-9bbd-9b01cd1eadf3
+uuid: 37ecce65-8121-4fa4-900e-ca2d1fc27802
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-id: taxonomy_term.field_greutate_specifica_minima
-field_name: field_greutate_specifica_minima
+id: taxonomy_term.field_greutate_specifica
+field_name: field_greutate_specifica
 entity_type: taxonomy_term
-type: integer
+type: string
 settings:
-  unsigned: false
-  size: normal
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

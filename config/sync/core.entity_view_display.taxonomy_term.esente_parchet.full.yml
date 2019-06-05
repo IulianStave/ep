@@ -9,8 +9,6 @@ dependencies:
     - field.field.taxonomy_term.esente_parchet.field_durabilitate
     - field.field.taxonomy_term.esente_parchet.field_duritate
     - field.field.taxonomy_term.esente_parchet.field_fibra
-    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_maxima
-    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica_minima
     - field.field.taxonomy_term.esente_parchet.field_imagine
     - field.field.taxonomy_term.esente_parchet.field_nume_latina
     - field.field.taxonomy_term.esente_parchet.field_oxidare
@@ -72,24 +70,6 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
-    region: content
-  field_greutate_specifica_maxima:
-    weight: 7
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
-    region: content
-  field_greutate_specifica_minima:
-    weight: 6
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    type: number_integer
     region: content
   field_imagine:
     weight: 0
