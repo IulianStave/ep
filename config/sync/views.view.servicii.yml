@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.storage.node.field_image
+    - image.style.large
     - image.style.medium
     - image.style.thumbnail
     - node.type.serviciu
@@ -493,7 +494,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: medium
+            image_style: large
             image_link: ''
           group_column: ''
           group_columns: {  }

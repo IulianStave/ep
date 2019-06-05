@@ -1,5 +1,68 @@
 #header >.container {
   /*height: 110px;*/
- /* background: url(../img/logo.jpg) no-repeat;*/
-/*background-image: http://www.europarchet.ro/images/logo5.jpg;*/
+	/*background: url(../img/logo.jpg) no-repeat;*/
+	/*background-image: http://www.europarchet.ro/images/logo5.jpg;*/
 }
+
+/*
+.sidebar .title-over-image .views-field-title a {
+  display: block;
+  padding: 7px 10px;
+  font-weight: normal;
+  color: #fff;
+}
+*/
+
+
+/*.title-over-image .views-field-name a {
+  display: block;
+  padding: 7px 10px;
+  font-weight: normal;
+  color: #aaf;
+}*/
+
+/* line 487, ../sass/partials/_block.scss */
+.title-over-image .views-row:hover .views-field-name a, .title-over-image .views-row:focus .views-field-title a {
+  color: #ccc;
+}
+
+.title-over-image .views-view-grid .views-col {
+
+    float: left;
+    position: relative;
+    width: auto !important;
+    margin-right: 20px;
+    margin-top: 20px;
+
+
+}
+/* line 493, ../sass/partials/_block.scss */
+.title-over-image .views-field-field-image  {
+  float: none;
+  margin: 0;
+  border-radius: 0;
+  min-height: 115px;
+  width: 100%;
+}
+/* line 501, ../sass/partials/_block.scss */
+.title-over-image .views-field-name {
+  position: absolute;
+  bottom: 0;
+  z-index: 5;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+/* line 509, ../sass/partials/_block.scss */
+.title-over-image .views-field-name a {
+  display: block;
+  padding: 7px 10px;
+  font-weight: normal;
+  color: #fff;
+}
+
+/*.sidebar .our-products-list .views-row {
+	float:left;
+}
+*/

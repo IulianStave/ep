@@ -1,0 +1,15 @@
+ep_version: '1.0'
+layout: layout-default
+layout_width: '1200'
+background: bg-1
+features:
+  node_user_picture: 1
+  comment_user_picture: 1
+  comment_user_verification: 1
+  favicon: 1
+show_skins_menu: 0
+loading_page: 0
+logo:
+  use_default: 1
+favicon:
+  use_default: 1

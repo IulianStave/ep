@@ -404,7 +404,7 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-      css_class: our-products-list
+      css_class: title-over-image
     cache_metadata:
       max-age: -1
       contexts:
