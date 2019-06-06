@@ -149,7 +149,6 @@ class ComposerStaticInit063b294b676a7d3978497dd739bccb0c
         'F' => 
         array (
             'FontLib\\' => 8,
-            'FileEye\\MimeMap\\' => 16,
         ),
         'E' => 
         array (
@@ -459,10 +458,6 @@ class ComposerStaticInit063b294b676a7d3978497dd739bccb0c
         'FontLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
-        ),
-        'FileEye\\MimeMap\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fileeye/mimemap/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
