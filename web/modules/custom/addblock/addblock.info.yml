@@ -1,0 +1,5 @@
+name: AddBlock
+type: module
+description: 'Programatically create a block with uuid 24599d23-a015-4d69-8eba-2508f92bb056'
+package: custom
+core: 8.x

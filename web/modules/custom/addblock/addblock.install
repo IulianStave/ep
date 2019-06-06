@@ -1,0 +1,33 @@
+<?php
+
+use Drupal\block\Entity\Block;
+
+/**
+ * Implements hook_install().
+ */
+function addblock_install() {
+    // Grab a block entity manager from EntityManager service
+    $blockEntityManager = \Drupal::service('entity.manager')
+      ->getStorage('block_content');
+    
+    // Tell block entity manager to create a block of type 'basic'
+    $block = $blockEntityManager->create(array(
+      'type' => 'basic'
+    ));
+    
+    // Every block should have a description, but strangely it's property
+    // is not 'description' but 'info'
+    $block->info = 'Contact info';
+    
+    // we should take this UUID from configuration file, see example above
+    $block->uuid = '24599d23-a015-4d69-8eba-2508f92bb056'; 
+
+    // Block content 
+    $block->body->value = 'Telefon mobil ';
+    
+    // Block Input Format, because block content formated long text
+    $block->body->format = 'full_html';
+
+    // In the end, save our new block.
+    $block->save(); 
+}
