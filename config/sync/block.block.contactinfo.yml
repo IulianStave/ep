@@ -1,9 +1,9 @@
-uuid: b406c3d2-7c73-4cd4-99e1-a84cd881bb78
+uuid: 4fc441c8-bd07-4190-ac84-9984390a92aa
 langcode: en
 status: true
 dependencies:
   content:
-    - 'block_content:basic:24599d23-a015-4d69-8eba-2508f92bb056'
+    - 'block_content:basic:3302c7aa-2af2-455c-8dcd-571a773a770c'
   module:
     - block_content
   theme:
@@ -11,12 +11,12 @@ dependencies:
 id: contactinfo
 theme: ep
 region: panel_second_1
-weight: -9
+weight: -7
 provider: null
-plugin: 'block_content:24599d23-a015-4d69-8eba-2508f92bb056'
+plugin: 'block_content:3302c7aa-2af2-455c-8dcd-571a773a770c'
 settings:
-  id: 'block_content:24599d23-a015-4d69-8eba-2508f92bb056'
-  label: 'Contact info'
+  id: 'block_content:3302c7aa-2af2-455c-8dcd-571a773a770c'
+  label: 'Date companie'
   provider: block_content
   label_display: visible
   status: true

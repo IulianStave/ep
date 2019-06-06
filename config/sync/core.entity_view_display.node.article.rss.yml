@@ -25,5 +25,4 @@ hidden:
   body: true
   comment: true
   field_image: true
-  field_slideshow: true
   field_tags: true

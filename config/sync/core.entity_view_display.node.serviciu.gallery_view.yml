@@ -18,6 +18,5 @@ content: {  }
 hidden:
   body: true
   field_image: true
-  field_ordine_afisare: true
   field_slideshow: true
   links: true
