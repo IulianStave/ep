@@ -66,3 +66,50 @@
 	float:left;
 }
 */
+
+
+
+
+/* css for servicii*/
+
+.our-products-list .views-row:hover .views-field-title a, .our-products-list .views-row:focus .views-field-title a {
+  color: #ccc;
+}
+
+.sidebar .our-products-list .views-view-grid .views-col {
+
+    float: left;
+    position: relative;
+    width: auto !important;
+    margin-right: 20px;
+
+
+}
+.sidebar .our-products-list .views-field-field-image  {
+  float: none;
+  margin: 0;
+  border-radius: 0;
+  min-height: 115px;
+  width: 100%;
+}
+.sidebar .our-products-list .views-field-title {
+  position: absolute;
+  bottom: 0;
+  z-index: 5;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+.sidebar .our-products-list .views-field-title a {
+  display: block;
+  padding: 7px 10px;
+  font-weight: normal;
+  color: #fff;
+}
+*/
+/*
+.sidebar .our-products-list .views-row {
+	float:left; 
+}
+*/
