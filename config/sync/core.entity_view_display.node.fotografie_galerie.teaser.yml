@@ -27,4 +27,11 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-hidden: {  }
+hidden:
+  field_categorie_lucrare: true
+  field_esenta_parchet: true
+  field_image: true
+  field_ordine_afisare: true
+  field_produs: true
+  field_serviciu: true
+  field_slideshow: true
