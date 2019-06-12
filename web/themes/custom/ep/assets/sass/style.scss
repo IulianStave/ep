@@ -1,8 +1,11 @@
-/* Translate */
-#header > .container {
+// Core variables and mixins
+@import "../../../../contrib/zircon/assets/sass/config/variables";
+@import "../../../../contrib/zircon/assets/sass/config/mixins";
+
+#header >.container {
   /*height: 110px;*/
-  /*background: url(../img/logo.jpg) no-repeat;*/
-  /*background-image: http://www.europarchet.ro/images/logo5.jpg;*/
+	/*background: url(../img/logo.jpg) no-repeat;*/
+	/*background-image: http://www.europarchet.ro/images/logo5.jpg;*/
 }
 
 /*
@@ -13,34 +16,38 @@
   color: #fff;
 }
 */
+
+
 /*.title-over-image .views-field-name a {
   display: block;
   padding: 7px 10px;
   font-weight: normal;
   color: #aaf;
 }*/
+
 /* line 487, ../sass/partials/_block.scss */
 .title-over-image .views-row:hover .views-field-name a, .title-over-image .views-row:focus .views-field-title a {
   color: #ccc;
 }
 
 .title-over-image .views-view-grid .views-col {
-  float: left;
-  position: relative;
-  width: auto !important;
-  margin-right: 20px;
-  margin-top: 20px;
-}
 
+    float: left;
+    position: relative;
+    width: auto !important;
+    margin-right: 20px;
+    margin-top: 20px;
+
+
+}
 /* line 493, ../sass/partials/_block.scss */
-.title-over-image .views-field-field-image {
+.title-over-image .views-field-field-image  {
   float: none;
   margin: 0;
   border-radius: 0;
   min-height: 115px;
   width: 100%;
 }
-
 /* line 501, ../sass/partials/_block.scss */
 .title-over-image .views-field-name {
   position: absolute;
@@ -51,7 +58,6 @@
   background-color: rgba(0, 0, 0, 0.6);
   margin: 0;
 }
-
 /* line 509, ../sass/partials/_block.scss */
 .title-over-image .views-field-name a {
   display: block;
@@ -64,27 +70,36 @@
 	float:left;
 }
 */
+
+
+
+
+
+
+
+
 .title-over-image .views-row:hover .views-field-name a, .title-over-image .views-row:focus .views-field-title a {
   color: #ccc;
 }
 
 .title-over-image .views-view-grid .views-col {
-  float: left;
-  position: relative;
-  width: auto !important;
-  margin-right: 20px;
-  margin-top: 20px;
-}
 
+    float: left;
+    position: relative;
+    width: auto !important;
+    margin-right: 20px;
+    margin-top: 20px;
+
+
+}
 /* line 493, ../sass/partials/_block.scss */
-.title-over-image .views-field-field-image {
+.title-over-image .views-field-field-image  {
   float: none;
   margin: 0;
   border-radius: 0;
   min-height: 115px;
   width: 100%;
 }
-
 /* line 501, ../sass/partials/_block.scss */
 .title-over-image .views-field-name {
   position: absolute;
@@ -95,7 +110,6 @@
   background-color: rgba(0, 0, 0, 0.6);
   margin: 0;
 }
-
 /* line 509, ../sass/partials/_block.scss */
 .title-over-image .views-field-name a {
   display: block;
@@ -104,38 +118,47 @@
   color: #fff;
 }
 
-@media (max-width: 480px) {
-  .sidebar .our-products-list .views-row {
-    position: relative;
-    border: 1px solid transparent !important;
-    padding-top: 0 !important;
-    min-height: 34px;
-  }
-  .sidebar .our-products-list .views-row:hover .views-field-title a, .sidebar .our-products-list .views-row:focus .views-field-title a {
-    color: #ccc;
-  }
-  .sidebar .our-products-list .views-row .views-field-field-image {
-    float: none;
-    margin: 0;
-    border-radius: 0;
-    min-height: 115px;
-    width: 100%;
-  }
-  .sidebar .our-products-list .views-row .views-field-title {
-    position: absolute;
-    bottom: 0;
-    z-index: 5;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    margin: 0;
-  }
-  .sidebar .our-products-list .views-row .views-field-title a {
-    display: block;
-    padding: 7px 10px;
-    font-weight: normal;
-    color: #fff;
-  }
-}
 
-/*# sourceMappingURL=style.css.map */
+
+@media (max-width: $mobile-md) {
+.sidebar .our-products-list {
+        .views-row {
+            position: relative;
+            border: 1px solid transparent !important;
+            padding-top: 0 !important;
+            min-height:34px;
+            &:hover,
+            &:focus {
+                .views-field-title {
+                    a {
+                        color: #ccc;
+                    }
+                }
+            }
+        
+        .views-field-field-image {
+            float: none;
+            margin: 0;
+            border-radius: 0;
+            min-height: 115px;
+            width: 100%;
+
+        }
+        .views-field-title {
+            position: absolute;
+            bottom: 0;
+            z-index: 5;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            margin: 0;
+            a {
+                display: block;
+                padding: 7px 10px;
+                font-weight: normal;
+                color: $white;
+            }
+        }
+      }
+    }
+}
