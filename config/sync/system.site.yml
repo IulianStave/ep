@@ -5,7 +5,7 @@ slogan: 'Confort si durabilitate'
 page:
   403: ''
   404: ''
-  front: /node/21
+  front: /home-page
 admin_compact_mode: false
 weight_select_max: 100
 langcode: en
