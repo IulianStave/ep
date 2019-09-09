@@ -226,13 +226,6 @@ display:
           entity_type: taxonomy_term
           entity_field: vid
           plugin_id: bundle
-        weight:
-          id: weight
-          table: taxonomy_term_field_data
-          field: weight
-          entity_type: taxonomy_term
-          entity_field: weight
-          plugin_id: numeric
       sorts:
         weight:
           id: weight
