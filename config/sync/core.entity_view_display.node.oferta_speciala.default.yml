@@ -33,10 +33,10 @@ content:
     weight: 5
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      date_format: 'F j, Y'
     third_party_settings: {  }
-    type: datetime_default
+    type: datetime_custom
     region: content
   field_dimensiune:
     weight: 3
@@ -73,10 +73,10 @@ content:
     weight: 6
     label: above
     settings:
-      format_type: medium
       timezone_override: ''
+      date_format: 'F j, Y'
     third_party_settings: {  }
-    type: datetime_default
+    type: datetime_custom
     region: content
 hidden:
   links: true
