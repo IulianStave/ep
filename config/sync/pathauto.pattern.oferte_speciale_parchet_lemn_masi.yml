@@ -1,0 +1,22 @@
+uuid: 50bcce11-2a80-4cac-9c3c-f74c1a0d6d84
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: oferte_speciale_parchet_lemn_masi
+label: Oferte-speciale-parchet-lemn-masiv
+type: 'canonical_entities:node'
+pattern: 'oferte-speciale-parchet-lemn/[node:title]'
+selection_criteria:
+  be3ac258-e8c4-4050-86ad-85cd36249615:
+    id: node_type
+    bundles:
+      oferta_speciala: oferta_speciala
+    negate: false
+    context_mapping:
+      node: node
+    uuid: be3ac258-e8c4-4050-86ad-85cd36249615
+selection_logic: and
+weight: -5
+relationships: {  }

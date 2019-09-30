@@ -1,0 +1,23 @@
+uuid: 01b16825-7a97-4b3a-b9f2-2bced576d938
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: produse_parchet
+label: 'Produse parchet'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'produse-parchet/[term:name]'
+selection_criteria:
+  de406f13-c051-4660-89e8-b5da3dd97365:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      categorii_produse: categorii_produse
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: de406f13-c051-4660-89e8-b5da3dd97365
+selection_logic: and
+weight: -5
+relationships: {  }
