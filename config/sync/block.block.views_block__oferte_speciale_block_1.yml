@@ -5,7 +5,6 @@ dependencies:
   config:
     - views.view.oferte_speciale
   module:
-    - system
     - views
   theme:
     - ep
@@ -22,9 +21,4 @@ settings:
   label_display: visible
   views_label: ''
   items_per_page: none
-visibility:
-  request_path:
-    id: request_path
-    pages: "<front>\r\n/galerie-foto"
-    negate: false
-    context_mapping: {  }
+visibility: {  }
