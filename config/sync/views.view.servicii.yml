@@ -331,6 +331,18 @@ display:
           expose:
             label: ''
           granularity: second
+        field_ordine_afisare_value:
+          id: field_ordine_afisare_value
+          table: node__field_ordine_afisare
+          field: field_ordine_afisare_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          plugin_id: standard
       title: Servicii
       header: {  }
       footer: {  }
