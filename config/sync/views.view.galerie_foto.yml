@@ -78,7 +78,7 @@ display:
               field: field_categorie_lucrare
               rendered: true
               rendered_strip: false
-          columns: 3
+          columns: 4
           automatic_width: true
           alignment: horizontal
           col_class_default: true
