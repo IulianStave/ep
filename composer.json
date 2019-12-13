@@ -27,7 +27,7 @@
         "drupal/devel": "^2.1",
         "drupal/image_effects": "^2.3",
         "drupal/image_widget_crop": "^2.2",
-        "drupal/pathauto": "^1.5",
+        "drupal/pathauto": "^1.6",
         "drush/drush": "^9.0.0",
         "vlucas/phpdotenv": "^2.4",
         "webflo/drupal-finder": "^1.0.0",
