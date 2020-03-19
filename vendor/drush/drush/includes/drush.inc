@@ -188,7 +188,7 @@ function drush_op($callable) {
   $args = func_get_args();
   array_shift($args); // Skip function name
   foreach ($args as $arg) {
-    $args_printed[] = is_scalar($arg) ? $arg : (is_array($arg) ? 'Array' : 'Object');
+    $args_printed[] = is_scalar($arg) ? $arg : (is_object($arg) ? get_class($arg) : gettype($arg));
   }
 
   if (!is_array($callable)) {
@@ -696,7 +696,7 @@ function drush_errors_on($errors = null) {
 function drush_memory_limit() {
   $value = trim(ini_get('memory_limit'));
   $last = strtolower($value[strlen($value)-1]);
-  $size = (int) substr($value, 0, -1);
+  $size = (int) rtrim($value, 'GgMmKk');
   switch ($last) {
     case 'g':
       $size *= DRUSH_KILOBYTE;
