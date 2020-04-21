@@ -84,7 +84,7 @@ class NodeElement extends TraversableElement
      *
      * Calling this method on other elements than form fields or option elements is not allowed.
      *
-     * @return string|bool|array|null
+     * @return string|bool|array
      */
     public function getValue()
     {
