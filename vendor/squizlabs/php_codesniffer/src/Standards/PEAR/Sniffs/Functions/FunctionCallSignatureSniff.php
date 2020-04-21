@@ -234,7 +234,7 @@ class FunctionCallSignatureSniff implements Sniff
             }
 
             if ($spaceAfterOpen !== $requiredSpacesAfterOpen) {
-                $error = 'Expected %s spaces after opening bracket; %s found';
+                $error = 'Expected %s spaces after opening parenthesis; %s found';
                 $data  = [
                     $requiredSpacesAfterOpen,
                     $spaceAfterOpen,
@@ -266,7 +266,7 @@ class FunctionCallSignatureSniff implements Sniff
         }
 
         if ($spaceBeforeClose !== $requiredSpacesBeforeClose) {
-            $error = 'Expected %s spaces before closing bracket; %s found';
+            $error = 'Expected %s spaces before closing parenthesis; %s found';
             $data  = [
                 $requiredSpacesBeforeClose,
                 $spaceBeforeClose,
@@ -585,7 +585,7 @@ class FunctionCallSignatureSniff implements Sniff
             }//end if
 
             // If we are within an argument we should be ignoring commas
-            // as these are not signaling the end of an argument.
+            // as these are not signalling the end of an argument.
             if ($inArg === false && $tokens[$i]['code'] === T_COMMA) {
                 $next = $phpcsFile->findNext(Tokens::$emptyTokens, ($i + 1), $closeBracket, true);
                 if ($next === false) {
