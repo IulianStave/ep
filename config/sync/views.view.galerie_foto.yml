@@ -83,7 +83,7 @@ display:
           col_class_default: true
           col_class_custom: ''
           row_class_default: true
-          row_class_custom: ''
+          row_class_custom: border-added
       row:
         type: fields
         options:
@@ -350,6 +350,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      css_class: margin-added
     cache_metadata:
       max-age: -1
       contexts:
