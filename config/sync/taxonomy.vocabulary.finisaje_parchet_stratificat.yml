@@ -1,0 +1,8 @@
+uuid: 4362a7c2-b3b9-4f41-93e3-232718ffe3db
+langcode: en
+status: true
+dependencies: {  }
+name: 'Finisaje parchet stratificat'
+vid: finisaje_parchet_stratificat
+description: 'Clasifica parchetul stratificat'
+weight: 0

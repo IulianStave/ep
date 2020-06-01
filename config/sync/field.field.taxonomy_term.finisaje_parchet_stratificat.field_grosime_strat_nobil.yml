@@ -1,0 +1,21 @@
+uuid: 8396ab0d-6357-49ee-9ac7-5fcc6dc7ac78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_grosime_strat_nobil
+    - taxonomy.vocabulary.finisaje_parchet_stratificat
+  module:
+    - text
+id: taxonomy_term.finisaje_parchet_stratificat.field_grosime_strat_nobil
+field_name: field_grosime_strat_nobil
+entity_type: taxonomy_term
+bundle: finisaje_parchet_stratificat
+label: 'Grosime strat nobil'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

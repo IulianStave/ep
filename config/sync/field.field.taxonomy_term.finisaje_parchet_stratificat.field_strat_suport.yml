@@ -1,0 +1,21 @@
+uuid: 641481d4-ada7-4de9-9c90-1f16c6a4f865
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_strat_suport
+    - taxonomy.vocabulary.finisaje_parchet_stratificat
+  module:
+    - text
+id: taxonomy_term.finisaje_parchet_stratificat.field_strat_suport
+field_name: field_strat_suport
+entity_type: taxonomy_term
+bundle: finisaje_parchet_stratificat
+label: 'Strat suport'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

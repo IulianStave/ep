@@ -1,0 +1,33 @@
+uuid: e61f6736-1174-4f48-b9ae-f581edb40184
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_colectie
+    - taxonomy.vocabulary.colectii_parchet_stratificat
+    - taxonomy.vocabulary.finisaje_parchet_stratificat
+  content:
+    - 'taxonomy_term:colectii_parchet_stratificat:09fda8d5-38b3-4089-9d6a-2d124350c5a6'
+id: taxonomy_term.finisaje_parchet_stratificat.field_colectie
+field_name: field_colectie
+entity_type: taxonomy_term
+bundle: finisaje_parchet_stratificat
+label: Colectie
+description: 'Colectia din care face parte finisajul'
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: 09fda8d5-38b3-4089-9d6a-2d124350c5a6
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      colectii_parchet_stratificat: colectii_parchet_stratificat
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

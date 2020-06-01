@@ -1,0 +1,21 @@
+uuid: 83027268-0673-4ba4-bb2f-02e3a187c726
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_cod_pro
+    - taxonomy.vocabulary.finisaje_parchet_stratificat
+  module:
+    - text
+id: taxonomy_term.finisaje_parchet_stratificat.field_cod_pro
+field_name: field_cod_pro
+entity_type: taxonomy_term
+bundle: finisaje_parchet_stratificat
+label: 'Cod produs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text
