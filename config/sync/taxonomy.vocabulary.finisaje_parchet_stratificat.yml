@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Finisaje parchet stratificat'
 vid: finisaje_parchet_stratificat
 description: 'Clasifica parchetul stratificat'
-weight: 0
+weight: -9

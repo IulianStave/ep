@@ -1,8 +1,0 @@
-uuid: f3aa5466-ca89-4316-9b02-37d26ac19928
-langcode: en
-status: true
-dependencies: {  }
-name: 'Producator stratificat'
-vid: producator_stratificat
-description: 'Producator stratificat'
-weight: 0

@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Colectii parchet stratificat'
 vid: colectii_parchet_stratificat
 description: 'Grupeaza finisajele parchet stratificat pe colectii A, B, ...'
-weight: 0
+weight: 1

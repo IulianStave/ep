@@ -5,4 +5,4 @@ dependencies: {  }
 name: Regiuni
 vid: regiuni
 description: 'Regiuni de provenienta'
-weight: -3
+weight: -2

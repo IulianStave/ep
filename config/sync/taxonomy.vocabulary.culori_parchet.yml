@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Culori parchet'
 vid: culori_parchet
 description: 'Clasifica Esente parchet dupa nuanta de culoare'
-weight: -6
+weight: -5

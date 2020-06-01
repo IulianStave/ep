@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Tipuri contragere'
 vid: tipuri_contragere
 description: 'Clasifica esente parchet dupa contragere'
-weight: 0
+weight: 2

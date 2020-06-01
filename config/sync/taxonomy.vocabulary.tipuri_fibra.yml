@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Tipuri fibra'
 vid: tipuri_fibra
 description: 'Clasifica esentele in functie de structura fibrei (ex. regulata, dreapta, neregulata,etc.)'
-weight: 2
+weight: 4

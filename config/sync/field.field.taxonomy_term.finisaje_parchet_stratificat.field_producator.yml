@@ -1,33 +1,21 @@
-uuid: cc143b75-1cdf-4410-9886-9b5e1f9d4974
+uuid: 971fcfe0-5119-4497-887b-7591a76a12c4
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_producator
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-    - taxonomy.vocabulary.producator_stratificat
-  content:
-    - 'taxonomy_term:producator_stratificat:08e0bd51-1b30-4d95-b907-15a557c48807'
 id: taxonomy_term.finisaje_parchet_stratificat.field_producator
 field_name: field_producator
 entity_type: taxonomy_term
 bundle: finisaje_parchet_stratificat
 label: Producator
 description: ''
-required: false
+required: true
 translatable: false
 default_value:
   -
-    target_uuid: 08e0bd51-1b30-4d95-b907-15a557c48807
+    value: Boen
 default_value_callback: ''
-settings:
-  handler: 'default:taxonomy_term'
-  handler_settings:
-    target_bundles:
-      producator_stratificat: producator_stratificat
-    sort:
-      field: name
-      direction: asc
-    auto_create: false
-    auto_create_bundle: ''
-field_type: entity_reference
+settings: {  }
+field_type: string

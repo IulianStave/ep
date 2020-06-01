@@ -108,9 +108,11 @@ content:
     region: content
   field_producator:
     weight: 7
-    settings: {  }
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
-    type: options_select
+    type: string_textfield
     region: content
   field_selectia_lemnului:
     weight: 15

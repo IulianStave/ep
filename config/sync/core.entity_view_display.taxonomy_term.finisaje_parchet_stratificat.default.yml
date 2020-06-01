@@ -109,12 +109,12 @@ content:
     type: text_default
     region: content
   field_producator:
-    weight: 8
+    weight: 17
     label: above
     settings:
-      link: true
+      link_to_entity: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: string
     region: content
   field_selectia_lemnului:
     weight: 15

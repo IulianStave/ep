@@ -5,4 +5,4 @@ dependencies: {  }
 name: 'Categorii materiale de montaj'
 vid: categorii_materiale_de_montaj
 description: 'Clasifica materialele de montaj'
-weight: -7
+weight: -6

@@ -5,4 +5,4 @@ dependencies: {  }
 name: Duritati
 vid: duritati
 description: 'Clasifica esentele dupa duritate'
-weight: -5
+weight: -4
