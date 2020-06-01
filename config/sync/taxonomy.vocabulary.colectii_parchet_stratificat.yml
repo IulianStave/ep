@@ -1,0 +1,8 @@
+uuid: 1b34f6c3-703c-41b7-afc2-04d681a1e350
+langcode: en
+status: true
+dependencies: {  }
+name: 'Colectii parchet stratificat'
+vid: colectii_parchet_stratificat
+description: 'Grupeaza finisajele parchet stratificat pe colectii A, B, ...'
+weight: 0
