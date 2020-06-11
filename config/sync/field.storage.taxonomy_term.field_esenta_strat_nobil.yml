@@ -1,17 +1,18 @@
-uuid: ac709fe3-988e-486a-b1ad-45e21556b126
+uuid: 8aa7a5dd-5444-435b-b69f-2373947fa570
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-    - text
 id: taxonomy_term.field_esenta_strat_nobil
 field_name: field_esenta_strat_nobil
 entity_type: taxonomy_term
-type: text
+type: string
 settings:
   max_length: 255
-module: text
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

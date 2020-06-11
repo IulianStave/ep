@@ -1,14 +1,12 @@
-uuid: 83027268-0673-4ba4-bb2f-02e3a187c726
+uuid: fb036118-426d-4a94-a489-fa74ba7050a0
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.taxonomy_term.field_cod_pro
+    - field.storage.taxonomy_term.field_cod_produs
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
-id: taxonomy_term.finisaje_parchet_stratificat.field_cod_pro
-field_name: field_cod_pro
+id: taxonomy_term.finisaje_parchet_stratificat.field_cod_produs
+field_name: field_cod_produs
 entity_type: taxonomy_term
 bundle: finisaje_parchet_stratificat
 label: 'Cod produs'
@@ -18,4 +16,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string

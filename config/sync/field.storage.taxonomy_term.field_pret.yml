@@ -1,17 +1,18 @@
-uuid: bbb891ee-8ee1-4e01-8689-808c4a5503cc
+uuid: 10f787fc-18f7-41e9-8cc6-9c95703f14bf
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-    - text
 id: taxonomy_term.field_pret
 field_name: field_pret
 entity_type: taxonomy_term
-type: text
+type: string
 settings:
   max_length: 255
-module: text
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

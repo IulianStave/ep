@@ -1,17 +1,18 @@
-uuid: 03156311-b90e-4ef0-bbc8-27ac89f11921
+uuid: 5c1852fe-e851-4af0-a383-2608923e16cd
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-    - text
 id: taxonomy_term.field_strat_suport
 field_name: field_strat_suport
 entity_type: taxonomy_term
-type: text
+type: string
 settings:
   max_length: 255
-module: text
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

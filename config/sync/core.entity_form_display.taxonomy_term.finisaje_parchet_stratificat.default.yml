@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_cod_pro
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_cod_produs
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_colectie
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_dimensiuni
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_esenta_strat_nobil
@@ -21,58 +21,56 @@ dependencies:
     - taxonomy.vocabulary.finisaje_parchet_stratificat
   module:
     - image
-    - path
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.default
 targetEntityType: taxonomy_term
 bundle: finisaje_parchet_stratificat
 mode: default
 content:
-  field_cod_pro:
-    weight: 8
+  field_cod_produs:
+    weight: 6
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: text_textfield
+    type: string_textfield
     region: content
   field_colectie:
-    weight: 6
+    weight: 3
     settings: {  }
     third_party_settings: {  }
     type: options_select
     region: content
   field_dimensiuni:
-    weight: 12
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: text_textfield
-    region: content
-  field_esenta_strat_nobil:
     weight: 10
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: text_textfield
+    type: string_textfield
+    region: content
+  field_esenta_strat_nobil:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_finisaj:
-    weight: 14
+    weight: 12
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: text_textfield
+    type: string_textfield
     region: content
   field_grosime_strat_nobil:
-    weight: 11
+    weight: 9
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: text_textfield
+    type: string_textfield
     region: content
   field_imagine:
     weight: 1
@@ -83,15 +81,15 @@ content:
     type: image_image
     region: content
   field_impachetare:
-    weight: 16
+    weight: 14
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: text_textfield
+    type: string_textfield
     region: content
   field_poza_mica:
-    weight: 2
+    weight: 4
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -99,15 +97,15 @@ content:
     type: image_image
     region: content
   field_pret:
-    weight: 5
+    weight: 2
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: text_textfield
+    type: string_textfield
     region: content
   field_producator:
-    weight: 7
+    weight: 5
     settings:
       size: 60
       placeholder: ''
@@ -115,23 +113,23 @@ content:
     type: string_textfield
     region: content
   field_selectia_lemnului:
-    weight: 15
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-    type: text_textfield
-    region: content
-  field_strat_suport:
     weight: 13
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: text_textfield
+    type: string_textfield
+    region: content
+  field_strat_suport:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
     region: content
   field_tip_:
-    weight: 9
+    weight: 7
     settings:
       size: 60
       placeholder: ''
@@ -146,18 +144,13 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  path:
-    type: path
-    weight: 3
-    region: content
-    settings: {  }
-    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
       display_label: true
-    weight: 4
+    weight: 15
     region: content
     third_party_settings: {  }
 hidden:
   description: true
+  path: true

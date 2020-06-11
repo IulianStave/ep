@@ -1,12 +1,10 @@
-uuid: bbac8961-8ce9-4725-a48b-8da1f083e1bf
+uuid: 354fe6c8-35f6-4ae4-bb1c-edc66652f388
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_finisaj
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.field_finisaj
 field_name: field_finisaj
 entity_type: taxonomy_term
@@ -18,4 +16,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string

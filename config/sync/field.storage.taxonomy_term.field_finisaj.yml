@@ -1,17 +1,18 @@
-uuid: 2154f769-2faa-459c-96ca-4f90d378346a
+uuid: 842fe8d2-bb9f-4216-89e8-54a7e9effd2c
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-    - text
 id: taxonomy_term.field_finisaj
 field_name: field_finisaj
 entity_type: taxonomy_term
-type: text
+type: string
 settings:
   max_length: 255
-module: text
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

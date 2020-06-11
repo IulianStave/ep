@@ -1,12 +1,10 @@
-uuid: a243b6a8-ce18-49df-90b7-0c22cc4e02d6
+uuid: 2aae3f16-7a42-41f9-8976-d35175948a29
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_dimensiuni
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.field_dimensiuni
 field_name: field_dimensiuni
 entity_type: taxonomy_term
@@ -18,4 +16,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string

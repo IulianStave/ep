@@ -1,12 +1,10 @@
-uuid: a30416ad-6521-4c5b-8a56-a7ce933e6275
+uuid: 06dfcc76-3490-4703-ae09-19944983bdab
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_pret
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.field_pret
 field_name: field_pret
 entity_type: taxonomy_term
@@ -15,7 +13,9 @@ label: Pret
 description: 'Pret salvat in format complet (de ex.: 40 € + TVA)'
 required: false
 translatable: false
-default_value: {  }
+default_value:
+  -
+    value: ' € + TVA'
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string

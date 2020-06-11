@@ -1,17 +1,18 @@
-uuid: 7fce7166-6458-4dea-b3dd-f468c3a92162
+uuid: 402695c2-b5ea-448a-b961-f7713bbd4d6c
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-    - text
 id: taxonomy_term.field_selectia_lemnului
 field_name: field_selectia_lemnului
 entity_type: taxonomy_term
-type: text
+type: string
 settings:
   max_length: 255
-module: text
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

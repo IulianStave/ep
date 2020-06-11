@@ -1,12 +1,10 @@
-uuid: 723f1c92-0050-4ce6-b6ab-1d8108d2bcd7
+uuid: c4114cc0-105b-454d-baa0-2ca08ca2b19b
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_impachetare
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.field_impachetare
 field_name: field_impachetare
 entity_type: taxonomy_term
@@ -18,4 +16,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string

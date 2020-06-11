@@ -1,17 +1,18 @@
-uuid: 5d3a523a-894c-465b-a90d-425eb4d95898
+uuid: cedad549-7164-4e4b-8242-f2d62eeff14c
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-    - text
 id: taxonomy_term.field_impachetare
 field_name: field_impachetare
 entity_type: taxonomy_term
-type: text
+type: string
 settings:
   max_length: 255
-module: text
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_cod_pro
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_cod_produs
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_colectie
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_dimensiuni
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_esenta_strat_nobil
@@ -33,12 +33,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_cod_pro:
-    weight: 11
+  field_cod_produs:
+    weight: 26
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_colectie:
     weight: 1
@@ -49,32 +50,36 @@ content:
     type: entity_reference_label
     region: content
   field_dimensiuni:
-    weight: 12
+    weight: 19
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_esenta_strat_nobil:
-    weight: 10
+    weight: 20
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_finisaj:
-    weight: 14
+    weight: 21
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_grosime_strat_nobil:
-    weight: 9
+    weight: 22
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_imagine:
     weight: 2
@@ -86,11 +91,12 @@ content:
     type: image
     region: content
   field_impachetare:
-    weight: 16
+    weight: 23
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_poza_mica:
     weight: 4
@@ -102,11 +108,12 @@ content:
     type: image
     region: content
   field_pret:
-    weight: 3
+    weight: 24
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_producator:
     weight: 17
@@ -117,18 +124,20 @@ content:
     type: string
     region: content
   field_selectia_lemnului:
-    weight: 15
+    weight: 25
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_strat_suport:
-    weight: 13
+    weight: 18
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
-    type: text_default
+    type: string
     region: content
   field_tip_:
     weight: 6

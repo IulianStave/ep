@@ -1,17 +1,18 @@
-uuid: 8c139cc1-c8cf-4a7d-a5db-f77cec46ad3f
+uuid: d81ab174-b868-4bd7-8dee-772191018307
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-    - text
 id: taxonomy_term.field_dimensiuni
 field_name: field_dimensiuni
 entity_type: taxonomy_term
-type: text
+type: string
 settings:
   max_length: 255
-module: text
+  is_ascii: false
+  case_sensitive: false
+module: core
 locked: false
 cardinality: 1
 translatable: true

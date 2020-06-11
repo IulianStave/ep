@@ -1,12 +1,10 @@
-uuid: 9adb381f-54f7-46a2-a000-96cbe9c0c28a
+uuid: 7f865eaa-43de-4bdc-aa2d-9c6dae407abe
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_esenta_strat_nobil
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.field_esenta_strat_nobil
 field_name: field_esenta_strat_nobil
 entity_type: taxonomy_term
@@ -18,4 +16,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string

@@ -1,12 +1,10 @@
-uuid: 19ebedf6-65c2-4173-a27f-080e54d0c76b
+uuid: 7797d7b9-4675-4017-9c9e-0be29a301492
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_selectia_lemnului
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.field_selectia_lemnului
 field_name: field_selectia_lemnului
 entity_type: taxonomy_term
@@ -18,4 +16,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string

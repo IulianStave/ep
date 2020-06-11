@@ -1,12 +1,10 @@
-uuid: 641481d4-ada7-4de9-9c90-1f16c6a4f865
+uuid: 07499205-f2b4-4c93-93d0-6d3bfc3429b7
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_strat_suport
     - taxonomy.vocabulary.finisaje_parchet_stratificat
-  module:
-    - text
 id: taxonomy_term.finisaje_parchet_stratificat.field_strat_suport
 field_name: field_strat_suport
 entity_type: taxonomy_term
@@ -18,4 +16,4 @@ translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }
-field_type: text
+field_type: string
