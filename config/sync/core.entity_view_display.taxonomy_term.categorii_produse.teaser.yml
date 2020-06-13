@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.teaser
     - field.field.taxonomy_term.categorii_produse.field_esente
+    - field.field.taxonomy_term.categorii_produse.field_finisaje
     - field.field.taxonomy_term.categorii_produse.field_imagine
     - image.style.block_style_
     - taxonomy.vocabulary.categorii_produse
@@ -42,4 +43,5 @@ content:
     third_party_settings: {  }
     type: image
     region: content
-hidden: {  }
+hidden:
+  field_finisaje: true
