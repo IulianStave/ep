@@ -1,0 +1,10 @@
+uuid: a63e9836-9596-41ec-9482-70191b4cd999
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term.image_and_price_listing
+label: 'Image and price listing'
+targetEntityType: taxonomy_term
+cache: true

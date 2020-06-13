@@ -1,0 +1,19 @@
+uuid: e3c874ac-4e20-4671-ae7e-b3d24c7cbc86
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: imagine_mica_scalata_100x75_
+label: 'Imagine mica scalata (100x75]'
+effects:
+  baa59859-cc9c-4645-b659-60cba056dcdf:
+    uuid: baa59859-cc9c-4645-b659-60cba056dcdf
+    id: image_effects_scale_and_smart_crop
+    weight: 1
+    data:
+      width: '100'
+      height: '75'
+      upscale: false
+      simulate: false
+      algorithm: entropy_slice

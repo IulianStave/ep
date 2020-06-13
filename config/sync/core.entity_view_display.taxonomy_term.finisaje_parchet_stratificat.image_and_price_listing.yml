@@ -1,0 +1,60 @@
+uuid: 51d42fbf-e77f-4a16-9f6e-5cc24f249a6b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.image_and_price_listing
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_cod_produs
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_colectie
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_dimensiuni
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_esenta_strat_nobil
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_finisaj
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_grosime_strat_nobil
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_imagine
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_impachetare
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_poza_mica
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_pret
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_producator
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_selectia_lemnului
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_strat_suport
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_tip_
+    - image.style.imagine_mica_scalata_100x75_
+    - taxonomy.vocabulary.finisaje_parchet_stratificat
+  module:
+    - image
+id: taxonomy_term.finisaje_parchet_stratificat.image_and_price_listing
+targetEntityType: taxonomy_term
+bundle: finisaje_parchet_stratificat
+mode: image_and_price_listing
+content:
+  field_imagine:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: imagine_mica_scalata_100x75_
+      image_link: content
+    third_party_settings: {  }
+    type: image
+    region: content
+  field_pret:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  description: true
+  field_cod_produs: true
+  field_colectie: true
+  field_dimensiuni: true
+  field_esenta_strat_nobil: true
+  field_finisaj: true
+  field_grosime_strat_nobil: true
+  field_impachetare: true
+  field_poza_mica: true
+  field_producator: true
+  field_selectia_lemnului: true
+  field_strat_suport: true
+  field_tip_: true

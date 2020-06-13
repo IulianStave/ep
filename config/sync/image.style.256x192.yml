@@ -1,0 +1,19 @@
+uuid: 0f16f06b-1a8a-4334-bc73-9ca762f3576d
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: 256x192
+label: 'Imagine medie scalata (256x192)'
+effects:
+  a0dba29b-7d2e-47d7-9ef4-b1e7cb645b0f:
+    uuid: a0dba29b-7d2e-47d7-9ef4-b1e7cb645b0f
+    id: image_effects_scale_and_smart_crop
+    weight: 2
+    data:
+      width: '256'
+      height: '192'
+      upscale: false
+      simulate: false
+      algorithm: entropy_slice
