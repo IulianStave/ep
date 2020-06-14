@@ -1,6 +1,6 @@
 uuid: a04b5174-d471-4760-9280-5db9c094e152
 langcode: en
-status: true
+status: false
 dependencies:
   config:
     - views.view.servicii
