@@ -2,6 +2,13 @@
 @import "../../../../contrib/zircon/assets/sass/config/variables";
 @import "../../../../contrib/zircon/assets/sass/config/mixins";
 
+$dark_green: #011d04;
+$lighter_green: #023107;
+$left_gray: #b6bfc9;
+$right_gray: #d9e6f2;
+$transparent_flex_background: rgba(238, 245, 252, 0.6);
+$transparent_over_image_background: hsla(210, 67%, 96%, 0.6);
+
 .title-over-image .views-view-grid .views-col {
   float: left;
   position: relative;
@@ -26,7 +33,8 @@
   /* background-color: rgba(0, 0, 0, 0.6); */
   /*background: hsl(209, 49%, 90%, .7);*/
   margin: 0;
-  background: hsla(210, 67%, 96%, 0.61);
+  background: $transparent_over_image_background;
+  // background: $transparent_flex_background;
 }
 
 .title-over-image .views-field-name a {
@@ -34,13 +42,14 @@
   padding: 7px 10px;
   font-weight: normal;
   /*color:#ced2d9*/
-  color: #023107;
+  //   color: #023107;
+  color: $lighter_green;
   /* background-color:  hsl(209, 49%, 90%, 1); */
 }
 
 .title-over-image .views-row:hover .views-field-name a,
 .title-over-image .views-row:focus .views-field-title a {
-  color: #011d04;
+  color: $dark_green;
 }
 
 @media (max-width: $mobile-md) {
@@ -92,13 +101,13 @@
     linear,
     0% 0%,
     0% 100%,
-    from(#b6bfc9),
-    to(#d9e6f2)
+    from($left_gray),
+    to($right_gray)
   );
-  background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -o-linear-gradient(top, #b6bfc9, #d9e6f2);
+  background: -webkit-linear-gradient(top, $left_gray, $right_gray);
+  background: -moz-linear-gradient(top, $left_gray, $right_gray);
+  background: -ms-linear-gradient(top, $left_gray, $right_gray);
+  background: -o-linear-gradient(top, $left_gray, $right_gray);
 }
 
 .not-front #main-menu .container ul.menu li:first-child .is-active {
@@ -107,13 +116,13 @@
     linear,
     0% 0%,
     0% 100%,
-    from(#b6bfc9),
-    to(#d9e6f2)
+    from($left_gray),
+    to($right_gray)
   );
-  background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -o-linear-gradient(top, #b6bfc9, #d9e6f2);
+  background: -webkit-linear-gradient(top, $left_gray, $right_gray);
+  background: -moz-linear-gradient(top, $left_gray, $right_gray);
+  background: -ms-linear-gradient(top, $left_gray, $right_gray);
+  background: -o-linear-gradient(top, $left_gray, $right_gray);
 }
 
 // image style for pictures appearing in /servicii page
@@ -132,16 +141,10 @@ article .field--name-field-image {
 
 // Siderbar menu on the left - Oferte speciale
 .sidebar h2 {
-  background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -o-linear-gradient(top, #b6bfc9, #d9e6f2);
-  /* background-color: #555;
-      background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#373a3d), to(#282a2c));
-      background: -webkit-linear-gradient(top, #373a3d, #282a2c);
-      background: -moz-linear-gradient(top, #373a3d, #282a2c);
-      background: -ms-linear-gradient(top, #373a3d, #282a2c);
-      background: -o-linear-gradient(top, #373a3d, #282a2c); */
+  background: -webkit-linear-gradient(top, $left_gray, $right_gray);
+  background: -moz-linear-gradient(top, $left_gray, $right_gray);
+  background: -ms-linear-gradient(top, $left_gray, $right_gray);
+  background: -o-linear-gradient(top, $left_gray, $right_gray);
   color: #fff;
   margin: -15px -15px 15px -15px;
   padding: 10px 15px;
@@ -155,17 +158,10 @@ article .field--name-field-image {
 
 //Slideshow carousel caption css, color and background
 #slideshow .flex-caption {
-  /* background:#d9e6f2;  */
-  /* background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-    background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-    background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-    background: -o-linear-gradient(top, #b6bfc9, #d9e6f2); */
-  /* background: rgba(0,0,0,0.8); */
-  background: rgba(217, 230, 242, 0.7);
+  background: $transparent_flex_background;
 }
 
 #slideshow .flex-caption a {
-  /* color: #fff; */
   /* color: blueviolet; */
-  color: #023107;
+  color: $lighter_green;
 }
