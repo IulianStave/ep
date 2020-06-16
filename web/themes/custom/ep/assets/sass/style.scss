@@ -81,7 +81,8 @@ $transparent_over_image_background: hsla(210, 67%, 96%, 0.6);
         z-index: 5;
         left: 0;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
+        // background-color: rgba(0, 0, 0, 0.6);
+        background: $transparent_over_image_background;
         margin: 0;
         a {
           display: block;
@@ -96,7 +97,7 @@ $transparent_over_image_background: hsla(210, 67%, 96%, 0.6);
 
 // main menu style and gradient background
 #main-menu .container {
-  background-color: #d9e6f2;
+  background-color: $right_gray;
   background: -webkit-gradient(
     linear,
     0% 0%,
@@ -109,9 +110,18 @@ $transparent_over_image_background: hsla(210, 67%, 96%, 0.6);
   background: -ms-linear-gradient(top, $left_gray, $right_gray);
   background: -o-linear-gradient(top, $left_gray, $right_gray);
 }
+#main-menu .container ul.menu li > a {
+  color: $lighter_green;
+}
+#main-menu .container ul.menu li .is-active {
+  color: white;
+}
+#main-menu .container ul.menu li:hover > a {
+  color: white;
+}
 
 .not-front #main-menu .container ul.menu li:first-child .is-active {
-  background-color: #d9e6f2;
+  background-color: $right_gray;
   background: -webkit-gradient(
     linear,
     0% 0%,
@@ -145,7 +155,7 @@ article .field--name-field-image {
   background: -moz-linear-gradient(top, $left_gray, $right_gray);
   background: -ms-linear-gradient(top, $left_gray, $right_gray);
   background: -o-linear-gradient(top, $left_gray, $right_gray);
-  color: #fff;
+  color: $lighter_green;
   margin: -15px -15px 15px -15px;
   padding: 10px 15px;
   /* text-transform: uppercase; */
