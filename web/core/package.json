@@ -98,9 +98,5 @@
     "last 1 Samsung version",
     "last 1 OperaMini version",
     "Firefox ESR"
-  ],
-  "dependencies": {
-    "acorn": "5.7.4",
-    "kind-of": "^6.0.3"
-  }
+  ]
 }
