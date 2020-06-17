@@ -16,3 +16,5 @@
 
 # Ignore .env files as they are personal
 /.env
+
+/web/node_modules
