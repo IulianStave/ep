@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.image_and_price_listing
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_categorie_produs
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_cod_produs
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_colectie
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_dimensiuni
@@ -46,6 +47,7 @@ content:
     region: content
 hidden:
   description: true
+  field_categorie_produs: true
   field_cod_produs: true
   field_colectie: true
   field_dimensiuni: true

@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.taxonomy_term.categorii_produse.field_esente
-    - field.field.taxonomy_term.categorii_produse.field_finisaje
     - field.field.taxonomy_term.categorii_produse.field_imagine
     - image.style.thumbnail
     - taxonomy.vocabulary.categorii_produse
@@ -27,12 +26,6 @@ content:
     third_party_settings: {  }
   field_esente:
     weight: 5
-    settings: {  }
-    third_party_settings: {  }
-    type: options_buttons
-    region: content
-  field_finisaje:
-    weight: 4
     settings: {  }
     third_party_settings: {  }
     type: options_buttons

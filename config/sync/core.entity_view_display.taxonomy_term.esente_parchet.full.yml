@@ -4,11 +4,13 @@ status: false
 dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.full
+    - field.field.taxonomy_term.esente_parchet.field_categorie_produs
     - field.field.taxonomy_term.esente_parchet.field_contragere
     - field.field.taxonomy_term.esente_parchet.field_culoare
     - field.field.taxonomy_term.esente_parchet.field_durabilitate
     - field.field.taxonomy_term.esente_parchet.field_duritate
     - field.field.taxonomy_term.esente_parchet.field_fibra
+    - field.field.taxonomy_term.esente_parchet.field_greutate_specifica
     - field.field.taxonomy_term.esente_parchet.field_imagine
     - field.field.taxonomy_term.esente_parchet.field_nume_latina
     - field.field.taxonomy_term.esente_parchet.field_oxidare
@@ -121,4 +123,5 @@ content:
     type: entity_reference_label
     region: content
 hidden:
+  field_categorie_produs: true
   field_greutate_specifica: true

@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.taxonomy_term.image_and_price_listing
     - field.field.taxonomy_term.categorii_produse.field_esente
-    - field.field.taxonomy_term.categorii_produse.field_finisaje
     - field.field.taxonomy_term.categorii_produse.field_imagine
     - image.style.block_style_
     - taxonomy.vocabulary.categorii_produse
@@ -34,15 +33,6 @@ content:
       view_mode: image_teaser
       link: false
     third_party_settings: {  }
-  field_finisaje:
-    weight: 3
-    label: hidden
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    type: entity_reference_entity_view
-    region: content
   field_imagine:
     weight: 1
     label: hidden

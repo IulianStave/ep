@@ -1,18 +1,18 @@
-uuid: 08ddc110-6697-48ff-9fe2-1c999af399b6
+uuid: f8e7adcd-1552-474e-bf24-317e5198c6a9
 langcode: en
 status: true
 dependencies:
   module:
     - taxonomy
-id: taxonomy_term.field_finisaje
-field_name: field_finisaje
+id: taxonomy_term.field_categorie_produs
+field_name: field_categorie_produs
 entity_type: taxonomy_term
 type: entity_reference
 settings:
   target_type: taxonomy_term
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

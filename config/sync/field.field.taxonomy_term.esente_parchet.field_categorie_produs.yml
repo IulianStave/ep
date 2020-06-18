@@ -1,0 +1,33 @@
+uuid: 13cb45d2-a019-4f58-bb5d-eb4ede12a259
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_categorie_produs
+    - taxonomy.vocabulary.categorii_produse
+    - taxonomy.vocabulary.esente_parchet
+  content:
+    - 'taxonomy_term:categorii_produse:c7adc2a5-118e-4c77-b93d-f56bfe184938'
+id: taxonomy_term.esente_parchet.field_categorie_produs
+field_name: field_categorie_produs
+entity_type: taxonomy_term
+bundle: esente_parchet
+label: 'Categorie produs'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    target_uuid: c7adc2a5-118e-4c77-b93d-f56bfe184938
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categorii_produse: categorii_produse
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

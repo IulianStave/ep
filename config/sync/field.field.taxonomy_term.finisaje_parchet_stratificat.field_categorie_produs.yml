@@ -1,0 +1,33 @@
+uuid: 2c8906b8-eb6c-4b36-b018-99ffdd276c53
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_categorie_produs
+    - taxonomy.vocabulary.categorii_produse
+    - taxonomy.vocabulary.finisaje_parchet_stratificat
+  content:
+    - 'taxonomy_term:categorii_produse:6c63168a-cc62-47ca-b1a9-3d407a8ec72d'
+id: taxonomy_term.finisaje_parchet_stratificat.field_categorie_produs
+field_name: field_categorie_produs
+entity_type: taxonomy_term
+bundle: finisaje_parchet_stratificat
+label: 'Categorie produs'
+description: 'Categoria din care face parte (stratificat, masiv, materiale, etc...)'
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 6c63168a-cc62-47ca-b1a9-3d407a8ec72d
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categorii_produse: categorii_produse
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

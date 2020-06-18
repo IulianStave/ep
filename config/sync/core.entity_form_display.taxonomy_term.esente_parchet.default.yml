@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.esente_parchet.field_categorie_produs
     - field.field.taxonomy_term.esente_parchet.field_contragere
     - field.field.taxonomy_term.esente_parchet.field_culoare
     - field.field.taxonomy_term.esente_parchet.field_durabilitate
@@ -34,6 +35,12 @@ content:
       placeholder: ''
       rows: 5
     third_party_settings: {  }
+  field_categorie_produs:
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
   field_contragere:
     weight: 12
     settings: {  }
@@ -125,5 +132,12 @@ content:
     weight: 2
     region: content
     settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 100
+    region: content
     third_party_settings: {  }
 hidden: {  }

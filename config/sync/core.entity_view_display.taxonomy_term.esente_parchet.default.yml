@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.esente_parchet.field_categorie_produs
     - field.field.taxonomy_term.esente_parchet.field_contragere
     - field.field.taxonomy_term.esente_parchet.field_culoare
     - field.field.taxonomy_term.esente_parchet.field_durabilitate
@@ -31,6 +32,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_categorie_produs:
+    weight: 13
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_contragere:
     weight: 11
     label: inline

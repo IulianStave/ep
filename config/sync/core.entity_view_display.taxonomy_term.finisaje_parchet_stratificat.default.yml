@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.finisaje_parchet_stratificat.field_categorie_produs
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_cod_produs
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_colectie
     - field.field.taxonomy_term.finisaje_parchet_stratificat.field_dimensiuni
@@ -29,12 +30,20 @@ content:
   description:
     label: hidden
     type: text_default
-    weight: 0
+    weight: 1
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_categorie_produs:
+    weight: 0
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
   field_cod_produs:
-    weight: 26
+    weight: 15
     label: above
     settings:
       link_to_entity: false
@@ -42,15 +51,15 @@ content:
     type: string
     region: content
   field_colectie:
-    weight: 1
-    label: above
+    weight: 2
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_dimensiuni:
-    weight: 19
+    weight: 8
     label: above
     settings:
       link_to_entity: false
@@ -58,7 +67,7 @@ content:
     type: string
     region: content
   field_esenta_strat_nobil:
-    weight: 20
+    weight: 9
     label: above
     settings:
       link_to_entity: false
@@ -66,7 +75,7 @@ content:
     type: string
     region: content
   field_finisaj:
-    weight: 21
+    weight: 10
     label: above
     settings:
       link_to_entity: false
@@ -74,7 +83,7 @@ content:
     type: string
     region: content
   field_grosime_strat_nobil:
-    weight: 22
+    weight: 11
     label: above
     settings:
       link_to_entity: false
@@ -82,8 +91,8 @@ content:
     type: string
     region: content
   field_imagine:
-    weight: 2
-    label: above
+    weight: 3
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -91,7 +100,7 @@ content:
     type: image
     region: content
   field_impachetare:
-    weight: 23
+    weight: 12
     label: above
     settings:
       link_to_entity: false
@@ -100,7 +109,7 @@ content:
     region: content
   field_poza_mica:
     weight: 4
-    label: above
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
@@ -108,7 +117,7 @@ content:
     type: image
     region: content
   field_pret:
-    weight: 24
+    weight: 13
     label: above
     settings:
       link_to_entity: false
@@ -116,7 +125,7 @@ content:
     type: string
     region: content
   field_producator:
-    weight: 17
+    weight: 6
     label: above
     settings:
       link_to_entity: false
@@ -124,7 +133,7 @@ content:
     type: string
     region: content
   field_selectia_lemnului:
-    weight: 25
+    weight: 14
     label: above
     settings:
       link_to_entity: false
@@ -132,7 +141,7 @@ content:
     type: string
     region: content
   field_strat_suport:
-    weight: 18
+    weight: 7
     label: above
     settings:
       link_to_entity: false
@@ -140,7 +149,7 @@ content:
     type: string
     region: content
   field_tip_:
-    weight: 6
+    weight: 5
     label: above
     settings:
       link_to_entity: false
