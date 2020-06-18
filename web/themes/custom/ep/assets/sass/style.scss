@@ -179,3 +179,9 @@ article .field--name-field-image {
   background: $transparent_flex_background;
   color: $lighter_green;
 }
+
+// display elements in Finisaje view with some space between
+
+.views-view-grid .views-col {
+  margin-right: 10px;
+}

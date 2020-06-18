@@ -146,4 +146,8 @@ article .field--name-field-image {
   color: #023107;
 }
 
+.views-view-grid .views-col {
+  margin-right: 10px;
+}
+
 /*# sourceMappingURL=style.css.map */
