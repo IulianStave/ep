@@ -15,7 +15,7 @@ dependencies:
 id: finisaje_parchet_stratificat
 label: 'Finisaje parchet stratificat'
 module: views
-description: ''
+description: 'Finisaje Parchet stratificat grupate pe colectii'
 tag: ''
 base_table: taxonomy_term_field_data
 base_field: tid
@@ -393,7 +393,7 @@ display:
     display_options:
       display_extenders: {  }
       block_description: 'Finisaje PS'
-      display_description: ''
+      display_description: 'Finisaje Parchet stratificat grupate pe colectii'
     cache_metadata:
       max-age: -1
       contexts:
@@ -412,7 +412,7 @@ display:
     position: 1
     display_options:
       display_extenders: {  }
-      block_description: 'Finisaje Parchet Stratificat'
+      block_description: 'Finisaje PS CFCategorie'
       display_description: 'Filtreaza contextual dupa Categorie produs term id luat din url'
       arguments:
         field_categorie_produs_target_id:

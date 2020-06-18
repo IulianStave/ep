@@ -1,0 +1,31 @@
+uuid: 0083f166-edcc-4c0a-93fd-d6d06cf62c0d
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.finisaje_parchet_stratificat
+  module:
+    - system
+    - views
+  theme:
+    - ep
+id: views_block__finisaje_parchet_stratificat_block_2
+theme: ep
+region: content
+weight: -8
+provider: null
+plugin: 'views_block:finisaje_parchet_stratificat-block_2'
+settings:
+  id: 'views_block:finisaje_parchet_stratificat-block_2'
+  label: ''
+  provider: views
+  label_display: visible
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '/taxonomy/term/*'
+    negate: false
+    context_mapping: {  }
