@@ -440,15 +440,21 @@ display:
       display_extenders: {  }
       path: produse
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: ''
-          default_row_class: true
+          columns: 3
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       defaults:
         style: false
         row: false
         fields: false
+        css_class: false
       row:
         type: fields
         options:
@@ -587,6 +593,7 @@ display:
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: term_name
+      css_class: title-over-image
     cache_metadata:
       max-age: -1
       contexts:
