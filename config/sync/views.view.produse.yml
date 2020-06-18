@@ -267,12 +267,12 @@ display:
     position: 2
     display_options:
       display_extenders: {  }
-      block_description: Produse
+      block_description: 'Produse HomePage'
       style:
         type: grid
         options:
           grouping: {  }
-          columns: 2
+          columns: 3
           automatic_width: true
           alignment: horizontal
           col_class_default: true
