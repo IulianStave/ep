@@ -1,6 +1,6 @@
 uuid: 4ce58b76-0f13-48a7-b5b6-e62eeefa097b
 langcode: en
-status: false
+status: true
 dependencies:
   module:
     - system
@@ -11,7 +11,7 @@ _core:
 id: ep_content
 theme: ep
 region: content
-weight: -3
+weight: -8
 provider: null
 plugin: system_main_block
 settings:
