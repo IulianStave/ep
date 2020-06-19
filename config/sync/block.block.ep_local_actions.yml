@@ -9,7 +9,7 @@ _core:
 id: ep_local_actions
 theme: ep
 region: content
-weight: -5
+weight: -4
 provider: null
 plugin: local_actions_block
 settings:

@@ -1,0 +1,20 @@
+uuid: 397f0bde-4178-40db-91b1-4e860ce9937c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_categorie_produs
+field_name: field_categorie_produs
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

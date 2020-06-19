@@ -5,6 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.material_montaj.body
+    - field.field.node.material_montaj.field_categorie_material
+    - field.field.node.material_montaj.field_categorie_produs
+    - field.field.node.material_montaj.field_image
+    - field.field.node.material_montaj.field_pret
     - node.type.material_montaj
   module:
     - text
@@ -29,4 +33,6 @@ content:
     region: content
 hidden:
   field_categorie_material: true
+  field_categorie_produs: true
   field_image: true
+  field_pret: true

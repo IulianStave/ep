@@ -1,0 +1,33 @@
+uuid: da08f122-e237-463d-9a19-156639723d90
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_categorie_produs
+    - node.type.material_montaj
+    - taxonomy.vocabulary.categorii_produse
+  content:
+    - 'taxonomy_term:categorii_produse:4ff39c15-de75-42b7-be45-a7685ca54611'
+id: node.material_montaj.field_categorie_produs
+field_name: field_categorie_produs
+entity_type: node
+bundle: material_montaj
+label: 'Categorie produs'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 4ff39c15-de75-42b7-be45-a7685ca54611
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categorii_produse: categorii_produse
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

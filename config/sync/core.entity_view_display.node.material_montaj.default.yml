@@ -5,7 +5,9 @@ dependencies:
   config:
     - field.field.node.material_montaj.body
     - field.field.node.material_montaj.field_categorie_material
+    - field.field.node.material_montaj.field_categorie_produs
     - field.field.node.material_montaj.field_image
+    - field.field.node.material_montaj.field_pret
     - node.type.material_montaj
   module:
     - image
@@ -19,30 +21,38 @@ content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     region: content
   field_categorie_material:
-    weight: 103
-    label: above
+    weight: 3
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
     region: content
   field_image:
-    weight: 102
-    label: above
+    weight: 2
+    label: hidden
     settings:
       image_style: ''
       image_link: ''
     third_party_settings: {  }
     type: image
     region: content
-  links:
-    weight: 100
+  field_pret:
+    weight: 4
+    label: above
     settings: {  }
     third_party_settings: {  }
+    type: text_default
     region: content
-hidden: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_categorie_produs: true

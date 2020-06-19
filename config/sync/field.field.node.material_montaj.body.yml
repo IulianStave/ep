@@ -11,8 +11,8 @@ id: node.material_montaj.body
 field_name: body
 entity_type: node
 bundle: material_montaj
-label: Body
-description: ''
+label: Descriere
+description: 'Descriere material montaj parchet'
 required: false
 translatable: true
 default_value: {  }

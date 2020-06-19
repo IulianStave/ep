@@ -1,22 +1,22 @@
-uuid: 6c11abfe-cdb2-4ea3-806f-7ad06840eb22
+uuid: 83b6116c-a725-4012-876d-de471d635ba6
 langcode: en
 status: true
 dependencies:
   config:
-    - views.view.produse
+    - views.view.materiale_montaj_parchet
   module:
     - system
     - views
   theme:
     - ep
-id: views_block__produse_block_1
+id: views_block__materiale_montaj_parchet_block_2
 theme: ep
 region: content
-weight: -3
+weight: -6
 provider: null
-plugin: 'views_block:produse-block_1'
+plugin: 'views_block:materiale_montaj_parchet-block_2'
 settings:
-  id: 'views_block:produse-block_1'
+  id: 'views_block:materiale_montaj_parchet-block_2'
   label: ''
   provider: views
   label_display: visible
@@ -25,6 +25,6 @@ settings:
 visibility:
   request_path:
     id: request_path
-    pages: '<front>'
+    pages: '/taxonomy/term/*'
     negate: false
     context_mapping: {  }

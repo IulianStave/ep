@@ -1,0 +1,24 @@
+uuid: f9f556c2-9974-46b6-b8ee-218489418bc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_pret
+    - node.type.material_montaj
+  module:
+    - text
+id: node.material_montaj.field_pret
+field_name: field_pret
+entity_type: node
+bundle: material_montaj
+label: Pret
+description: 'Pret material in format 15 euro/kg+TVA'
+required: false
+translatable: true
+default_value:
+  -
+    value: ' €/Kg + TVA'
+    format: basic_html
+default_value_callback: ''
+settings: {  }
+field_type: text
