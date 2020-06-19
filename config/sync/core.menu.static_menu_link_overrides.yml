@@ -6,9 +6,9 @@ definitions:
     weight: 0
     expanded: false
   standard__front_page:
-    weight: -50
     menu_name: main
     parent: ''
+    weight: 10
     expanded: false
     enabled: true
 _core:

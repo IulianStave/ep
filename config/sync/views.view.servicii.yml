@@ -544,7 +544,11 @@ display:
         type: normal
         title: Servicii
         menu_name: main
-        weight: -48
+        weight: 30
+        description: ''
+        parent: ''
+        expanded: false
+        enabled: true
       sorts:
         field_ordine_afisare_value:
           id: field_ordine_afisare_value
