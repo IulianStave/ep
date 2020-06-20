@@ -8,6 +8,10 @@ $left_gray: #b6bfc9;
 $right_gray: #d9e6f2;
 $transparent_flex_background: rgba(238, 245, 252, 0.6);
 $transparent_over_image_background: hsla(210, 67%, 96%, 0.6);
+$dark_grey: #555;
+$red: #c01700;
+$white: #fff;
+$border_grey: 1px solid #dadada;
 
 .title-over-image .views-view-grid .views-col {
   float: left;
@@ -110,17 +114,33 @@ $transparent_over_image_background: hsla(210, 67%, 96%, 0.6);
   background: -ms-linear-gradient(top, $left_gray, $right_gray);
   background: -o-linear-gradient(top, $left_gray, $right_gray);
 }
+//main menu option borders
+#main-menu .container ul.menu li {
+  border-left: 1px solid $white;
+}
 #main-menu .container ul.menu li > a {
   color: $lighter_green;
+  //   border: $dark_green;
 }
 #main-menu .container ul.menu li .is-active {
-  color: white;
+  color: $white;
 }
 #main-menu .container ul.menu li:hover > a {
-  color: white;
+  color: $white;
 }
 
-.not-front #main-menu .container ul.menu li:first-child .is-active {
+// main menu dropdown menu
+// #main-menu .container ul.menu .menu-item--expanded{
+//active selected option
+#main-menu .container ul.menu li.menu-item--active-trail > a {
+  background: $red;
+  color: $white;
+}
+
+#main-menu .container ul.menu ul.menu li {
+  border: none;
+}
+#main-menu .container ul.menu ul.menu li a {
   background-color: $right_gray;
   background: -webkit-gradient(
     linear,
@@ -133,6 +153,32 @@ $transparent_over_image_background: hsla(210, 67%, 96%, 0.6);
   background: -moz-linear-gradient(top, $left_gray, $right_gray);
   background: -ms-linear-gradient(top, $left_gray, $right_gray);
   background: -o-linear-gradient(top, $left_gray, $right_gray);
+  color: $lighter_green;
+  border: none;
+  &:hover {
+    background: $red;
+  }
+}
+#main-menu .container ul.menu ul.menu li .is-active {
+  background: $red;
+  color: $white;
+}
+
+.not-front #main-menu .container ul.menu li:first-child .is-active {
+  background-color: $red;
+  background: -webkit-gradient(
+    linear,
+    0% 0%,
+    0% 100%,
+    from($red),
+    to($right_gray)
+  );
+  background: -webkit-linear-gradient(top, $left_gray, $right_gray);
+  background: -moz-linear-gradient(top, $left_gray, $right_gray);
+  background: -ms-linear-gradient(top, $left_gray, $right_gray);
+  background: -o-linear-gradient(top, $left_gray, $right_gray);
+  background: $red;
+  color: $white;
 }
 
 // image style for pictures appearing in /servicii page
