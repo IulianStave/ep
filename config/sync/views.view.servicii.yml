@@ -544,7 +544,7 @@ display:
         type: normal
         title: Servicii
         menu_name: main
-        weight: 30
+        weight: -48
         description: ''
         parent: ''
         expanded: false
