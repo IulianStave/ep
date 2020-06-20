@@ -104,6 +104,10 @@
   color: #fff;
 }
 
+#main-menu .container ul.menu ul.menu {
+  border: none;
+}
+
 #main-menu .container ul.menu ul.menu li {
   border: none;
 }

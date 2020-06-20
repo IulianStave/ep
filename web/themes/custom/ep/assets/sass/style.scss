@@ -136,7 +136,9 @@ $border_grey: 1px solid #dadada;
   background: $red;
   color: $white;
 }
-
+#main-menu .container ul.menu ul.menu {
+    border: none;
+}
 #main-menu .container ul.menu ul.menu li {
   border: none;
 }
