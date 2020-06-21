@@ -137,7 +137,7 @@ $border_grey: 1px solid #dadada;
   color: $white;
 }
 #main-menu .container ul.menu ul.menu {
-    border: none;
+  border: none;
 }
 #main-menu .container ul.menu ul.menu li {
   border: none;
@@ -233,3 +233,10 @@ article .field--name-field-image {
 .views-view-grid .views-col {
   margin-right: 10px;
 }
+
+// Link color in servicii listing green
+h3 > a,
+h2 > a {
+  color: $lighter_green;
+}
+// .field field--name-title field--type-string field--label-hidden quickedit-field {}

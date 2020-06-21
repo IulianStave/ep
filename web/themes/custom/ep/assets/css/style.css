@@ -188,4 +188,9 @@ article .field--name-field-image {
   margin-right: 10px;
 }
 
+h3 > a,
+h2 > a {
+  color: #023107;
+}
+
 /*# sourceMappingURL=style.css.map */
