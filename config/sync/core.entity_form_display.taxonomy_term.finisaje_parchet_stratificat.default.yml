@@ -22,6 +22,7 @@ dependencies:
     - taxonomy.vocabulary.finisaje_parchet_stratificat
   module:
     - image
+    - path
 id: taxonomy_term.finisaje_parchet_stratificat.default
 targetEntityType: taxonomy_term
 bundle: finisaje_parchet_stratificat
@@ -151,6 +152,12 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  path:
+    type: path
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
     settings:
@@ -160,4 +167,3 @@ content:
     third_party_settings: {  }
 hidden:
   description: true
-  path: true

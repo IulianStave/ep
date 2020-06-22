@@ -1,0 +1,23 @@
+uuid: 9d1610cd-e855-4de2-b7d1-963d0b605ea4
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - taxonomy
+id: finisaje_parchet_stratificat
+label: 'Finisaje parchet stratificat'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'produse_parchet/[term:field_categorie_produs]/[term:name]'
+selection_criteria:
+  bd53993a-04d8-42dc-b61f-b6810767b0dd:
+    id: 'entity_bundle:taxonomy_term'
+    bundles:
+      finisaje_parchet_stratificat: finisaje_parchet_stratificat
+    negate: false
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    uuid: bd53993a-04d8-42dc-b61f-b6810767b0dd
+selection_logic: and
+weight: -10
+relationships: {  }
