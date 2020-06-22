@@ -11,8 +11,8 @@ id: taxonomy_term.finisaje_parchet_stratificat.field_poza_mica
 field_name: field_poza_mica
 entity_type: taxonomy_term
 bundle: finisaje_parchet_stratificat
-label: 'Poza mica'
-description: 'Poze mici, maxim 3 poze in acest camp'
+label: 'Poze finisaj'
+description: 'Poze reprezentative pentru finisajul parchet stratificat, prima va fi afisata in pagina de detaliu mai mare (se pot ordona cu drag and drop)'
 required: false
 translatable: false
 default_value: {  }
