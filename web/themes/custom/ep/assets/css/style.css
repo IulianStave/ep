@@ -196,6 +196,7 @@ h2 > a {
 .field__item > a > img.image-style-large {
   clear: right;
   width: 60%;
+  padding: 1px 1px 1px 0;
 }
 
 .field__item {
@@ -208,7 +209,8 @@ h2 > a {
 
 .field__item > a > img.image-style-thumbnail {
   box-sizing: border-box;
-  margin: 1px 1px 1px 0;
+  padding: 1px 1px 1px 0;
+  width: 20%;
   float: left;
 }
 
