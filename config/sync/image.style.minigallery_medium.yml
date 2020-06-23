@@ -1,0 +1,19 @@
+uuid: b89ace65-3a80-438e-b9fc-f2e6732d0ef3
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: minigallery_medium
+label: 'Minigallery medium'
+effects:
+  a299ec79-b521-40b3-897f-9d7c7bc64a95:
+    uuid: a299ec79-b521-40b3-897f-9d7c7bc64a95
+    id: image_effects_scale_and_smart_crop
+    weight: 1
+    data:
+      width: '300'
+      height: '225'
+      upscale: true
+      simulate: false
+      algorithm: entropy_slice

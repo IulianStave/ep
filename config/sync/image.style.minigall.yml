@@ -1,0 +1,19 @@
+uuid: f3beace2-daba-4edf-b393-99458133d8d1
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: minigall
+label: 'Minigallery small'
+effects:
+  ebfebde0-488a-4ed5-a530-edd987abf045:
+    uuid: ebfebde0-488a-4ed5-a530-edd987abf045
+    id: image_effects_scale_and_smart_crop
+    weight: 1
+    data:
+      width: '100'
+      height: '75'
+      upscale: true
+      simulate: false
+      algorithm: entropy_slice
