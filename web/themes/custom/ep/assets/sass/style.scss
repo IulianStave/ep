@@ -239,4 +239,28 @@ h3 > a,
 h2 > a {
   color: $lighter_green;
 }
-// .field field--name-title field--type-string field--label-hidden quickedit-field {}
+
+.field__item > a >  img.image-style-large {
+    clear:right;
+    width:60%;
+    
+}
+.field__item {
+    box-sizing: border-box;
+}
+* {
+    box-sizing: border-box;
+}
+.field__item > a > img.image-style-thumbnail {
+    box-sizing: border-box;
+    margin:1px 1px 1px 0; 
+    // width:20%;
+    float:left; 
+    // align-items:center;
+    
+    
+}
+
+div.field.field--name-field-producator > div.field__label{
+    clear:left;
+}

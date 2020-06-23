@@ -193,4 +193,27 @@ h2 > a {
   color: #023107;
 }
 
+.field__item > a > img.image-style-large {
+  clear: right;
+  width: 60%;
+}
+
+.field__item {
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.field__item > a > img.image-style-thumbnail {
+  box-sizing: border-box;
+  margin: 1px 1px 1px 0;
+  float: left;
+}
+
+div.field.field--name-field-producator > div.field__label {
+  clear: left;
+}
+
 /*# sourceMappingURL=style.css.map */
