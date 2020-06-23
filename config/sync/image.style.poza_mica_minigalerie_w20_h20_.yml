@@ -1,0 +1,19 @@
+uuid: 0d8584c1-0248-4af2-b6d4-2d6c0139dafa
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: poza_mica_minigalerie_w20_h20_
+label: 'Poza mica minigalerie w20%h20%'
+effects:
+  02d3f955-533c-4677-9256-b519e777aa34:
+    uuid: 02d3f955-533c-4677-9256-b519e777aa34
+    id: image_effects_scale_and_smart_crop
+    weight: 1
+    data:
+      width: 20%
+      height: '20'
+      upscale: false
+      simulate: false
+      algorithm: entropy_slice

@@ -1,0 +1,19 @@
+uuid: 9798fadd-4963-4a61-ab66-8b30ccb983f0
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: poza_mare_minigalerie
+label: 'Poza mare minigalerie w60%'
+effects:
+  b5c63510-311b-4667-915d-c56f7ccd0899:
+    uuid: b5c63510-311b-4667-915d-c56f7ccd0899
+    id: image_effects_scale_and_smart_crop
+    weight: 1
+    data:
+      width: 60%
+      height: ''
+      upscale: false
+      simulate: false
+      algorithm: entropy_slice
