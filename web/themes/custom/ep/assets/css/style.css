@@ -196,6 +196,7 @@ h2 > a {
 .field--name-field-poza-mica .field__item:first-child img {
   padding: 2px 1px 1px 0px;
   clear: right;
+  box-sizing: border-box;
 }
 
 .field__item {

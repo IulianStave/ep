@@ -249,8 +249,9 @@ h2 > a {
 // }
 
 .field--name-field-poza-mica .field__item:first-child img {
-    padding: 2px 1px 1px 0px;
-    clear:right;
+  padding: 2px 1px 1px 0px;
+  clear: right;
+  box-sizing: border-box;
 }
 .field__item {
   box-sizing: border-box;
@@ -260,14 +261,13 @@ h2 > a {
 //   box-sizing: border-box;
 //   padding: 1px 1px 1px 0;
 //   float: left;
-  
+
 // }
 .field--name-field-poza-mica .field__item:not(:first-child) img {
-    padding: 1px 1px 1px 0;
-    box-sizing: border-box;
-    float: left;
-  }
-
+  padding: 1px 1px 1px 0;
+  box-sizing: border-box;
+  float: left;
+}
 
 div.field.field--name-field-producator > div.field__label {
   clear: left;
