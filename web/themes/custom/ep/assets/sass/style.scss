@@ -242,22 +242,32 @@ h2 > a {
 
 //Style image to be shown one bigger and the next three smaller and underneath
 //One big and 3 below smaller
-.field__item > a > img.image-style-minigallery-medium {
-  clear: right;
-  // width:60%;
-  padding: 1px 1px 1px 0;
+// .field__item > a > img.image-style-minigallery-medium {
+//   clear: right;
+//   // width:60%;
+//   padding: 1px 1px 1px 0;
+// }
+
+.field--name-field-poza-mica .field__item:first-child img {
+    padding: 2px 1px 1px 0px;
+    clear:right;
 }
 .field__item {
   box-sizing: border-box;
 }
 
-.field__item > a > img.image-style-minigall {
-  box-sizing: border-box;
-  padding: 1px 1px 1px 0;
-  // width:20%;
-  float: left;
-  // align-items:center;
-}
+// .field__item > a > img.image-style-minigall {
+//   box-sizing: border-box;
+//   padding: 1px 1px 1px 0;
+//   float: left;
+  
+// }
+.field--name-field-poza-mica .field__item:not(:first-child) img {
+    padding: 1px 1px 1px 0;
+    box-sizing: border-box;
+    float: left;
+  }
+
 
 div.field.field--name-field-producator > div.field__label {
   clear: left;
