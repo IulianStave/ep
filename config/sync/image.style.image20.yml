@@ -1,0 +1,19 @@
+uuid: 21428037-16a5-4ee9-8d99-454ecc06a855
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: image20
+label: 'Galerie 200x150'
+effects:
+  847f940b-776d-4ce0-addd-4a1f8764a4ee:
+    uuid: 847f940b-776d-4ce0-addd-4a1f8764a4ee
+    id: image_effects_scale_and_smart_crop
+    weight: 1
+    data:
+      width: '200'
+      height: '150'
+      upscale: false
+      simulate: false
+      algorithm: entropy_slice

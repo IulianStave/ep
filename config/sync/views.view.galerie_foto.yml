@@ -5,7 +5,7 @@ dependencies:
   config:
     - field.storage.node.field_categorie_lucrare
     - field.storage.node.field_image
-    - image.style.imagine_mica_scalata_100x75_
+    - image.style.image20
     - node.type.fotografie_galerie
     - system.menu.main
   module:
@@ -61,8 +61,8 @@ display:
           tags:
             previous: ‹‹
             next: ››
-            first: '« Prima pagina'
-            last: 'Ultima pagina »'
+            first: 'Prima pagina« '
+            last: '»Ultima pagina'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -71,7 +71,7 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          quantity: 9
+          quantity: 5
       style:
         type: grid
         options:
@@ -146,10 +146,10 @@ display:
           click_sort_column: target_id
           type: colorbox
           settings:
-            colorbox_node_style: imagine_mica_scalata_100x75_
+            colorbox_node_style: image20
             colorbox_node_style_first: ''
             colorbox_image_style: ''
-            colorbox_gallery: post
+            colorbox_gallery: page
             colorbox_gallery_custom: ''
             colorbox_caption: auto
             colorbox_caption_custom: ''
