@@ -150,10 +150,6 @@ article .field--name-field-image {
   border-style: none;
 }
 
-.margin-added {
-  margin-bottom: 24px;
-}
-
 .sidebar h2 {
   background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
   background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
@@ -182,10 +178,6 @@ article .field--name-field-image {
 #slideshow .container .views-field-title {
   background: rgba(238, 245, 252, 0.6);
   color: #023107;
-}
-
-.views-view-grid .views-col {
-  margin-right: 10px;
 }
 
 h3 > a,
@@ -230,6 +222,16 @@ div.field.field--name-field-producator > div.field__label {
 .views-field.views-field-title .field-content a {
     min-height: 3em;
   }
+
+  .views-view-grid .views-col {
+    box-sizing: border-box;
+    margin-right: 0px;
+    padding-right: 1px;
+  }
+}
+.views-view-grid .views-col {
+  box-sizing: border-box;
+  padding-right: 1px;
 }
 
 /*# sourceMappingURL=style.css.map */
