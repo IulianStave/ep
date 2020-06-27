@@ -80,7 +80,7 @@ display:
               field: field_colectie
               rendered: true
               rendered_strip: false
-          columns: 6
+          columns: 4
           automatic_width: true
           alignment: horizontal
           col_class_default: true
