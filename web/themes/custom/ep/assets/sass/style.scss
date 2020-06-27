@@ -273,19 +273,29 @@ div.field.field--name-field-producator > div.field__label {
   clear: left;
 }
 
-
-// show title for Parchet stratificat listing on two blocks
-.views-field.views-field-name, .views-field.views-field-title .field-content a{
-    // margin-top:4px;
-    line-height:1em;
-    height:2em;
-    display:inline-block;
-    overflow:hidden;
-    // white-space: pre;
+//add some margin to the main produse picture
+.field.field--name-field-imagine {
+  margin-bottom: 20px;
+}
+// show title for Produs (e.g. Parchet stratificat) listing in 2 lines
+.views-field.views-field-name,
+.views-field.views-field-title .field-content a {
+  // margin-top:4px;
+  line-height: 1em;
+  min-height: 2em;
+  display: inline-block;
+  overflow: hidden;
+  // white-space: pre;
 }
 
-
-//add some margin to the main produse picture
-.field.field--name-field-imagine{
-    margin-bottom:20px;
+@media (max-width: $mobile-lg) {
+  .views-field.views-field-name,
+  .views-field.views-field-title .field-content a {
+    // margin-top:4px;
+    // line-height:1em;
+    min-height: 3em;
+    // display:inline-block;
+    // overflow:hidden;
+    // white-space: pre;
+  }
 }
