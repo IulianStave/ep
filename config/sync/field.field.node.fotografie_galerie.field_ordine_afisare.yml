@@ -10,12 +10,12 @@ field_name: field_ordine_afisare
 entity_type: node
 bundle: fotografie_galerie
 label: 'Ordine afisare'
-description: 'Imaginile vor fi afisate in ordinea crescatoare a valorii campului Ordine afisare (cele mai mici primele)'
+description: 'Imaginile vor fi afisate in ordinea descrescatoare a valorii campului Ordine afisare (cele mai mari primele)'
 required: false
 translatable: false
 default_value:
   -
-    value: 1000
+    value: 10
 default_value_callback: ''
 settings:
   min: null
