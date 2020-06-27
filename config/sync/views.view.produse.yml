@@ -245,7 +245,7 @@ display:
           entity_type: taxonomy_term
           entity_field: weight
           plugin_id: standard
-      title: Produse
+      title: ''
       header: {  }
       footer: {  }
       empty: {  }
