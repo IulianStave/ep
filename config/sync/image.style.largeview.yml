@@ -1,0 +1,19 @@
+uuid: e5a59a02-df5f-4c53-bcd2-50894786683c
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_effects
+name: largeview
+label: LargeView
+effects:
+  01c3b409-0417-43a5-b568-8e69d0a0036b:
+    uuid: 01c3b409-0417-43a5-b568-8e69d0a0036b
+    id: image_effects_scale_and_smart_crop
+    weight: 1
+    data:
+      width: '400'
+      height: '300'
+      upscale: false
+      simulate: false
+      algorithm: entropy_slice
