@@ -234,4 +234,17 @@ div.field.field--name-field-producator > div.field__label {
   padding-right: 1px;
 }
 
+#panel_second .container {
+  background-color: #b6bfc9;
+  color: #011d04;
+}
+
+.region.region-panel-second-4 a {
+  color: #011d04;
+}
+
+#panel_second ul li a {
+  color: #011d04;
+}
+
 /*# sourceMappingURL=style.css.map */

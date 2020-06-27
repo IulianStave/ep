@@ -320,3 +320,17 @@ div.field.field--name-field-producator > div.field__label {
     padding-right: 1px;
   }
   
+
+  // footer background
+  #panel_second .container {
+      background-color: $left_gray;
+      color: $dark_green;
+  }
+
+//   .contextual-region.block.block-menu.navigation.menu--footer a
+  .region.region-panel-second-4 a {
+      color: $dark_green;
+  }
+  #panel_second ul li a {
+    color: $dark_green;
+  }
