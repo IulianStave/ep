@@ -76,11 +76,11 @@
 }
 #main-menu .container {
   background-color: #d9e6f2;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b6bfc9), to(#d9e6f2));
-  background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -o-linear-gradient(top, #b6bfc9, #d9e6f2);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D3D3D3), to(#d9e6f2));
+  background: -webkit-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -moz-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -ms-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -o-linear-gradient(top, #D3D3D3, #d9e6f2);
 }
 
 #main-menu .container ul.menu li {
@@ -114,11 +114,11 @@
 
 #main-menu .container ul.menu ul.menu li a {
   background-color: #d9e6f2;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b6bfc9), to(#d9e6f2));
-  background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -o-linear-gradient(top, #b6bfc9, #d9e6f2);
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#D3D3D3), to(#d9e6f2));
+  background: -webkit-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -moz-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -ms-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -o-linear-gradient(top, #D3D3D3, #d9e6f2);
   color: #023107;
   border: none;
 }
@@ -134,10 +134,10 @@
 .not-front #main-menu .container ul.menu li:first-child .is-active {
   background-color: #c01700;
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c01700), to(#d9e6f2));
-  background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -o-linear-gradient(top, #b6bfc9, #d9e6f2);
+  background: -webkit-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -moz-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -ms-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -o-linear-gradient(top, #D3D3D3, #d9e6f2);
   background: #c01700;
   color: #fff;
 }
@@ -151,10 +151,10 @@ article .field--name-field-image {
 }
 
 .sidebar h2 {
-  background: -webkit-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -moz-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -ms-linear-gradient(top, #b6bfc9, #d9e6f2);
-  background: -o-linear-gradient(top, #b6bfc9, #d9e6f2);
+  background: -webkit-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -moz-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -ms-linear-gradient(top, #D3D3D3, #d9e6f2);
+  background: -o-linear-gradient(top, #D3D3D3, #d9e6f2);
   color: #023107;
   margin: -15px -15px 15px -15px;
   padding: 10px 15px;
@@ -235,7 +235,7 @@ div.field.field--name-field-producator > div.field__label {
 }
 
 #panel_second .container {
-  background-color: #b6bfc9;
+  background-color: #D3D3D3;
   color: #011d04;
 }
 
