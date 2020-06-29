@@ -8,16 +8,16 @@ dependencies:
 id: finisaje_parchet_stratificat
 label: 'Finisaje parchet stratificat'
 type: 'canonical_entities:taxonomy_term'
-pattern: 'produse-parchet/[term:field_categorie_produs]/[term:name]'
+pattern: 'produse/[term:field_categorie_produs]/[term:name]'
 selection_criteria:
-  01af52fb-aa02-42b9-9cec-55fff2489014:
+  4ea98c38-4b69-4d57-be94-0ecd179d5949:
     id: 'entity_bundle:taxonomy_term'
     bundles:
       finisaje_parchet_stratificat: finisaje_parchet_stratificat
     negate: false
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: 01af52fb-aa02-42b9-9cec-55fff2489014
+    uuid: 4ea98c38-4b69-4d57-be94-0ecd179d5949
 selection_logic: and
 weight: -10
 relationships: {  }

@@ -8,16 +8,16 @@ dependencies:
 id: produse_parchet
 label: 'Produse parchet'
 type: 'canonical_entities:taxonomy_term'
-pattern: 'produse-parchet/[term:name]'
+pattern: 'produse/[term:name]'
 selection_criteria:
-  de406f13-c051-4660-89e8-b5da3dd97365:
+  c9446f46-ac99-4f4f-b7ca-ace7961f3e8e:
     id: 'entity_bundle:taxonomy_term'
     bundles:
       categorii_produse: categorii_produse
     negate: false
     context_mapping:
       taxonomy_term: taxonomy_term
-    uuid: de406f13-c051-4660-89e8-b5da3dd97365
+    uuid: c9446f46-ac99-4f4f-b7ca-ace7961f3e8e
 selection_logic: and
 weight: -5
 relationships: {  }
