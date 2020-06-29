@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_imagine
-    - image.style.largeview
+    - image.style.256x192
     - taxonomy.vocabulary.categorii_produse
   module:
     - image
@@ -124,7 +124,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: largeview
+            image_style: 256x192
             image_link: content
           group_column: ''
           group_columns: {  }
@@ -408,7 +408,7 @@ display:
           click_sort_column: target_id
           type: image
           settings:
-            image_style: largeview
+            image_style: 256x192
             image_link: content
           group_column: ''
           group_columns: {  }

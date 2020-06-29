@@ -14,6 +14,6 @@ effects:
     data:
       width: '300'
       height: '200'
-      upscale: false
+      upscale: true
       simulate: false
       algorithm: entropy_slice
