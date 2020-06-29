@@ -1,0 +1,22 @@
+uuid: f2eb15e5-d688-43c5-abed-c6427a0eb295
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: materiale_montaj_finisaj
+label: 'Materiale montaj finisaj'
+type: 'canonical_entities:node'
+pattern: 'produse/[node:field_categorie_produs]/[node:title]'
+selection_criteria:
+  6495185a-488e-4911-acac-683ed486af9b:
+    id: node_type
+    bundles:
+      material_montaj: material_montaj
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 6495185a-488e-4911-acac-683ed486af9b
+selection_logic: and
+weight: -5
+relationships: {  }
