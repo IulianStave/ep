@@ -2204,18 +2204,18 @@
     },
     {
         "name": "drupal/colorbox",
-        "version": "1.6.0",
-        "version_normalized": "1.6.0.0",
+        "version": "1.7.0",
+        "version_normalized": "1.7.0.0",
         "source": {
             "type": "git",
             "url": "https://git.drupalcode.org/project/colorbox.git",
-            "reference": "8.x-1.6"
+            "reference": "8.x-1.7"
         },
         "dist": {
             "type": "zip",
-            "url": "https://ftp.drupal.org/files/projects/colorbox-8.x-1.6.zip",
-            "reference": "8.x-1.6",
-            "shasum": "73bfc74e9afd294e3d3aded3622ad9cb9de6b75c"
+            "url": "https://ftp.drupal.org/files/projects/colorbox-8.x-1.7.zip",
+            "reference": "8.x-1.7",
+            "shasum": "64c7290be86fe1d3bf80dcf4003a37b3698bba50"
         },
         "require": {
             "drupal/core": "^8.8 || ^9"
@@ -2226,8 +2226,8 @@
         "type": "drupal-module",
         "extra": {
             "drupal": {
-                "version": "8.x-1.6",
-                "datestamp": "1587016344",
+                "version": "8.x-1.7",
+                "datestamp": "1614960641",
                 "security-coverage": {
                     "status": "covered",
                     "message": "Covered by Drupal's security advisory policy"
@@ -2242,7 +2242,7 @@
         "installation-source": "dist",
         "notification-url": "https://packages.drupal.org/8/downloads",
         "license": [
-            "GPL-2.0+"
+            "GPL-2.0-or-later"
         ],
         "authors": [
             {
@@ -2256,8 +2256,16 @@
                 "role": "Maintainer"
             },
             {
+                "name": "Sam152",
+                "homepage": "https://www.drupal.org/user/1485048"
+            },
+            {
                 "name": "jdwfly",
                 "homepage": "https://www.drupal.org/user/298179"
+            },
+            {
+                "name": "rsmylski",
+                "homepage": "https://www.drupal.org/user/1324348"
             }
         ],
         "description": "A light-weight, customizable lightbox plugin for jQuery.",
