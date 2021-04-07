@@ -35,6 +35,7 @@ Invert                   | Replace each pixel with its complementary color.     
 Mask                     | Apply a mask to the image.                                                                   | X          | IM only             |
 Mirror                   | Mirror the image horizontally and/or vertically.                                             | X          | X                   |
 Opacity                  | Change overall image transparency level.                                                     | X          | IM only             |
+Relative crop            | Resize the image to match a ratio, for example 4:3 or 16:9.                                  | X          | X                   |
 Resize percentage        | Resize the image by percentage of its width/height.                                          | X          | X                   |
 Scale and Smart Crop     | Similar to Scale and Crop, but preserves the portion of the image with the most entropy.     | X          | X                |
 Set canvas               | Places the source image over a colored or a transparent background of a defined size.        | X          | IM only             |

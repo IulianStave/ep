@@ -4,7 +4,7 @@
     "description": "Provides effects and operations for the Image API.",
     "require": {
         "php": ">=7.1",
-        "drupal/core": "^8.8 || ^9",
+        "drupal/core": "^8.9 || ^9",
         "drupal/file_mdm_exif": "^2",
         "drupal/file_mdm_font": "^2"
     },
